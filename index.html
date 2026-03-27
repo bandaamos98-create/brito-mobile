@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap');
-      
+        
         .logo-font { font-family: 'Space Grotesk', sans-serif; }
         .hero-bg { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); }
        
@@ -153,7 +153,10 @@
                     <div class="md:col-span-2 text-center text-5xl font-bold text-emerald-400 py-4">VS</div>
                     <div class="md:col-span-5"><select id="phone2" class="w-full bg-zinc-800 text-white rounded-3xl px-8 py-6 text-lg"></select></div>
                 </div>
-                <button onclick="performComparison()" class="mt-10 w-full bg-emerald-400 hover:bg-emerald-300 text-black py-6 rounded-3xl text-xl font-semibold">Compare Now</button>
+                <button onclick="performComparison()" 
+                        class="mt-10 w-full bg-emerald-400 hover:bg-emerald-300 text-black py-6 rounded-3xl text-xl font-semibold">
+                    Compare Now
+                </button>
                 <div id="comparison-result" class="hidden mt-12 grid grid-cols-2 gap-8"></div>
             </div>
         </div>
@@ -174,18 +177,17 @@
     <footer class="bg-black py-16">
         <div class="max-w-7xl mx-auto px-6 text-center">
             <div class="flex justify-center items-center gap-3 mb-6">
-                <img src="https://bandaamos98-create.github.io/brito-mobile/images/icon.png" alt="Brito Mobiles" class="w-10 h-10 rounded-3xl object-cover">
+                <img src="https://bandaamos98-create.github.io/brito-mobile/images/icon.png" 
+                     alt="Brito Mobiles" class="w-10 h-10 rounded-3xl">
                 <h1 class="logo-font text-3xl font-bold">Brito Mobiles</h1>
             </div>
             <p class="text-white/60">Shop No. 75, Buntungwa Street, Kabwe, Zambia</p>
             <p class="text-white/60">Opposite Ukupopoka Grocery</p>
-           
             <div class="mt-6 space-y-1">
                 <a href="tel:+260961971085" class="text-emerald-400 hover:underline block">📞 +260 961 971 085</a>
                 <a href="https://wa.me/260979077079" class="text-emerald-400 hover:underline block">💬 WhatsApp: +260 979 077 079</a>
                 <a href="mailto:bandaamos98@gmail.com" class="text-emerald-400 hover:underline block">✉️ bandaamos98@gmail.com</a>
             </div>
-           
             <p class="text-white/50 text-sm mt-10">© 2026 Brito Mobiles - All Rights Reserved</p>
         </div>
     </footer>
@@ -203,32 +205,32 @@
 
         async function loadData() {
             try {
+                // Make sure this URL points to your actual uploaded data.json
                 const res = await fetch('https://bandaamos98-create.github.io/brito-mobile/data.json');
                 
-                if (!res.ok) throw new Error("Failed to fetch data");
+                if (!res.ok) throw new Error("Failed to fetch data.json");
 
                 const data = await res.json();
-                
+
                 products = data.products || [];
                 staff = data.staff || [];
 
                 // Set company icon dynamically
-                const iconEl = document.getElementById('company-icon');
                 if (data.company && data.company.icon) {
-                    iconEl.src = data.company.icon;
+                    document.getElementById('company-icon').src = data.company.icon;
                 }
 
-                console.log(`✅ Loaded ${products.length} products and ${staff.length} staff members`);
+                console.log(`✅ Successfully loaded ${products.length} products`);
 
                 renderProducts();
                 populateComparisonSelects();
                 renderStaffSlideshow();
-            } catch(e) {
-                console.error("Failed to load data:", e);
+            } catch (e) {
+                console.error("Load error:", e);
                 document.getElementById('products-grid').innerHTML = `
                     <div class="col-span-full text-center py-20">
-                        <p class="text-red-400 text-xl">Failed to load products.</p>
-                        <p class="text-white/70 mt-2">Please check your internet connection or contact support.</p>
+                        <p class="text-red-400 text-xl">Failed to load products</p>
+                        <p class="text-white/70 mt-3">Please ensure data.json is correctly uploaded to GitHub.</p>
                     </div>`;
             }
         }
@@ -281,16 +283,14 @@
                 const div = document.createElement('div');
                 div.className = "min-w-[260px] bg-zinc-900 rounded-2xl overflow-hidden cursor-pointer hover:ring-2 hover:ring-emerald-400";
                 div.innerHTML = `
-                    <img src="${p.img}" class="w-full h-40 object-cover" onerror="this.src='https://via.placeholder.com/300x200/1f2937/10b981?text=${encodeURIComponent(p.name)}'">
+                    <img src="${p.img}" class="w-full h-40 object-cover" 
+                         onerror="this.src='https://via.placeholder.com/300x200/1f2937/10b981?text=${encodeURIComponent(p.name)}'">
                     <div class="p-4">
                         <h4 class="font-medium text-white">${p.name}</h4>
                         <p class="text-emerald-400 font-bold mt-2">K${p.price.toLocaleString()}</p>
                     </div>
                 `;
-                div.onclick = () => {
-                    closeModal();
-                    setTimeout(() => showProduct(p.id), 300);
-                };
+                div.onclick = () => { closeModal(); setTimeout(() => showProduct(p.id), 300); };
                 similarContainer.appendChild(div);
             });
 
@@ -336,10 +336,10 @@
             const id1 = parseInt(document.getElementById('phone1').value);
             const id2 = parseInt(document.getElementById('phone2').value);
             if (!id1 || !id2 || id1 === id2) return alert("Please select two different phones.");
-          
+            
             const p1 = products.find(p => p.id === id1);
             const p2 = products.find(p => p.id === id2);
-          
+            
             const result = document.getElementById('comparison-result');
             result.innerHTML = `
                 <div class="bg-zinc-800 p-8 rounded-3xl">
@@ -379,7 +379,7 @@
             }, 8000);
         }
 
-        // Initialize
+        // Initialize the website
         window.onload = loadData;
     </script>
 </body>
