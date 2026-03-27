@@ -43,24 +43,16 @@
             z-index: 10000;
         }
 
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-        .blink-live {
-            animation: blink 1.2s infinite;
-            color: #ff0000;
-            font-weight: 700;
-            text-shadow: 0 0 10px #ff0000;
-        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        .blink-live { animation: blink 1.2s infinite; color: #ff0000; font-weight: 700; text-shadow: 0 0 10px #ff0000; }
 
-        /* Modal */
+        /* Modals */
         .modal {
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.85);
-            z-index: 50000;
+            background: rgba(0,0,0,0.9);
+            z-index: 60000;
             align-items: center;
             justify-content: center;
             padding: 20px;
@@ -69,7 +61,7 @@
             background: white;
             border-radius: 24px;
             width: 100%;
-            max-width: 900px;
+            max-width: 920px;
             max-height: 95vh;
             overflow: hidden;
             box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
@@ -82,8 +74,7 @@
     <nav class="bg-black/90 backdrop-blur-md sticky top-0 z-50 border-b border-white/10">
         <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <img id="company-icon" src="https://bandaamos98-create.github.io/brito-mobile/images/icon.png" 
-                     alt="Brito Mobiles" class="w-11 h-11 rounded-3xl object-cover">
+                <img id="company-icon" src="https://bandaamos98-create.github.io/brito-mobile/images/icon.png" alt="Brito Mobiles" class="w-11 h-11 rounded-3xl object-cover">
                 <h1 class="logo-font text-3xl text-white">Brito Mobiles</h1>
             </div>
             <div class="hidden md:flex gap-8 text-sm font-medium">
@@ -113,14 +104,8 @@
                 <p class="text-xl text-white/80">Genuine phones, laptops & accessories at the best prices in Kabwe, Zambia.</p>
                 <div class="flex flex-wrap gap-4">
                     <a href="#shop" class="inline-block bg-[#34C759] hover:bg-[#2E9E4B] text-black font-semibold px-10 py-4 rounded-3xl text-lg">Browse Products</a>
-                    <button onclick="openQuickOrderModal()" 
-                            class="inline-block bg-white hover:bg-gray-100 text-black font-semibold px-10 py-4 rounded-3xl text-lg">
-                        Quick Order
-                    </button>
-                    <button onclick="showServices()" 
-                            class="inline-block border-2 border-[#34C759] hover:bg-[#34C759] hover:text-black text-[#34C759] font-semibold px-10 py-4 rounded-3xl text-lg">
-                        Other Services
-                    </button>
+                    <button onclick="openQuickOrderModal()" class="inline-block bg-white hover:bg-gray-100 text-black font-semibold px-10 py-4 rounded-3xl text-lg">Quick Order</button>
+                    <button onclick="showServices()" class="inline-block border-2 border-[#34C759] hover:bg-[#34C759] hover:text-black text-[#34C759] font-semibold px-10 py-4 rounded-3xl text-lg">Other Services</button>
                 </div>
             </div>
             <div>
@@ -147,11 +132,11 @@
     <!-- QUICK ORDER MODAL -->
     <div id="quick-order-modal" class="modal">
         <div class="modal-content">
-            <div class="flex justify-between items-center p-6 border-b">
-                <h2 class="heading-font text-3xl font-bold text-black">Quick Order Request</h2>
-                <button onclick="closeQuickOrderModal()" class="text-4xl text-gray-500 hover:text-black">×</button>
+            <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
+                <h2 class="heading-font text-3xl font-bold">Quick Order Request</h2>
+                <button onclick="closeQuickOrderModal()" class="text-4xl hover:text-gray-300">×</button>
             </div>
-            <div class="p-4">
+            <div class="p-4 bg-white">
                 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe-LG2Jf_SobnqQ3Ui1RbKpV7MmRZSCQxL4e2Q5GU7rgHC4rA/viewform?embedded=true" 
                         width="100%" height="920" frameborder="0" marginheight="0" marginwidth="0">
                     Loading Quick Order Form...
@@ -170,47 +155,97 @@
             <div class="p-8 bg-white">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
-                        <label class="block text-sm font-medium mb-2">Select Device 1</label>
+                        <label class="block text-sm font-medium mb-2 text-zinc-700">Device 1</label>
                         <select id="compare1" class="w-full p-4 border border-gray-300 rounded-2xl text-lg"></select>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium mb-2">Select Device 2</label>
+                        <label class="block text-sm font-medium mb-2 text-zinc-700">Device 2</label>
                         <select id="compare2" class="w-full p-4 border border-gray-300 rounded-2xl text-lg"></select>
                     </div>
                 </div>
-                <button onclick="performComparison()" 
-                        class="mt-8 w-full bg-[#34C759] hover:bg-[#2E9E4B] text-black py-4 rounded-2xl font-semibold text-lg">
+                <button onclick="performComparison()" class="mt-8 w-full bg-[#34C759] hover:bg-[#2E9E4B] text-black py-4 rounded-2xl font-semibold text-lg">
                     Compare Now
                 </button>
-                <div id="comparison-result" class="mt-8 hidden">
-                    <!-- Result will be shown here -->
-                </div>
+                <div id="comparison-result" class="mt-8 hidden grid grid-cols-1 md:grid-cols-2 gap-8"></div>
             </div>
         </div>
     </div>
 
-    <!-- SERVICES MODAL (Mini Bank) -->
+    <!-- OTHER SERVICES MODAL -->
     <div id="services-modal" class="modal">
         <div class="modal-content max-w-5xl">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
                 <h2 class="heading-font text-3xl font-bold">Other Services (Mini Bank)</h2>
                 <button onclick="closeServices()" class="text-4xl hover:text-gray-300">×</button>
             </div>
-            <div class="p-8 bg-zinc-900 text-white">
+            <div class="p-8 bg-zinc-900 text-white overflow-y-auto max-h-[75vh]">
                 <div class="grid md:grid-cols-2 gap-6">
-                    <!-- Your service cards here (same as before) -->
                     <div class="bg-zinc-800 p-6 rounded-3xl flex gap-5">
-                        <div class="w-20 h-20 bg-[#34C759] rounded-2xl flex items-center justify-center text-3xl">📱</div>
+                        <div class="w-20 h-20 bg-[#34C759] rounded-2xl flex items-center justify-center text-4xl">💰</div>
                         <div>
                             <h3 class="text-2xl font-semibold text-[#34C759]">Airtel Money</h3>
                             <p class="text-white/70">Send, receive & withdraw</p>
+                            <p class="mt-4 font-medium">Grace Mwanza</p>
+                            <a href="tel:+260977123456" class="text-[#34C759]">+260 977 123 456</a>
                         </div>
                     </div>
-                    <!-- Add more services as needed -->
+                    <div class="bg-zinc-800 p-6 rounded-3xl flex gap-5">
+                        <div class="w-20 h-20 bg-[#34C759] rounded-2xl flex items-center justify-center text-4xl">📱</div>
+                        <div>
+                            <h3 class="text-2xl font-semibold text-[#34C759]">MTN Money</h3>
+                            <p class="text-white/70">Fast mobile money transfers</p>
+                            <p class="mt-4 font-medium">James Phiri</p>
+                            <a href="tel:+260966789012" class="text-[#34C759]">+260 966 789 012</a>
+                        </div>
+                    </div>
+                    <div class="bg-zinc-800 p-6 rounded-3xl flex gap-5">
+                        <div class="w-20 h-20 bg-[#34C759] rounded-2xl flex items-center justify-center text-4xl">🏦</div>
+                        <div>
+                            <h3 class="text-2xl font-semibold text-[#34C759]">Zanaco Bank</h3>
+                            <p class="text-white/70">Bank deposits & withdrawals</p>
+                            <p class="mt-4 font-medium">Mary Banda</p>
+                            <a href="tel:+260955555555" class="text-[#34C759]">+260 955 555 555</a>
+                        </div>
+                    </div>
+                    <div class="bg-zinc-800 p-6 rounded-3xl flex gap-5">
+                        <div class="w-20 h-20 bg-[#34C759] rounded-2xl flex items-center justify-center text-4xl">🏦</div>
+                        <div>
+                            <h3 class="text-2xl font-semibold text-[#34C759]">FNB Bank</h3>
+                            <p class="text-white/70">FNB deposits & transfers</p>
+                            <p class="mt-4 font-medium">Peter Zulu</p>
+                            <a href="tel:+260977111222" class="text-[#34C759]">+260 977 111 222</a>
+                        </div>
+                    </div>
+                    <div class="bg-zinc-800 p-6 rounded-3xl flex gap-5">
+                        <div class="w-20 h-20 bg-[#34C759] rounded-2xl flex items-center justify-center text-4xl">📶</div>
+                        <div>
+                            <h3 class="text-2xl font-semibold text-[#34C759]">Float / Airtime</h3>
+                            <p class="text-white/70">Airtime & data for all networks</p>
+                            <p class="mt-4 font-medium">Agnes Tembo</p>
+                            <a href="tel:+260966333444" class="text-[#34C759]">+260 966 333 444</a>
+                        </div>
+                    </div>
+                    <div class="bg-zinc-800 p-6 rounded-3xl flex gap-5">
+                        <div class="w-20 h-20 bg-[#34C759] rounded-2xl flex items-center justify-center text-4xl">💱</div>
+                        <div>
+                            <h3 class="text-2xl font-semibold text-[#34C759]">Cash Exchange</h3>
+                            <p class="text-white/70">Cash to Airtel Money & vice versa</p>
+                            <p class="mt-4 font-medium">John Banda</p>
+                            <a href="tel:+260979077079" class="text-[#34C759]">+260 979 077 079</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- ABOUT US -->
+    <section id="about" class="py-20 bg-white text-black">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="heading-font text-5xl font-bold tracking-tight mb-6">About Brito Mobiles</h2>
+            <p class="max-w-3xl mx-auto text-zinc-700 text-lg">Shop No. 75, Buntungwa Street, Opposite Ukupopoka Grocery, Kabwe, Zambia.<br>We sell only genuine products with warranty and excellent after-sales support.</p>
+        </div>
+    </section>
 
     <!-- FOOTER -->
     <footer class="bg-black py-16 text-center">
@@ -224,8 +259,7 @@
     </footer>
 
     <!-- Floating Inquire Now -->
-    <a href="https://wa.me/260979077079?text=Hello%20Brito%20Mobiles%2C%20I%20would%20like%20to%20inquire%20about%20a%20product" 
-       target="_blank" class="floating-btn">
+    <a href="https://wa.me/260979077079?text=Hello%20Brito%20Mobiles%2C%20I%20would%20like%20to%20inquire%20about%20a%20product" target="_blank" class="floating-btn">
         <i class="fa-brands fa-whatsapp text-2xl"></i>
         <span>Inquire Now</span>
     </a>
@@ -243,9 +277,7 @@
                 renderProducts();
                 renderStaffSlideshow();
                 populateComparisonSelects();
-            } catch (e) {
-                console.error(e);
-            }
+            } catch (e) { console.error(e); }
         }
 
         function renderProducts() {
@@ -262,8 +294,7 @@
                         <p class="text-zinc-600 text-sm mt-3 line-clamp-2">${product.description}</p>
                         <div class="mt-6 text-3xl font-bold text-[#34C759]">K${product.price.toLocaleString()}</div>
                         <a href="https://wa.me/260979077079?text=Hello Brito Mobiles, I want to order ${encodeURIComponent(product.name)} (K${product.price})" 
-                           target="_blank"
-                           class="mt-6 block w-full bg-[#34C759] hover:bg-[#2E9E4B] text-black text-center py-4 rounded-2xl font-semibold text-lg">
+                           target="_blank" class="mt-6 block w-full bg-[#34C759] hover:bg-[#2E9E4B] text-black text-center py-4 rounded-2xl font-semibold text-lg">
                             Order Now
                         </a>
                     </div>
@@ -274,16 +305,12 @@
 
         function renderStaffSlideshow() {
             const container = document.getElementById('staff-slideshow');
-            if (staff.length === 0) {
-                container.innerHTML = `<div class="text-center text-white/60 py-20">Staff photos loading...</div>`;
-                return;
-            }
+            if (staff.length === 0) return;
             let html = '';
             staff.forEach((member, i) => {
                 html += `
-                <div class="staff-slide ${i === 0 ? 'active' : ''}">
-                    <img src="${member.img}" 
-                         class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-3xl mb-8 shadow-2xl border-4 border-[#34C759]"
+                <div class="staff-slide ${i === 0 ? 'active' : ''}" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:${i===0?1:0};transition:opacity 0.8s;">
+                    <img src="${member.img}" class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-3xl mb-8 shadow-2xl border-4 border-[#34C759]"
                          onerror="this.src='https://via.placeholder.com/400x400/1f2937/34C759?text=${encodeURIComponent(member.name)}'">
                     <h3 class="heading-font text-4xl font-bold text-white">${member.name}</h3>
                     <p class="text-[#34C759] text-xl mt-1">${member.role}</p>
@@ -295,9 +322,9 @@
             const slides = container.querySelectorAll('.staff-slide');
             if (slides.length > 1) {
                 setInterval(() => {
-                    slides[index].classList.remove('active');
+                    slides.forEach(s => s.style.opacity = 0);
                     index = (index + 1) % slides.length;
-                    slides[index].classList.add('active');
+                    slides[index].style.opacity = 1;
                 }, 7000);
             }
         }
@@ -327,43 +354,38 @@
         }
 
         function populateComparisonSelects() {
-            const phones = products.filter(p => p.category === "phone");
-            const select1 = document.getElementById('compare1');
-            const select2 = document.getElementById('compare2');
-            select1.innerHTML = '<option value="">Select Device 1</option>';
-            select2.innerHTML = '<option value="">Select Device 2</option>';
+            const phones = products.filter(p => p.category === "phone" || p.name.toLowerCase().includes("galaxy") || p.name.toLowerCase().includes("infinix") || p.name.toLowerCase().includes("note"));
+            const s1 = document.getElementById('compare1');
+            const s2 = document.getElementById('compare2');
+            s1.innerHTML = s2.innerHTML = '<option value="">Select Device</option>';
             phones.forEach(p => {
-                select1.innerHTML += `<option value="${p.id}">${p.name}</option>`;
-                select2.innerHTML += `<option value="${p.id}">${p.name}</option>`;
+                s1.innerHTML += `<option value="${p.id}">${p.name}</option>`;
+                s2.innerHTML += `<option value="${p.id}">${p.name}</option>`;
             });
         }
 
         function performComparison() {
             const id1 = document.getElementById('compare1').value;
             const id2 = document.getElementById('compare2').value;
-            if (!id1 || !id2) {
-                alert("Please select two devices to compare.");
-                return;
-            }
+            if (!id1 || !id2) return alert("Please select two devices");
+
             const p1 = products.find(p => p.id == id1);
             const p2 = products.find(p => p.id == id2);
-            if (p1 && p2) {
-                document.getElementById('comparison-result').innerHTML = `
-                    <div class="grid grid-cols-2 gap-8 mt-6">
-                        <div class="border border-gray-300 p-6 rounded-2xl">
-                            <h3 class="font-bold text-xl">${p1.name}</h3>
-                            <p class="text-3xl font-bold text-[#34C759] mt-2">K${p1.price}</p>
-                            <p class="mt-4 text-sm">${p1.description}</p>
-                        </div>
-                        <div class="border border-gray-300 p-6 rounded-2xl">
-                            <h3 class="font-bold text-xl">${p2.name}</h3>
-                            <p class="text-3xl font-bold text-[#34C759] mt-2">K${p2.price}</p>
-                            <p class="mt-4 text-sm">${p2.description}</p>
-                        </div>
-                    </div>
-                `;
-                document.getElementById('comparison-result').classList.remove('hidden');
-            }
+
+            const resultDiv = document.getElementById('comparison-result');
+            resultDiv.innerHTML = `
+                <div class="border border-gray-300 p-6 rounded-2xl">
+                    <h3 class="font-bold text-2xl">${p1.name}</h3>
+                    <p class="text-4xl font-bold text-[#34C759] mt-2">K${p1.price.toLocaleString()}</p>
+                    <p class="mt-4">${p1.fullDescription || p1.description}</p>
+                </div>
+                <div class="border border-gray-300 p-6 rounded-2xl">
+                    <h3 class="font-bold text-2xl">${p2.name}</h3>
+                    <p class="text-4xl font-bold text-[#34C759] mt-2">K${p2.price.toLocaleString()}</p>
+                    <p class="mt-4">${p2.fullDescription || p2.description}</p>
+                </div>
+            `;
+            resultDiv.classList.remove('hidden');
         }
 
         window.onload = loadData;
