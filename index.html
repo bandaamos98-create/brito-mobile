@@ -21,9 +21,17 @@
             letter-spacing: -0.025em;
         }
 
-        .hero-bg { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); }
-        .product-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        .product-card:hover { transform: translateY(-12px); box-shadow: 0 25px 50px -12px rgb(16 185 129 / 0.3); }
+        .hero-bg { 
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); 
+        }
+        
+        .product-card { 
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+        }
+        .product-card:hover { 
+            transform: translateY(-12px); 
+            box-shadow: 0 25px 50px -12px rgb(52 199 89 / 0.3); 
+        }
         
         .staff-slide {
             position: absolute;
@@ -42,11 +50,29 @@
             visibility: visible;
         }
         
-        .similar-scroll { display: flex; gap: 1.25rem; overflow-x: auto; padding-bottom: 1rem; scrollbar-width: thin; }
+        .similar-scroll { 
+            display: flex; 
+            gap: 1.25rem; 
+            overflow-x: auto; 
+            padding-bottom: 1rem; 
+            scrollbar-width: thin; 
+        }
+        
         .floating-btn {
-            position: fixed; bottom: 24px; right: 24px; width: 62px; height: 62px; border-radius: 50%;
-            background: #25D366; color: white; display: flex; align-items: center; justify-content: center;
-            font-size: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); z-index: 10000;
+            position: fixed; 
+            bottom: 24px; 
+            right: 24px; 
+            width: 62px; 
+            height: 62px; 
+            border-radius: 50%;
+            background: #34C759; 
+            color: white; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            font-size: 30px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4); 
+            z-index: 10000;
         }
     </style>
 </head>
@@ -58,19 +84,19 @@
             <div class="flex items-center gap-3">
                 <img id="company-icon" src="https://bandaamos98-create.github.io/brito-mobile/images/icon.png" 
                      alt="Brito Mobiles" class="w-11 h-11 rounded-3xl object-cover">
-                <h1 class="logo-font text-3xl">Brito Mobiles</h1>
+                <h1 class="logo-font text-3xl text-white">Brito Mobiles</h1>
             </div>
             <div class="hidden md:flex gap-8 text-sm font-medium">
-                <a href="#home" class="hover:text-emerald-400">Home</a>
-                <a href="#shop" class="hover:text-emerald-400">Shop</a>
-                <a href="#compare" class="hover:text-emerald-400">Compare</a>
-                <a href="#about" class="hover:text-emerald-400">About Us</a>
+                <a href="#home" class="hover:text-[#34C759]">Home</a>
+                <a href="#shop" class="hover:text-[#34C759]">Shop</a>
+                <a href="#compare" class="hover:text-[#34C759]">Compare</a>
+                <a href="#about" class="hover:text-[#34C759]">About Us</a>
             </div>
             <div class="flex items-center gap-6">
-                <button onclick="toggleSearch()" class="text-2xl hover:text-emerald-400"><i class="fa-solid fa-magnifying-glass"></i></button>
-                <button onclick="showCart()" class="relative text-2xl hover:text-emerald-400">
+                <button onclick="toggleSearch()" class="text-2xl hover:text-[#34C759]"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button onclick="showCart()" class="relative text-2xl hover:text-[#34C759]">
                     <i class="fa-solid fa-shopping-cart"></i>
-                    <span id="cart-count" class="absolute -top-1 -right-1 bg-emerald-400 text-black text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+                    <span id="cart-count" class="absolute -top-1 -right-1 bg-[#34C759] text-black text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
                 </button>
                 <a href="mailto:bandaamos98@gmail.com" class="px-6 py-3 bg-white/10 hover:bg-white/20 rounded-3xl text-sm font-medium">Email Us</a>
             </div>
@@ -84,14 +110,14 @@
                 <h1 class="heading-font text-6xl md:text-7xl font-bold tracking-tighter leading-none text-white">
                     Your Trusted Mobile Partner<br>in Kabwe
                 </h1>
-                <p class="text-xl text-white/80">Genuine phones, laptops & accessories at the best prices.</p>
+                <p class="text-xl text-white/80">Genuine phones, laptops & accessories at the best prices in Kabwe, Zambia.</p>
                 
                 <div class="flex flex-wrap gap-4">
-                    <a href="#shop" class="inline-block bg-emerald-400 hover:bg-emerald-300 text-black font-semibold px-10 py-4 rounded-3xl text-lg">
+                    <a href="#shop" class="inline-block bg-[#34C759] hover:bg-[#2E9E4B] text-black font-semibold px-10 py-4 rounded-3xl text-lg">
                         View Our Store
                     </a>
                     <button onclick="showServices()" 
-                            class="inline-block border-2 border-emerald-400 hover:bg-emerald-400 hover:text-black text-emerald-400 font-semibold px-10 py-4 rounded-3xl text-lg">
+                            class="inline-block border-2 border-[#34C759] hover:bg-[#34C759] hover:text-black text-[#34C759] font-semibold px-10 py-4 rounded-3xl text-lg transition-all">
                         Other Services (Mini Bank)
                     </button>
                 </div>
@@ -101,7 +127,7 @@
             <div>
                 <div class="text-center mb-6">
                     <h2 class="heading-font text-4xl font-bold tracking-tight text-white">Meet Our Staff</h2>
-                    <p class="text-emerald-400">The friendly team ready to serve you</p>
+                    <p class="text-[#34C759]">The friendly team ready to serve you</p>
                 </div>
                 <div id="staff-slideshow" class="relative h-[580px] md:h-[520px] bg-zinc-900 rounded-3xl overflow-hidden shadow-2xl"></div>
             </div>
@@ -116,7 +142,7 @@
         </div>
     </section>
 
-    <!-- SERVICES MODAL (kept from previous) -->
+    <!-- SERVICES MODAL -->
     <div id="services-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[30000] p-4">
         <div class="bg-zinc-900 rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-hidden">
             <div class="p-8 border-b border-white/10 flex justify-between items-center">
@@ -125,29 +151,128 @@
             </div>
             <div class="p-8 overflow-y-auto max-h-[75vh]">
                 <div class="grid md:grid-cols-2 gap-6">
-                    <!-- Your 6 service cards here (same as before) -->
-                    <!-- For brevity, I'm showing one. Add the rest similarly -->
+                    <!-- Airtel Money -->
                     <div class="service-card bg-zinc-800 p-6 rounded-3xl flex gap-5">
-                        <img src="https://via.placeholder.com/80x80/10b981/ffffff?text=AM" class="w-20 h-20 rounded-2xl object-cover" alt="">
+                        <img src="https://via.placeholder.com/80x80/34C759/ffffff?text=AM" class="w-20 h-20 rounded-2xl object-cover" alt="">
                         <div>
-                            <h3 class="text-2xl font-semibold text-emerald-400">Airtel Money</h3>
+                            <h3 class="text-2xl font-semibold text-[#34C759]">Airtel Money</h3>
                             <p class="text-white/70 text-sm">Send, receive & withdraw</p>
                             <div class="mt-4">
                                 <p class="font-medium">Grace Mwanza</p>
-                                <a href="tel:+260977123456" class="text-emerald-400">+260 977 123 456</a>
+                                <a href="tel:+260977123456" class="text-[#34C759]">+260 977 123 456</a>
                             </div>
                         </div>
                     </div>
-                    <!-- Repeat for other 5 services... -->
+                    <!-- MTN Money -->
+                    <div class="service-card bg-zinc-800 p-6 rounded-3xl flex gap-5">
+                        <img src="https://via.placeholder.com/80x80/34C759/ffffff?text=MTN" class="w-20 h-20 rounded-2xl object-cover" alt="">
+                        <div>
+                            <h3 class="text-2xl font-semibold text-[#34C759]">MTN Money</h3>
+                            <p class="text-white/70 text-sm">Fast mobile money transfers</p>
+                            <div class="mt-4">
+                                <p class="font-medium">James Phiri</p>
+                                <a href="tel:+260966789012" class="text-[#34C759]">+260 966 789 012</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Zanaco -->
+                    <div class="service-card bg-zinc-800 p-6 rounded-3xl flex gap-5">
+                        <img src="https://via.placeholder.com/80x80/34C759/ffffff?text=ZAN" class="w-20 h-20 rounded-2xl object-cover" alt="">
+                        <div>
+                            <h3 class="text-2xl font-semibold text-[#34C759]">Zanaco Bank</h3>
+                            <p class="text-white/70 text-sm">Bank deposits & withdrawals</p>
+                            <div class="mt-4">
+                                <p class="font-medium">Mary Banda</p>
+                                <a href="tel:+260955555555" class="text-[#34C759]">+260 955 555 555</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FNB -->
+                    <div class="service-card bg-zinc-800 p-6 rounded-3xl flex gap-5">
+                        <img src="https://via.placeholder.com/80x80/34C759/ffffff?text=FNB" class="w-20 h-20 rounded-2xl object-cover" alt="">
+                        <div>
+                            <h3 class="text-2xl font-semibold text-[#34C759]">FNB Bank</h3>
+                            <p class="text-white/70 text-sm">FNB deposits & transfers</p>
+                            <div class="mt-4">
+                                <p class="font-medium">Peter Zulu</p>
+                                <a href="tel:+260977111222" class="text-[#34C759]">+260 977 111 222</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Float -->
+                    <div class="service-card bg-zinc-800 p-6 rounded-3xl flex gap-5">
+                        <img src="https://via.placeholder.com/80x80/34C759/ffffff?text=FLOAT" class="w-20 h-20 rounded-2xl object-cover" alt="">
+                        <div>
+                            <h3 class="text-2xl font-semibold text-[#34C759]">Float / Airtime</h3>
+                            <p class="text-white/70 text-sm">Airtime & data for all networks</p>
+                            <div class="mt-4">
+                                <p class="font-medium">Agnes Tembo</p>
+                                <a href="tel:+260966333444" class="text-[#34C759]">+260 966 333 444</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Cash Exchange -->
+                    <div class="service-card bg-zinc-800 p-6 rounded-3xl flex gap-5">
+                        <img src="https://via.placeholder.com/80x80/34C759/ffffff?text=CASH" class="w-20 h-20 rounded-2xl object-cover" alt="">
+                        <div>
+                            <h3 class="text-2xl font-semibold text-[#34C759]">Cash Exchange</h3>
+                            <p class="text-white/70 text-sm">Cash to Airtel Money & vice versa</p>
+                            <div class="mt-4">
+                                <p class="font-medium">John Banda</p>
+                                <a href="tel:+260979077079" class="text-[#34C759]">+260 979 077 079</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="p-6 border-t border-white/10 text-center">
-                <button onclick="closeServices()" class="px-10 py-3 bg-emerald-400 hover:bg-emerald-300 text-black rounded-3xl font-medium">Close</button>
+                <button onclick="closeServices()" class="px-10 py-3 bg-[#34C759] hover:bg-[#2E9E4B] text-black rounded-3xl font-medium">Close</button>
             </div>
         </div>
     </div>
 
-    <!-- PRODUCT MODAL and FOOTER remain the same as previous version -->
+    <!-- PRODUCT MODAL -->
+    <div id="product-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[20000] p-4">
+        <div class="bg-zinc-900 rounded-3xl max-w-6xl w-full max-h-[95vh] overflow-hidden">
+            <div class="flex flex-col lg:flex-row">
+                <div class="lg:w-1/2 p-8 lg:p-12 flex flex-col">
+                    <button onclick="closeModal()" class="absolute top-6 right-6 text-4xl text-white/70 hover:text-white z-10">×</button>
+                    <img id="modal-image" class="w-full h-80 object-cover rounded-2xl mb-8" alt="">
+                    <h2 id="modal-name" class="text-4xl font-bold text-white"></h2>
+                    <p id="modal-price" class="text-3xl font-bold text-[#34C759] mt-2"></p>
+                    <div class="mt-10">
+                        <h3 class="text-xl font-semibold mb-4">Full Description</h3>
+                        <p id="modal-full-desc" class="text-white/80 leading-relaxed text-lg"></p>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 bg-zinc-800 p-8 lg:p-12">
+                    <h3 class="text-2xl font-semibold mb-6 text-white">Similar Products</h3>
+                    <div id="similar-products" class="similar-scroll"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-black py-16">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="flex justify-center items-center gap-3 mb-6">
+                <img src="https://bandaamos98-create.github.io/brito-mobile/images/icon.png" alt="Brito Mobiles" class="w-10 h-10 rounded-3xl">
+                <h1 class="logo-font text-3xl text-white">Brito Mobiles</h1>
+            </div>
+            <p class="text-white/60">Shop No. 75, Buntungwa Street, Kabwe, Zambia</p>
+            <div class="mt-6 space-y-1">
+                <a href="tel:+260961971085" class="text-[#34C759] block">+260 961 971 085</a>
+                <a href="https://wa.me/260979077079" class="text-[#34C759] block">WhatsApp: +260 979 077 079</a>
+                <a href="mailto:bandaamos98@gmail.com" class="text-[#34C759] block">bandaamos98@gmail.com</a>
+            </div>
+            <p class="text-white/50 text-sm mt-10">© 2026 Brito Mobiles</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/260979077079?text=Hello%20Brito%20Mobiles" target="_blank" class="floating-btn">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
 
     <script>
         let products = [];
@@ -182,14 +307,14 @@
                 card.className = `product-card bg-zinc-900 rounded-3xl overflow-hidden border border-white/10 cursor-pointer`;
                 card.innerHTML = `
                     <img src="${product.img}" alt="${product.name}" class="w-full h-56 object-cover"
-                         onerror="this.src='https://via.placeholder.com/400x300/10b981/white?text=${encodeURIComponent(product.name)}'">
+                         onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(product.name)}'">
                     <div class="p-6">
                         <h3 class="font-semibold text-xl text-white">${product.name}</h3>
                         <p class="text-white/70 text-sm mt-3 line-clamp-2">${product.description}</p>
                         <div class="mt-6 flex justify-between items-end">
-                            <span class="text-3xl font-bold text-emerald-400">K${product.price.toLocaleString()}</span>
+                            <span class="text-3xl font-bold text-[#34C759]">K${product.price.toLocaleString()}</span>
                             <button onclick="event.stopImmediatePropagation(); addToCart(${product.id});" 
-                                    class="bg-emerald-400 hover:bg-emerald-300 text-black px-7 py-3 rounded-2xl font-medium text-sm">
+                                    class="bg-[#34C759] hover:bg-[#2E9E4B] text-black px-7 py-3 rounded-2xl font-medium text-sm">
                                 Add to Cart
                             </button>
                         </div>
@@ -203,7 +328,6 @@
         function showProduct(id) {
             const product = products.find(p => p.id === id);
             if (!product) return;
-            // ... (same as before)
             document.getElementById('modal-image').src = product.img;
             document.getElementById('modal-name').textContent = product.name;
             document.getElementById('modal-price').textContent = `K${product.price.toLocaleString()}`;
@@ -245,11 +369,10 @@
 
         function performComparison() { alert("Comparison feature coming soon!"); }
 
-        // Improved Staff Slideshow
         function renderStaffSlideshow() {
             const container = document.getElementById('staff-slideshow');
             if (staff.length === 0) {
-                container.innerHTML = `<div class="text-center text-white/60 py-20">Staff information coming soon...</div>`;
+                container.innerHTML = `<div class="text-center text-white/60 py-20">Staff photos loading...</div>`;
                 return;
             }
 
@@ -258,16 +381,15 @@
                 html += `
                 <div class="staff-slide ${i === 0 ? 'active' : ''}">
                     <img src="${m.img}" 
-                         class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-3xl mb-8 shadow-2xl border-4 border-emerald-400"
-                         onerror="this.src='https://via.placeholder.com/400x400/1f2937/10b981?text=${encodeURIComponent(m.name)}'">
+                         class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-3xl mb-8 shadow-2xl border-4 border-[#34C759]"
+                         onerror="this.src='https://via.placeholder.com/400x400/1f2937/34C759?text=${encodeURIComponent(m.name)}'">
                     <h3 class="heading-font text-4xl font-bold text-white">${m.name}</h3>
-                    <p class="text-emerald-400 text-xl mt-1">${m.role}</p>
+                    <p class="text-[#34C759] text-xl mt-1">${m.role}</p>
                     <p class="italic text-white/80 mt-8 max-w-md text-center">"${m.quote}"</p>
                 </div>`;
             });
             container.innerHTML = html;
 
-            // Slideshow logic
             let index = 0;
             const slides = container.querySelectorAll('.staff-slide');
             if (slides.length > 1) {
@@ -275,7 +397,7 @@
                     slides[index].classList.remove('active');
                     index = (index + 1) % slides.length;
                     slides[index].classList.add('active');
-                }, 6500);
+                }, 7000);
             }
         }
 
