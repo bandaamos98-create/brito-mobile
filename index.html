@@ -41,7 +41,6 @@
             font-weight: 600;
             box-shadow: 0 10px 25px rgba(0,0,0,0.4);
             z-index: 10000;
-            white-space: nowrap;
         }
 
         @keyframes blink {
@@ -53,6 +52,27 @@
             color: #ff0000;
             font-weight: 700;
             text-shadow: 0 0 10px #ff0000;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 50000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-content {
+            background: white;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 900px;
+            max-height: 95vh;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
@@ -69,7 +89,7 @@
             <div class="hidden md:flex gap-8 text-sm font-medium">
                 <a href="#home" class="hover:text-[#34C759]">Home</a>
                 <a href="#shop" class="hover:text-[#34C759]">Shop</a>
-                <a href="#quick-order" class="hover:text-[#34C759]">Quick Order</a>
+                <a href="#" onclick="openQuickOrderModal()" class="hover:text-[#34C759]">Quick Order</a>
                 <a href="#about" class="hover:text-[#34C759]">About Us</a>
                 <a href="#why-choose" class="hover:text-[#34C759]">Why Choose Us</a>
             </div>
@@ -91,12 +111,10 @@
                 </h1>
                 <p class="text-xl text-white/80">Genuine phones, laptops & accessories at the best prices in Kabwe, Zambia.</p>
                 <div class="flex flex-wrap gap-4">
-                    <a href="#shop" class="inline-block bg-[#34C759] hover:bg-[#2E9E4B] text-black font-semibold px-10 py-4 rounded-3xl text-lg">
-                        Browse Products
-                    </a>
-                    <button onclick="showServices()" 
-                            class="inline-block border-2 border-[#34C759] hover:bg-[#34C759] hover:text-black text-[#34C759] font-semibold px-10 py-4 rounded-3xl text-lg">
-                        Mini Bank Services
+                    <a href="#shop" class="inline-block bg-[#34C759] hover:bg-[#2E9E4B] text-black font-semibold px-10 py-4 rounded-3xl text-lg">Browse Products</a>
+                    <button onclick="openQuickOrderModal()" 
+                            class="inline-block bg-white hover:bg-gray-100 text-black font-semibold px-10 py-4 rounded-3xl text-lg">
+                        Quick Order
                     </button>
                 </div>
             </div>
@@ -110,29 +128,28 @@
         </div>
     </section>
 
-    <!-- SHOP SECTION - Horizontal Scroll -->
+    <!-- SHOP SECTION -->
     <section id="shop" class="py-20 bg-white text-black">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex justify-between items-end mb-8">
                 <h2 class="heading-font text-5xl font-bold tracking-tight">Featured Products</h2>
-                <p class="text-zinc-500 text-sm">Swipe left/right →</p>
+                <p class="text-zinc-500 text-sm">Swipe → to see more</p>
             </div>
             <div id="products-scroll" class="similar-scroll"></div>
         </div>
     </section>
 
-    <!-- QUICK ORDER SECTION - Your Google Form -->
-    <section id="quick-order" class="py-20 bg-zinc-950">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="heading-font text-5xl font-bold tracking-tight text-white">Quick Order</h2>
-                <p class="text-white/70 mt-3 text-lg">Fill this form and we will contact you shortly via WhatsApp or call</p>
+    <!-- QUICK ORDER MODAL -->
+    <div id="quick-order-modal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center p-6 border-b">
+                <h2 class="heading-font text-3xl font-bold text-black">Quick Order Request</h2>
+                <button onclick="closeQuickOrderModal()" class="text-4xl text-gray-500 hover:text-black">×</button>
             </div>
-            
-            <div class="bg-white rounded-3xl overflow-hidden shadow-2xl p-6">
+            <div class="p-4">
                 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe-LG2Jf_SobnqQ3Ui1RbKpV7MmRZSCQxL4e2Q5GU7rgHC4rA/viewform?embedded=true" 
                         width="100%" 
-                        height="950" 
+                        height="920" 
                         frameborder="0" 
                         marginheight="0" 
                         marginwidth="0">
@@ -140,13 +157,13 @@
                 </iframe>
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- ABOUT US -->
     <section id="about" class="py-20 bg-white text-black">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="heading-font text-5xl font-bold tracking-tight mb-6 text-center">About Brito Mobiles</h2>
-            <p class="max-w-3xl mx-auto text-center text-zinc-700 text-lg">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="heading-font text-5xl font-bold tracking-tight mb-6">About Brito Mobiles</h2>
+            <p class="max-w-3xl mx-auto text-zinc-700 text-lg">
                 Brito Mobiles is your trusted shop in Kabwe for genuine smartphones, laptops, and accessories. 
                 Located at Shop No. 75, Buntungwa Street, we provide honest prices and excellent customer service.
             </p>
@@ -160,37 +177,32 @@
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="bg-zinc-900 p-8 rounded-3xl text-center">
                     <i class="fa-solid fa-shield-halved text-5xl text-[#34C759] mb-6"></i>
-                    <h3 class="text-2xl font-semibold text-white mb-3">100% Genuine Products</h3>
-                    <p class="text-white/70">Original items with manufacturer warranty. No fakes.</p>
+                    <h3 class="text-2xl font-semibold text-white mb-3">100% Genuine</h3>
+                    <p class="text-white/70">Original products with warranty</p>
                 </div>
                 <div class="bg-zinc-900 p-8 rounded-3xl text-center">
                     <i class="fa-solid fa-tags text-5xl text-[#34C759] mb-6"></i>
-                    <h3 class="text-2xl font-semibold text-white mb-3">Best Prices in Kabwe</h3>
-                    <p class="text-white/70">Competitive pricing with no hidden charges.</p>
+                    <h3 class="text-2xl font-semibold text-white mb-3">Best Prices</h3>
+                    <p class="text-white/70">Competitive pricing in Kabwe</p>
                 </div>
                 <div class="bg-zinc-900 p-8 rounded-3xl text-center">
                     <i class="fa-solid fa-headset text-5xl text-[#34C759] mb-6"></i>
-                    <h3 class="text-2xl font-semibold text-white mb-3">Expert Support</h3>
-                    <p class="text-white/70">Friendly staff ready to help you choose the right device.</p>
+                    <h3 class="text-2xl font-semibold text-white mb-3">Expert Help</h3>
+                    <p class="text-white/70">Friendly staff to assist you</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="bg-black py-16">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <div class="flex justify-center items-center gap-3 mb-6">
-                <img src="https://bandaamos98-create.github.io/brito-mobile/images/icon.png" alt="Brito Mobiles" class="w-10 h-10 rounded-3xl">
-                <h1 class="logo-font text-3xl text-white">Brito Mobiles</h1>
-            </div>
-            <p class="text-white/60">Shop No. 75, Buntungwa Street, Kabwe, Zambia</p>
-            <div class="mt-6 space-y-1">
-                <a href="tel:+260961971085" class="text-[#34C759] block">+260 961 971 085</a>
-                <a href="https://wa.me/260979077079" class="text-[#34C759] block">WhatsApp: +260 979 077 079</a>
-            </div>
-            <p class="text-white/50 text-sm mt-10">© 2026 Brito Mobiles • All transactions at the branch only</p>
+    <footer class="bg-black py-16 text-center">
+        <h1 class="logo-font text-3xl text-white mb-4">Brito Mobiles</h1>
+        <p class="text-white/60">Shop No. 75, Buntungwa Street, Kabwe, Zambia</p>
+        <div class="mt-6 space-y-1">
+            <a href="tel:+260961971085" class="text-[#34C759] block">+260 961 971 085</a>
+            <a href="https://wa.me/260979077079" class="text-[#34C759] block">WhatsApp: +260 979 077 079</a>
         </div>
+        <p class="text-white/50 text-sm mt-10">© 2026 Brito Mobiles • All transactions at the branch only</p>
     </footer>
 
     <!-- Floating Inquire Now Button -->
@@ -267,9 +279,19 @@
             }
         }
 
-        function showServices() {
-            alert("Mini Bank Services:\nAirtel Money, MTN Money, Zanaco, FNB, Float & Cash Exchange available at the shop.");
+        // Quick Order Modal Functions
+        function openQuickOrderModal() {
+            document.getElementById('quick-order-modal').style.display = 'flex';
         }
+
+        function closeQuickOrderModal() {
+            document.getElementById('quick-order-modal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside the content
+        document.getElementById('quick-order-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeQuickOrderModal();
+        });
 
         window.onload = loadData;
     </script>
