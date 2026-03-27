@@ -10,53 +10,12 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap');
         .logo-font { font-family: 'Space Grotesk', sans-serif; }
         .hero-bg { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); }
-        .product-card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .product-card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 25px 50px -12px rgb(16 185 129 / 0.3);
-        }
-        .staff-slide {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.8s ease;
-            padding: 2rem 1.5rem;
-        }
-        .staff-slide.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .similar-scroll {
-            display: flex;
-            gap: 1.25rem;
-            overflow-x: auto;
-            padding-bottom: 1rem;
-            scrollbar-width: thin;
-        }
-        .floating-btn {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            width: 62px;
-            height: 62px;
-            border-radius: 50%;
-            background: #25D366;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-            z-index: 10000;
-        }
-        .floating-btn:hover { transform: scale(1.15); }
+        .product-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .product-card:hover { transform: translateY(-12px); box-shadow: 0 25px 50px -12px rgb(16 185 129 / 0.3); }
+        .staff-slide { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.8s ease; padding: 2rem 1.5rem; }
+        .staff-slide.active { opacity: 1; visibility: visible; }
+        .similar-scroll { display: flex; gap: 1.25rem; overflow-x: auto; padding-bottom: 1rem; scrollbar-width: thin; }
+        .floating-btn { position: fixed; bottom: 24px; right: 24px; width: 62px; height: 62px; border-radius: 50%; background: #25D366; color: white; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); z-index: 10000; }
     </style>
 </head>
 <body class="bg-zinc-950 text-white">
@@ -96,9 +55,15 @@
                 <p class="text-xl text-white/80">
                     Genuine phones, laptops & accessories at the best prices in Kabwe, Zambia.
                 </p>
-                <a href="#shop" class="inline-block bg-emerald-400 hover:bg-emerald-300 text-black font-semibold px-10 py-4 rounded-3xl text-lg">
-                    Shop Now
-                </a>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#shop" class="inline-block bg-emerald-400 hover:bg-emerald-300 text-black font-semibold px-10 py-4 rounded-3xl text-lg">
+                        View Our Store
+                    </a>
+                    <button onclick="showServices()" 
+                            class="inline-block border-2 border-emerald-400 hover:bg-emerald-400 hover:text-black text-emerald-400 font-semibold px-10 py-4 rounded-3xl text-lg transition-all">
+                        Other Services
+                    </button>
+                </div>
             </div>
             <div>
                 <div class="text-center mb-6">
@@ -117,6 +82,73 @@
             <div id="products-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"></div>
         </div>
     </section>
+
+    <!-- SERVICES MODAL -->
+    <div id="services-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[30000] p-4">
+        <div class="bg-zinc-900 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
+            <div class="p-8 border-b border-white/10 flex justify-between items-center">
+                <h2 class="text-4xl font-bold text-white">Our Other Services</h2>
+                <button onclick="closeServices()" class="text-4xl text-white/70 hover:text-white">×</button>
+            </div>
+            <div class="p-8 overflow-y-auto max-h-[70vh]">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-zinc-800 p-6 rounded-3xl">
+                        <h3 class="text-2xl font-semibold text-emerald-400 mb-3">Airtel Money</h3>
+                        <p class="text-white/80 mb-4">Send, receive and withdraw money instantly.</p>
+                        <div class="text-sm text-white/70 space-y-1">
+                            <p><strong>Handled by:</strong> Grace Mwanza</p>
+                            <p><strong>Contact:</strong> <a href="tel:+260977123456" class="text-emerald-400">+260 977 123 456</a></p>
+                        </div>
+                    </div>
+                    <div class="bg-zinc-800 p-6 rounded-3xl">
+                        <h3 class="text-2xl font-semibold text-emerald-400 mb-3">MTN Money</h3>
+                        <p class="text-white/80 mb-4">Fast mobile money transfers and payments.</p>
+                        <div class="text-sm text-white/70 space-y-1">
+                            <p><strong>Handled by:</strong> James Phiri</p>
+                            <p><strong>Contact:</strong> <a href="tel:+260966789012" class="text-emerald-400">+260 966 789 012</a></p>
+                        </div>
+                    </div>
+                    <div class="bg-zinc-800 p-6 rounded-3xl">
+                        <h3 class="text-2xl font-semibold text-emerald-400 mb-3">Zanaco Bank</h3>
+                        <p class="text-white/80 mb-4">Bank deposits, withdrawals & transfers.</p>
+                        <div class="text-sm text-white/70 space-y-1">
+                            <p><strong>Handled by:</strong> Mary Banda</p>
+                            <p><strong>Contact:</strong> <a href="tel:+260955555555" class="text-emerald-400">+260 955 555 555</a></p>
+                        </div>
+                    </div>
+                    <div class="bg-zinc-800 p-6 rounded-3xl">
+                        <h3 class="text-2xl font-semibold text-emerald-400 mb-3">FNB Bank</h3>
+                        <p class="text-white/80 mb-4">FNB deposits, withdrawals and account services.</p>
+                        <div class="text-sm text-white/70 space-y-1">
+                            <p><strong>Handled by:</strong> Peter Zulu</p>
+                            <p><strong>Contact:</strong> <a href="tel:+260977111222" class="text-emerald-400">+260 977 111 222</a></p>
+                        </div>
+                    </div>
+                    <div class="bg-zinc-800 p-6 rounded-3xl">
+                        <h3 class="text-2xl font-semibold text-emerald-400 mb-3">Float / Airtime</h3>
+                        <p class="text-white/80 mb-4">Sell airtime and mobile data for all networks.</p>
+                        <div class="text-sm text-white/70 space-y-1">
+                            <p><strong>Handled by:</strong> Agnes Tembo</p>
+                            <p><strong>Contact:</strong> <a href="tel:+260966333444" class="text-emerald-400">+260 966 333 444</a></p>
+                        </div>
+                    </div>
+                    <div class="bg-zinc-800 p-6 rounded-3xl">
+                        <h3 class="text-2xl font-semibold text-emerald-400 mb-3">Cash Exchange (Airtel Money)</h3>
+                        <p class="text-white/80 mb-4">Convert cash to Airtel Money and vice versa.</p>
+                        <div class="text-sm text-white/70 space-y-1">
+                            <p><strong>Handled by:</strong> John Banda</p>
+                            <p><strong>Contact:</strong> <a href="tel:+260979077079" class="text-emerald-400">+260 979 077 079</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-6 border-t border-white/10 text-center">
+                <button onclick="closeServices()" class="px-8 py-3 bg-emerald-400 hover:bg-emerald-300 text-black rounded-3xl font-medium">
+                    Close Services
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- PRODUCT DETAIL MODAL -->
     <div id="product-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[20000] p-4">
@@ -197,40 +229,28 @@
 
         async function loadData() {
             try {
-                // Using the correct URL you provided
                 const res = await fetch('https://bandaamos98-create.github.io/brito-mobile/products.json');
-                
-                if (!res.ok) throw new Error("Failed to load products.json");
-
                 const data = await res.json();
 
                 products = data.products || [];
                 staff = data.staff || [];
 
-                // Set company icon if available
                 if (data.company && data.company.icon) {
                     document.getElementById('company-icon').src = data.company.icon;
                 }
-
-                console.log(`✅ Loaded ${products.length} products successfully`);
 
                 renderProducts();
                 populateComparisonSelects();
                 renderStaffSlideshow();
             } catch (e) {
-                console.error("Error:", e);
-                document.getElementById('products-grid').innerHTML = `
-                    <div class="col-span-full text-center py-20 text-red-400">
-                        Failed to load products.<br>
-                        Please check your internet or refresh the page.
-                    </div>`;
+                console.error(e);
+                document.getElementById('products-grid').innerHTML = `<div class="col-span-full text-center py-20 text-red-400">Failed to load products. Please refresh the page.</div>`;
             }
         }
 
         function renderProducts() {
             const grid = document.getElementById('products-grid');
             grid.innerHTML = '';
-
             products.forEach(product => {
                 const card = document.createElement('div');
                 card.className = `product-card bg-zinc-900 rounded-3xl overflow-hidden border border-white/10 cursor-pointer`;
@@ -245,7 +265,7 @@
                                 <span class="block text-xs text-gray-400">Price</span>
                                 <span class="text-3xl font-bold text-emerald-400">K${product.price.toLocaleString()}</span>
                             </div>
-                            <button onclick="event.stopImmediatePropagation(); addToCart(${product.id});"
+                            <button onclick="event.stopImmediatePropagation(); addToCart(${product.id});" 
                                     class="bg-emerald-400 hover:bg-emerald-300 text-black px-7 py-3 rounded-2xl font-medium text-sm">
                                 Add to Cart
                             </button>
@@ -260,7 +280,6 @@
         function showProduct(id) {
             const product = products.find(p => p.id === id);
             if (!product) return;
-
             document.getElementById('modal-image').src = product.img;
             document.getElementById('modal-name').textContent = product.name;
             document.getElementById('modal-price').textContent = `K${product.price.toLocaleString()}`;
@@ -268,9 +287,7 @@
 
             const similarContainer = document.getElementById('similar-products');
             similarContainer.innerHTML = '';
-
             const similar = products.filter(p => p.category === product.category && p.id !== product.id).slice(0, 5);
-
             similar.forEach(p => {
                 const div = document.createElement('div');
                 div.className = "min-w-[260px] bg-zinc-900 rounded-2xl overflow-hidden cursor-pointer hover:ring-2 hover:ring-emerald-400";
@@ -284,7 +301,6 @@
                 div.onclick = () => { closeModal(); setTimeout(() => showProduct(p.id), 300); };
                 similarContainer.appendChild(div);
             });
-
             document.getElementById('product-modal').classList.remove('hidden');
         }
 
@@ -307,9 +323,7 @@
             alert(`Cart Total: K${total.toLocaleString()}`);
         }
 
-        function toggleSearch() {
-            alert("Search feature coming soon!");
-        }
+        function toggleSearch() { alert("Search feature coming soon!"); }
 
         function populateComparisonSelects() {
             const phones = products.filter(p => p.category === "phone");
@@ -349,6 +363,17 @@
                 index = (index + 1) % slides.length;
                 slides[index].classList.add('active');
             }, 8000);
+        }
+
+        // Services Modal Functions
+        function showServices() {
+            document.getElementById('services-modal').classList.remove('hidden');
+            document.getElementById('services-modal').classList.add('flex');
+        }
+
+        function closeServices() {
+            document.getElementById('services-modal').classList.add('hidden');
+            document.getElementById('services-modal').classList.remove('flex');
         }
 
         // Initialize
