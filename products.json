@@ -3,47 +3,47 @@
     "name": "Brito Mobiles",
     "slogan": "Genuine Phones, Laptops & Accessories",
     "location": "Shop No. 75, Buntungwa Street, Opposite Ukupopoka Grocery, Kabwe, Zambia",
-    "phone": "+260 977 942 323",
-    "whatsapp": "+260 977 942 323",
-    "email": "britomobile@gmail.com",
-    "icon": "https://bandaamos98-create.github.io/brito-mobile/images/brito-icon.png"
+    "phone": "+260 961971085",
+    "whatsapp": "+260 979077079",
+    "email": "bandaamos98@gmail.com",
+    "icon": "https://bandaamos98-create.github.io/brito-mobile/images/icon.png"
   },
   "products": [
     {
       "id": 1,
-      "name": "Tecno Camon 50 Pro",
+      "name": "Samsung Galaxy A17",
       "category": "phone",
-      "price": 6100,
+      "price": 3500,
       "description": "Powerful camera phone with premium design and smooth performance.",
       "fullDescription": "The Tecno Camon 50 Pro features a high-resolution camera system, large AMOLED display, fast charging, and powerful processor. Perfect for photography lovers and everyday users who want premium features at an affordable price.",
-      "img": "https://bandaamos98-create.github.io/brito-mobile/images/camon50pro.jpg"
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/csao7.jpg"
     },
     {
       "id": 2,
-      "name": "Infinix Hot 60i",
+      "name": "Samsung Galaxy A07",
       "category": "phone",
-      "price": 2700,
+      "price": 4500,
       "description": "Great value smartphone with big battery and fast charging.",
       "fullDescription": "Infinix Hot 60i comes with a massive battery, fast charging support, vibrant display, and decent camera setup. Ideal for students and users who need reliable performance on a budget.",
-      "img": "https://bandaamos98-create.github.io/brito-mobile/images/hot60.jpg"
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/samsung07.jpg"
     },
     {
       "id": 3,
-      "name": "Tecno Spark 20",
+      "name": "INFIX HOT 50",
       "category": "phone",
       "price": 4500,
       "description": "Reliable Tecno smartphone with good camera and performance.",
       "fullDescription": "Tecno Spark 20 offers excellent battery life, smooth performance, and a beautiful design. Great choice for daily use, social media, and light gaming.",
-      "img": "https://bandaamos98-create.github.io/brito-mobile/images/techno.jpg"
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/infinixhot50.jpg"
     },
     {
       "id": 4,
-      "name": "Samsung Galaxy A15",
+      "name": "INFINIX NOTE 50",
       "category": "phone",
       "price": 5200,
       "description": "Popular Samsung phone with excellent display and software support.",
       "fullDescription": "Samsung Galaxy A15 features a superb Super AMOLED display, long software update support, reliable cameras, and solid build quality. One of the best mid-range phones available.",
-      "img": "https://bandaamos98-create.github.io/brito-mobile/images/samsung.jpg"
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/infinixnote50.jpg"
     },
     {
       "id": 5,
@@ -84,10 +84,10 @@
   ],
   "staff": [
     {
-      "name": "Madam Nizza Dorcus",
-      "role": "Sales Manager",
-      "quote": "Quality and honesty is what we stand for. Every product is carefully selected to fit our customers' budget and needs.",
-      "img": "https://bandaamos98-create.github.io/brito-mobile/images/staff1.jpg"
+      "name": "AMOS BANDA",
+      "role": "IT SPECIALIST",
+      "quote": "Lets build your websites.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/profile-pic.jpg"
     },
     {
       "name": "John Banda",
