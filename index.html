@@ -46,7 +46,6 @@
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
         .blink-live { animation: blink 1.2s infinite; color: #ff0000; font-weight: 700; text-shadow: 0 0 10px #ff0000; }
 
-        /* Modals */
         .modal {
             display: none;
             position: fixed;
@@ -118,14 +117,34 @@
         </div>
     </section>
 
-    <!-- SHOP SECTION -->
+    <!-- SHOP SECTION - Grouped by Category -->
     <section id="shop" class="py-20 bg-white text-black">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="flex justify-between items-end mb-8">
-                <h2 class="heading-font text-5xl font-bold tracking-tight">Featured Products</h2>
-                <p class="text-zinc-500 text-sm">Swipe → to see more</p>
+            <h2 class="heading-font text-5xl font-bold tracking-tight mb-12 text-center">Our Products</h2>
+
+            <!-- Phones Group -->
+            <div class="mb-16">
+                <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3">
+                    <span class="text-[#34C759]">📱</span> Cell Phones
+                </h3>
+                <div id="phones-scroll" class="similar-scroll"></div>
             </div>
-            <div id="products-scroll" class="similar-scroll"></div>
+
+            <!-- Laptops Group -->
+            <div class="mb-16">
+                <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3">
+                    <span class="text-[#34C759]">💻</span> Laptops
+                </h3>
+                <div id="laptops-scroll" class="similar-scroll"></div>
+            </div>
+
+            <!-- Accessories Group -->
+            <div>
+                <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3">
+                    <span class="text-[#34C759]">🔌</span> Accessories
+                </h3>
+                <div id="accessories-scroll" class="similar-scroll"></div>
+            </div>
         </div>
     </section>
 
@@ -274,16 +293,37 @@
                 const data = await res.json();
                 products = data.products || [];
                 staff = data.staff || [];
-                renderProducts();
+                renderGroupedProducts();
                 renderStaffSlideshow();
                 populateComparisonSelects();
             } catch (e) { console.error(e); }
         }
 
-        function renderProducts() {
-            const container = document.getElementById('products-scroll');
+        function renderGroupedProducts() {
+            const phones = products.filter(p => p.category === "phone");
+            const laptops = products.filter(p => p.category === "laptop");
+            const accessories = products.filter(p => p.category === "accessory");
+
+            // Render Phones
+            renderCategory("phones-scroll", phones, "📱 Cell Phones");
+
+            // Render Laptops
+            renderCategory("laptops-scroll", laptops, "💻 Laptops");
+
+            // Render Accessories
+            renderCategory("accessories-scroll", accessories, "🔌 Accessories");
+        }
+
+        function renderCategory(containerId, categoryProducts, title) {
+            const container = document.getElementById(containerId);
             container.innerHTML = '';
-            products.forEach(product => {
+
+            if (categoryProducts.length === 0) {
+                container.innerHTML = `<div class="text-center py-12 text-zinc-400 col-span-full">No ${title.toLowerCase()} available at the moment.</div>`;
+                return;
+            }
+
+            categoryProducts.forEach(product => {
                 const card = document.createElement('div');
                 card.className = `product-card flex-shrink-0 w-72 md:w-80 bg-white rounded-3xl overflow-hidden border border-zinc-200 cursor-pointer`;
                 card.innerHTML = `
@@ -294,7 +334,8 @@
                         <p class="text-zinc-600 text-sm mt-3 line-clamp-2">${product.description}</p>
                         <div class="mt-6 text-3xl font-bold text-[#34C759]">K${product.price.toLocaleString()}</div>
                         <a href="https://wa.me/260979077079?text=Hello Brito Mobiles, I want to order ${encodeURIComponent(product.name)} (K${product.price})" 
-                           target="_blank" class="mt-6 block w-full bg-[#34C759] hover:bg-[#2E9E4B] text-black text-center py-4 rounded-2xl font-semibold text-lg">
+                           target="_blank"
+                           class="mt-6 block w-full bg-[#34C759] hover:bg-[#2E9E4B] text-black text-center py-4 rounded-2xl font-semibold text-lg">
                             Order Now
                         </a>
                     </div>
@@ -309,7 +350,7 @@
             let html = '';
             staff.forEach((member, i) => {
                 html += `
-                <div class="staff-slide ${i === 0 ? 'active' : ''}" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:${i===0?1:0};transition:opacity 0.8s;">
+                <div class="staff-slide ${i === 0 ? 'active' : ''}" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:${i===0?1:0};transition:opacity 0.8s ease;">
                     <img src="${member.img}" class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-3xl mb-8 shadow-2xl border-4 border-[#34C759]"
                          onerror="this.src='https://via.placeholder.com/400x400/1f2937/34C759?text=${encodeURIComponent(member.name)}'">
                     <h3 class="heading-font text-4xl font-bold text-white">${member.name}</h3>
@@ -329,7 +370,7 @@
             }
         }
 
-        // Quick Order Modal
+        // Modals
         function openQuickOrderModal() {
             document.getElementById('quick-order-modal').style.display = 'flex';
         }
@@ -337,7 +378,6 @@
             document.getElementById('quick-order-modal').style.display = 'none';
         }
 
-        // Services Modal
         function showServices() {
             document.getElementById('services-modal').style.display = 'flex';
         }
@@ -345,7 +385,6 @@
             document.getElementById('services-modal').style.display = 'none';
         }
 
-        // Compare Devices
         function openCompareModal() {
             document.getElementById('compare-modal').style.display = 'flex';
         }
@@ -354,7 +393,7 @@
         }
 
         function populateComparisonSelects() {
-            const phones = products.filter(p => p.category === "phone" || p.name.toLowerCase().includes("galaxy") || p.name.toLowerCase().includes("infinix") || p.name.toLowerCase().includes("note"));
+            const phones = products.filter(p => p.category === "phone");
             const s1 = document.getElementById('compare1');
             const s2 = document.getElementById('compare2');
             s1.innerHTML = s2.innerHTML = '<option value="">Select Device</option>';
@@ -367,7 +406,7 @@
         function performComparison() {
             const id1 = document.getElementById('compare1').value;
             const id2 = document.getElementById('compare2').value;
-            if (!id1 || !id2) return alert("Please select two devices");
+            if (!id1 || !id2) return alert("Please select two devices to compare.");
 
             const p1 = products.find(p => p.id == id1);
             const p2 = products.find(p => p.id == id2);
@@ -377,12 +416,12 @@
                 <div class="border border-gray-300 p-6 rounded-2xl">
                     <h3 class="font-bold text-2xl">${p1.name}</h3>
                     <p class="text-4xl font-bold text-[#34C759] mt-2">K${p1.price.toLocaleString()}</p>
-                    <p class="mt-4">${p1.fullDescription || p1.description}</p>
+                    <p class="mt-4 text-sm">${p1.fullDescription || p1.description}</p>
                 </div>
                 <div class="border border-gray-300 p-6 rounded-2xl">
                     <h3 class="font-bold text-2xl">${p2.name}</h3>
                     <p class="text-4xl font-bold text-[#34C759] mt-2">K${p2.price.toLocaleString()}</p>
-                    <p class="mt-4">${p2.fullDescription || p2.description}</p>
+                    <p class="mt-4 text-sm">${p2.fullDescription || p2.description}</p>
                 </div>
             `;
             resultDiv.classList.remove('hidden');
