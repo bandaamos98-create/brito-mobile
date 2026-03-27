@@ -6,7 +6,7 @@
     "phone": "+260 961971085",
     "whatsapp": "+260 979077079",
     "email": "bandaamos98@gmail.com",
-    "icon": "https://bandaamos98-create.github.io/brito-mobile/images/icon.png"
+    "icon": "https://bandaamos98-create.github.io/brito-mobile/images/icon.jpg"
   },
   "products": [
     {
@@ -16,7 +16,7 @@
       "price": 3500,
       "description": "Powerful camera phone with premium design and smooth performance.",
       "fullDescription": "The Samsung Galaxy A17 features a powerful camera system, premium design, smooth performance, and excellent battery life. Perfect for photography lovers and everyday users.",
-      "img": "https://bandaamos98-create.github.io/brito-mobile/images/csao7.jpg"
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/sao7.jpg"
     },
     {
       "id": 2,
@@ -25,7 +25,7 @@
       "price": 4500,
       "description": "Great value smartphone with big battery and fast charging.",
       "fullDescription": "Samsung Galaxy A07 comes with a massive battery, fast charging support, vibrant display, and decent camera setup.",
-      "img": "https://bandaamos98-create.github.io/brito-mobile/images/samsung07.jpg"
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/samsuna07.jpg"
     },
     {
       "id": 3,
@@ -34,7 +34,7 @@
       "price": 4500,
       "description": "Reliable smartphone with good camera and performance.",
       "fullDescription": "Infinix Hot 50 offers excellent battery life, smooth performance, and a beautiful design.",
-      "img": "https://bandaamos98-create.github.io/brito-mobile/images/infinixhot50.jpg"
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/ifinixhot50.jpg"
     },
     {
       "id": 4,
@@ -87,7 +87,7 @@
       "name": "AMOS BANDA",
       "role": "IT SPECIALIST",
       "quote": "Lets build your websites.",
-      "img": "https://bandaamos98-create.github.io/brito-mobile/images/profile-pic.jpg"
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/profile-pic.png"
     },
     {
       "name": "John Banda",
