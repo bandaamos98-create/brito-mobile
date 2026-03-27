@@ -8,10 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap');
-        
         .logo-font { font-family: 'Space Grotesk', sans-serif; }
         .hero-bg { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); }
-       
         .product-card {
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -153,10 +151,7 @@
                     <div class="md:col-span-2 text-center text-5xl font-bold text-emerald-400 py-4">VS</div>
                     <div class="md:col-span-5"><select id="phone2" class="w-full bg-zinc-800 text-white rounded-3xl px-8 py-6 text-lg"></select></div>
                 </div>
-                <button onclick="performComparison()" 
-                        class="mt-10 w-full bg-emerald-400 hover:bg-emerald-300 text-black py-6 rounded-3xl text-xl font-semibold">
-                    Compare Now
-                </button>
+                <button onclick="performComparison()" class="mt-10 w-full bg-emerald-400 hover:bg-emerald-300 text-black py-6 rounded-3xl text-xl font-semibold">Compare Now</button>
                 <div id="comparison-result" class="hidden mt-12 grid grid-cols-2 gap-8"></div>
             </div>
         </div>
@@ -168,7 +163,7 @@
             <h2 class="text-5xl font-semibold tracking-tighter mb-8 text-center">About Brito Mobiles</h2>
             <div class="max-w-3xl mx-auto text-lg text-gray-700 leading-relaxed">
                 <p>Brito Mobiles is your trusted supplier of genuine phones, laptops, and accessories in Kabwe, Zambia.</p>
-                <p class="mt-6">Located at Shop No. 75, Buntungwa Street, opposite Ukupopoka Grocery, we offer quality products at affordable prices with excellent customer service.</p>
+                <p class="mt-6">Located at Shop No. 75, Buntungwa Street, opposite Ukupopoka Grocery.</p>
             </div>
         </div>
     </section>
@@ -177,12 +172,10 @@
     <footer class="bg-black py-16">
         <div class="max-w-7xl mx-auto px-6 text-center">
             <div class="flex justify-center items-center gap-3 mb-6">
-                <img src="https://bandaamos98-create.github.io/brito-mobile/images/icon.png" 
-                     alt="Brito Mobiles" class="w-10 h-10 rounded-3xl">
+                <img src="https://bandaamos98-create.github.io/brito-mobile/images/icon.png" alt="Brito Mobiles" class="w-10 h-10 rounded-3xl">
                 <h1 class="logo-font text-3xl font-bold">Brito Mobiles</h1>
             </div>
             <p class="text-white/60">Shop No. 75, Buntungwa Street, Kabwe, Zambia</p>
-            <p class="text-white/60">Opposite Ukupopoka Grocery</p>
             <div class="mt-6 space-y-1">
                 <a href="tel:+260961971085" class="text-emerald-400 hover:underline block">📞 +260 961 971 085</a>
                 <a href="https://wa.me/260979077079" class="text-emerald-400 hover:underline block">💬 WhatsApp: +260 979 077 079</a>
@@ -193,8 +186,7 @@
     </footer>
 
     <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/260979077079?text=Hello%20Brito%20Mobiles%2C%20I%20would%20like%20to%20inquire%20about%20your%20products" 
-       target="_blank" class="floating-btn">
+    <a href="https://wa.me/260979077079?text=Hello%20Brito%20Mobiles" target="_blank" class="floating-btn">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
@@ -205,32 +197,32 @@
 
         async function loadData() {
             try {
-                // Make sure this URL points to your actual uploaded data.json
-                const res = await fetch('https://bandaamos98-create.github.io/brito-mobile/data.json');
+                // Using the correct URL you provided
+                const res = await fetch('https://bandaamos98-create.github.io/brito-mobile/products.json');
                 
-                if (!res.ok) throw new Error("Failed to fetch data.json");
+                if (!res.ok) throw new Error("Failed to load products.json");
 
                 const data = await res.json();
 
                 products = data.products || [];
                 staff = data.staff || [];
 
-                // Set company icon dynamically
+                // Set company icon if available
                 if (data.company && data.company.icon) {
                     document.getElementById('company-icon').src = data.company.icon;
                 }
 
-                console.log(`✅ Successfully loaded ${products.length} products`);
+                console.log(`✅ Loaded ${products.length} products successfully`);
 
                 renderProducts();
                 populateComparisonSelects();
                 renderStaffSlideshow();
             } catch (e) {
-                console.error("Load error:", e);
+                console.error("Error:", e);
                 document.getElementById('products-grid').innerHTML = `
-                    <div class="col-span-full text-center py-20">
-                        <p class="text-red-400 text-xl">Failed to load products</p>
-                        <p class="text-white/70 mt-3">Please ensure data.json is correctly uploaded to GitHub.</p>
+                    <div class="col-span-full text-center py-20 text-red-400">
+                        Failed to load products.<br>
+                        Please check your internet or refresh the page.
                     </div>`;
             }
         }
@@ -244,7 +236,7 @@
                 card.className = `product-card bg-zinc-900 rounded-3xl overflow-hidden border border-white/10 cursor-pointer`;
                 card.innerHTML = `
                     <img src="${product.img}" alt="${product.name}" class="w-full h-56 object-cover"
-                         onerror="this.src='https://via.placeholder.com/400x300/1f2937/10b981?text=${encodeURIComponent(product.name)}'">
+                         onerror="this.src='https://via.placeholder.com/400x300/10b981/white?text=${encodeURIComponent(product.name)}'">
                     <div class="p-6">
                         <h3 class="font-semibold text-xl text-white">${product.name}</h3>
                         <p class="text-white/70 text-sm mt-3 line-clamp-2">${product.description}</p>
@@ -283,8 +275,7 @@
                 const div = document.createElement('div');
                 div.className = "min-w-[260px] bg-zinc-900 rounded-2xl overflow-hidden cursor-pointer hover:ring-2 hover:ring-emerald-400";
                 div.innerHTML = `
-                    <img src="${p.img}" class="w-full h-40 object-cover" 
-                         onerror="this.src='https://via.placeholder.com/300x200/1f2937/10b981?text=${encodeURIComponent(p.name)}'">
+                    <img src="${p.img}" class="w-full h-40 object-cover" onerror="this.src='https://via.placeholder.com/300x200/1f2937/10b981?text=${encodeURIComponent(p.name)}'">
                     <div class="p-4">
                         <h4 class="font-medium text-white">${p.name}</h4>
                         <p class="text-emerald-400 font-bold mt-2">K${p.price.toLocaleString()}</p>
@@ -333,26 +324,7 @@
         }
 
         function performComparison() {
-            const id1 = parseInt(document.getElementById('phone1').value);
-            const id2 = parseInt(document.getElementById('phone2').value);
-            if (!id1 || !id2 || id1 === id2) return alert("Please select two different phones.");
-            
-            const p1 = products.find(p => p.id === id1);
-            const p2 = products.find(p => p.id === id2);
-            
-            const result = document.getElementById('comparison-result');
-            result.innerHTML = `
-                <div class="bg-zinc-800 p-8 rounded-3xl">
-                    <img src="${p1.img}" class="w-full h-48 object-cover rounded-2xl mb-4">
-                    <h4 class="font-semibold">${p1.name}</h4>
-                    <p class="text-3xl font-bold text-emerald-400">K${p1.price.toLocaleString()}</p>
-                </div>
-                <div class="bg-zinc-800 p-8 rounded-3xl">
-                    <img src="${p2.img}" class="w-full h-48 object-cover rounded-2xl mb-4">
-                    <h4 class="font-semibold">${p2.name}</h4>
-                    <p class="text-3xl font-bold text-emerald-400">K${p2.price.toLocaleString()}</p>
-                </div>`;
-            result.classList.remove('hidden');
+            alert("Comparison feature coming soon!");
         }
 
         function renderStaffSlideshow() {
@@ -379,7 +351,7 @@
             }, 8000);
         }
 
-        // Initialize the website
+        // Initialize
         window.onload = loadData;
     </script>
 </body>
