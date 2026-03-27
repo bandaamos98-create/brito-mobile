@@ -47,12 +47,12 @@
     },
     {
       "id": 5,
-      "name": "Affordable Feature Phone",
-      "category": "phone",
+      "name": "Bluetooth Speaker Oraimo",
+      "category": "accessory",
       "price": 250,
       "description": "Basic phone for calls, SMS and long battery life.",
       "fullDescription": "Simple and durable feature phone perfect for elderly users or as a secondary phone. Long battery life and easy to use.",
-      "img": "https://bandaamos98-create.github.io/brito-mobile/images/small.jpg"
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/btspeakeroraimo.jpg"
     },
     {
       "id": 6,
@@ -74,12 +74,12 @@
     },
     {
       "id": 8,
-      "name": "Phone Accessories Pack",
+      "name": "Connest Multiple Thing",
       "category": "accessory",
       "price": 350,
       "description": "Charger, earphones, case and screen protector combo.",
       "fullDescription": "Complete accessory bundle including fast charger, wired earphones, protective case and tempered glass screen protector.",
-      "img": "https://bandaamos98-create.github.io/brito-mobile/images/accessories.jpg"
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/connecting.jpg"
     }
   ],
   "staff": [
