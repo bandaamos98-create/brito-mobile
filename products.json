@@ -1,7 +1,4 @@
-async function loadData() {
-    try {
-        // Use the JSON data you pasted directly (no fetch required)
-        const data = {
+
           "company": {
             "name": "Brito Mobiles",
             "slogan": "Genuine Phones, Laptops & Accessories",
