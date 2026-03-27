@@ -1,1 +1,105 @@
-
+{
+  "company": {
+    "name": "Brito Mobiles",
+    "slogan": "Genuine Phones, Laptops & Accessories",
+    "location": "Shop No. 75, Buntungwa Street, Opposite Ukupopoka Grocery, Kabwe, Zambia",
+    "phone": "+260 977 942 323",
+    "whatsapp": "+260 977 942 323",
+    "email": "britomobile@gmail.com",
+    "icon": "https://bandaamos98-create.github.io/brito-mobile/images/brito-icon.png"
+  },
+  "products": [
+    {
+      "id": 1,
+      "name": "Tecno Camon 50 Pro",
+      "category": "phone",
+      "price": 6100,
+      "description": "Powerful camera phone with premium design and smooth performance.",
+      "fullDescription": "The Tecno Camon 50 Pro features a high-resolution camera system, large AMOLED display, fast charging, and powerful processor. Perfect for photography lovers and everyday users who want premium features at an affordable price.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/camon50pro.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Infinix Hot 60i",
+      "category": "phone",
+      "price": 2700,
+      "description": "Great value smartphone with big battery and fast charging.",
+      "fullDescription": "Infinix Hot 60i comes with a massive battery, fast charging support, vibrant display, and decent camera setup. Ideal for students and users who need reliable performance on a budget.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/hot60.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Tecno Spark 20",
+      "category": "phone",
+      "price": 4500,
+      "description": "Reliable Tecno smartphone with good camera and performance.",
+      "fullDescription": "Tecno Spark 20 offers excellent battery life, smooth performance, and a beautiful design. Great choice for daily use, social media, and light gaming.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/techno.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Samsung Galaxy A15",
+      "category": "phone",
+      "price": 5200,
+      "description": "Popular Samsung phone with excellent display and software support.",
+      "fullDescription": "Samsung Galaxy A15 features a superb Super AMOLED display, long software update support, reliable cameras, and solid build quality. One of the best mid-range phones available.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/samsung.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Affordable Feature Phone",
+      "category": "phone",
+      "price": 250,
+      "description": "Basic phone for calls, SMS and long battery life.",
+      "fullDescription": "Simple and durable feature phone perfect for elderly users or as a secondary phone. Long battery life and easy to use.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/small.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Lenovo IdeaPad Laptop",
+      "category": "laptop",
+      "price": 5600,
+      "description": "Budget laptop suitable for students and basic work.",
+      "fullDescription": "Lenovo IdeaPad offers good performance for everyday tasks like browsing, Microsoft Office, online classes, and light multimedia. Reliable and affordable.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/laptop.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Dell Inspiron 14",
+      "category": "laptop",
+      "price": 8500,
+      "description": "Powerful everyday laptop with good battery life.",
+      "fullDescription": "Dell Inspiron 14 is a versatile laptop with excellent build quality, comfortable keyboard, and strong performance for work and study.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/laptop1.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Phone Accessories Pack",
+      "category": "accessory",
+      "price": 350,
+      "description": "Charger, earphones, case and screen protector combo.",
+      "fullDescription": "Complete accessory bundle including fast charger, wired earphones, protective case and tempered glass screen protector.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/accessories.jpg"
+    }
+  ],
+  "staff": [
+    {
+      "name": "Madam Nizza Dorcus",
+      "role": "Sales Manager",
+      "quote": "Quality and honesty is what we stand for. Every product is carefully selected to fit our customers' budget and needs.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/staff1.jpg"
+    },
+    {
+      "name": "John Banda",
+      "role": "Tech Specialist",
+      "quote": "We help our customers find the perfect phone or laptop that matches their needs and budget.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/staff2.jpg"
+    },
+    {
+      "name": "Trisha Mwanza",
+      "role": "Customer Support",
+      "quote": "Our goal is to make every customer happy with their purchase and provide excellent after-sales support.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/staff3.jpg"
+    }
+  ]
+}
