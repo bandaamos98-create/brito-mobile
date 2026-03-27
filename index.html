@@ -12,12 +12,28 @@
         .hero-bg { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); }
         .product-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
         .product-card:hover { transform: translateY(-12px); box-shadow: 0 25px 50px -12px rgb(16 185 129 / 0.3); }
-        .staff-slide { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.8s ease; padding: 2rem 1.5rem; }
-        .staff-slide.active { opacity: 1; visibility: visible; }
+        .staff-slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.8s ease;
+            padding: 2rem 1.5rem;
+        }
+        .staff-slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
         .similar-scroll { display: flex; gap: 1.25rem; overflow-x: auto; padding-bottom: 1rem; scrollbar-width: thin; }
-        .floating-btn { position: fixed; bottom: 24px; right: 24px; width: 62px; height: 62px; border-radius: 50%; background: #25D366; color: white; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); z-index: 10000; }
-        .service-card { transition: all 0.3s ease; }
-        .service-card:hover { transform: translateY(-4px); }
+        .floating-btn {
+            position: fixed; bottom: 24px; right: 24px; width: 62px; height: 62px; border-radius: 50%;
+            background: #25D366; color: white; display: flex; align-items: center; justify-content: center;
+            font-size: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); z-index: 10000;
+        }
     </style>
 </head>
 <body class="bg-zinc-950 text-white">
@@ -54,16 +70,14 @@
                 <h1 class="text-6xl md:text-7xl font-bold tracking-tighter logo-font leading-none">
                     Your Trusted Mobile Partner<br>in Kabwe
                 </h1>
-                <p class="text-xl text-white/80">
-                    Genuine phones, laptops & accessories at the best prices in Kabwe, Zambia.
-                </p>
+                <p class="text-xl text-white/80">Genuine phones, laptops & accessories at the best prices in Kabwe, Zambia.</p>
                 <div class="flex flex-wrap gap-4">
                     <a href="#shop" class="inline-block bg-emerald-400 hover:bg-emerald-300 text-black font-semibold px-10 py-4 rounded-3xl text-lg">
                         View Our Store
                     </a>
                     <button onclick="showServices()" 
-                            class="inline-block border-2 border-emerald-400 hover:bg-emerald-400 hover:text-black text-emerald-400 font-semibold px-10 py-4 rounded-3xl text-lg transition-all">
-                        Other Services
+                            class="inline-block border-2 border-emerald-400 hover:bg-emerald-400 hover:text-black text-emerald-400 font-semibold px-10 py-4 rounded-3xl text-lg">
+                        Other Services (Mini Bank)
                     </button>
                 </div>
             </div>
@@ -85,114 +99,90 @@
         </div>
     </section>
 
-    <!-- SERVICES MODAL - MINI BANK -->
+    <!-- SERVICES MODAL -->
     <div id="services-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[30000] p-4">
         <div class="bg-zinc-900 rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-hidden">
             <div class="p-8 border-b border-white/10 flex justify-between items-center">
                 <h2 class="text-4xl font-bold text-white">Our Other Services (Mini Bank)</h2>
                 <button onclick="closeServices()" class="text-4xl text-white/70 hover:text-white">×</button>
             </div>
-            
             <div class="p-8 overflow-y-auto max-h-[75vh]">
                 <div class="grid md:grid-cols-2 gap-6">
-                    
-                    <!-- Airtel Money -->
                     <div class="service-card bg-zinc-800 p-6 rounded-3xl flex gap-5">
-                        <img src="https://via.placeholder.com/80x80/10b981/ffffff?text=AM" 
-                             class="w-20 h-20 rounded-2xl object-cover flex-shrink-0" alt="Airtel Money">
+                        <img src="https://via.placeholder.com/80x80/10b981/ffffff?text=AM" class="w-20 h-20 rounded-2xl object-cover" alt="">
                         <div>
                             <h3 class="text-2xl font-semibold text-emerald-400">Airtel Money</h3>
-                            <p class="text-white/80 text-sm mt-1">Send, receive & withdraw money</p>
-                            <div class="mt-4 text-sm">
+                            <p class="text-white/70 text-sm">Send, receive & withdraw</p>
+                            <div class="mt-4">
                                 <p class="font-medium">Grace Mwanza</p>
-                                <a href="tel:+260977123456" class="text-emerald-400 hover:underline">+260 977 123 456</a>
+                                <a href="tel:+260977123456" class="text-emerald-400">+260 977 123 456</a>
                             </div>
                         </div>
                     </div>
-
-                    <!-- MTN Money -->
                     <div class="service-card bg-zinc-800 p-6 rounded-3xl flex gap-5">
-                        <img src="https://via.placeholder.com/80x80/10b981/ffffff?text=MTN" 
-                             class="w-20 h-20 rounded-2xl object-cover flex-shrink-0" alt="MTN Money">
+                        <img src="https://via.placeholder.com/80x80/10b981/ffffff?text=MTN" class="w-20 h-20 rounded-2xl object-cover" alt="">
                         <div>
                             <h3 class="text-2xl font-semibold text-emerald-400">MTN Money</h3>
-                            <p class="text-white/80 text-sm mt-1">Fast mobile money transfers</p>
-                            <div class="mt-4 text-sm">
+                            <p class="text-white/70 text-sm">Fast mobile money transfers</p>
+                            <div class="mt-4">
                                 <p class="font-medium">James Phiri</p>
-                                <a href="tel:+260966789012" class="text-emerald-400 hover:underline">+260 966 789 012</a>
+                                <a href="tel:+260966789012" class="text-emerald-400">+260 966 789 012</a>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Zanaco -->
                     <div class="service-card bg-zinc-800 p-6 rounded-3xl flex gap-5">
-                        <img src="https://via.placeholder.com/80x80/10b981/ffffff?text=ZAN" 
-                             class="w-20 h-20 rounded-2xl object-cover flex-shrink-0" alt="Zanaco">
+                        <img src="https://via.placeholder.com/80x80/10b981/ffffff?text=ZAN" class="w-20 h-20 rounded-2xl object-cover" alt="">
                         <div>
                             <h3 class="text-2xl font-semibold text-emerald-400">Zanaco Bank</h3>
-                            <p class="text-white/80 text-sm mt-1">Bank deposits & withdrawals</p>
-                            <div class="mt-4 text-sm">
+                            <p class="text-white/70 text-sm">Bank deposits & withdrawals</p>
+                            <div class="mt-4">
                                 <p class="font-medium">Mary Banda</p>
-                                <a href="tel:+260955555555" class="text-emerald-400 hover:underline">+260 955 555 555</a>
+                                <a href="tel:+260955555555" class="text-emerald-400">+260 955 555 555</a>
                             </div>
                         </div>
                     </div>
-
-                    <!-- FNB -->
                     <div class="service-card bg-zinc-800 p-6 rounded-3xl flex gap-5">
-                        <img src="https://via.placeholder.com/80x80/10b981/ffffff?text=FNB" 
-                             class="w-20 h-20 rounded-2xl object-cover flex-shrink-0" alt="FNB">
+                        <img src="https://via.placeholder.com/80x80/10b981/ffffff?text=FNB" class="w-20 h-20 rounded-2xl object-cover" alt="">
                         <div>
                             <h3 class="text-2xl font-semibold text-emerald-400">FNB Bank</h3>
-                            <p class="text-white/80 text-sm mt-1">FNB deposits & transfers</p>
-                            <div class="mt-4 text-sm">
+                            <p class="text-white/70 text-sm">FNB deposits & transfers</p>
+                            <div class="mt-4">
                                 <p class="font-medium">Peter Zulu</p>
-                                <a href="tel:+260977111222" class="text-emerald-400 hover:underline">+260 977 111 222</a>
+                                <a href="tel:+260977111222" class="text-emerald-400">+260 977 111 222</a>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Float -->
                     <div class="service-card bg-zinc-800 p-6 rounded-3xl flex gap-5">
-                        <img src="https://via.placeholder.com/80x80/10b981/ffffff?text=FLOAT" 
-                             class="w-20 h-20 rounded-2xl object-cover flex-shrink-0" alt="Float">
+                        <img src="https://via.placeholder.com/80x80/10b981/ffffff?text=FLOAT" class="w-20 h-20 rounded-2xl object-cover" alt="">
                         <div>
                             <h3 class="text-2xl font-semibold text-emerald-400">Float / Airtime</h3>
-                            <p class="text-white/80 text-sm mt-1">Airtime & data for all networks</p>
-                            <div class="mt-4 text-sm">
+                            <p class="text-white/70 text-sm">Airtime & data for all networks</p>
+                            <div class="mt-4">
                                 <p class="font-medium">Agnes Tembo</p>
-                                <a href="tel:+260966333444" class="text-emerald-400 hover:underline">+260 966 333 444</a>
+                                <a href="tel:+260966333444" class="text-emerald-400">+260 966 333 444</a>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Cash Exchange -->
                     <div class="service-card bg-zinc-800 p-6 rounded-3xl flex gap-5">
-                        <img src="https://via.placeholder.com/80x80/10b981/ffffff?text=CASH" 
-                             class="w-20 h-20 rounded-2xl object-cover flex-shrink-0" alt="Cash Exchange">
+                        <img src="https://via.placeholder.com/80x80/10b981/ffffff?text=CASH" class="w-20 h-20 rounded-2xl object-cover" alt="">
                         <div>
                             <h3 class="text-2xl font-semibold text-emerald-400">Cash Exchange (Airtel Money)</h3>
-                            <p class="text-white/80 text-sm mt-1">Cash to Airtel Money & vice versa</p>
-                            <div class="mt-4 text-sm">
+                            <p class="text-white/70 text-sm">Cash to Airtel Money & vice versa</p>
+                            <div class="mt-4">
                                 <p class="font-medium">John Banda</p>
-                                <a href="tel:+260979077079" class="text-emerald-400 hover:underline">+260 979 077 079</a>
+                                <a href="tel:+260979077079" class="text-emerald-400">+260 979 077 079</a>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
-
             <div class="p-6 border-t border-white/10 text-center">
-                <button onclick="closeServices()" 
-                        class="px-10 py-3 bg-emerald-400 hover:bg-emerald-300 text-black rounded-3xl font-medium">
-                    Close Services
-                </button>
+                <button onclick="closeServices()" class="px-10 py-3 bg-emerald-400 hover:bg-emerald-300 text-black rounded-3xl font-medium">Close</button>
             </div>
         </div>
     </div>
 
-    <!-- PRODUCT MODAL (unchanged) -->
+    <!-- PRODUCT MODAL -->
     <div id="product-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-[20000] p-4">
         <div class="bg-zinc-900 rounded-3xl max-w-6xl w-full max-h-[95vh] overflow-hidden">
             <div class="flex flex-col lg:flex-row">
@@ -223,15 +213,14 @@
             </div>
             <p class="text-white/60">Shop No. 75, Buntungwa Street, Kabwe, Zambia</p>
             <div class="mt-6 space-y-1">
-                <a href="tel:+260961971085" class="text-emerald-400 hover:underline block">📞 +260 961 971 085</a>
-                <a href="https://wa.me/260979077079" class="text-emerald-400 hover:underline block">💬 WhatsApp: +260 979 077 079</a>
-                <a href="mailto:bandaamos98@gmail.com" class="text-emerald-400 hover:underline block">✉️ bandaamos98@gmail.com</a>
+                <a href="tel:+260961971085" class="text-emerald-400 block">+260 961 971 085</a>
+                <a href="https://wa.me/260979077079" class="text-emerald-400 block">WhatsApp: +260 979 077 079</a>
+                <a href="mailto:bandaamos98@gmail.com" class="text-emerald-400 block">bandaamos98@gmail.com</a>
             </div>
-            <p class="text-white/50 text-sm mt-10">© 2026 Brito Mobiles - All Rights Reserved</p>
+            <p class="text-white/50 text-sm mt-10">© 2026 Brito Mobiles</p>
         </div>
     </footer>
 
-    <!-- WhatsApp Floating Button -->
     <a href="https://wa.me/260979077079?text=Hello%20Brito%20Mobiles" target="_blank" class="floating-btn">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
@@ -255,13 +244,12 @@
 
                 renderProducts();
                 populateComparisonSelects();
-                renderStaffSlideshow();
+                renderStaffSlideshow();   // ← Fixed call
             } catch (e) {
                 console.error(e);
             }
         }
 
-        // Product rendering functions (same as before)
         function renderProducts() {
             const grid = document.getElementById('products-grid');
             grid.innerHTML = '';
@@ -275,10 +263,7 @@
                         <h3 class="font-semibold text-xl text-white">${product.name}</h3>
                         <p class="text-white/70 text-sm mt-3 line-clamp-2">${product.description}</p>
                         <div class="mt-6 flex justify-between items-end">
-                            <div>
-                                <span class="block text-xs text-gray-400">Price</span>
-                                <span class="text-3xl font-bold text-emerald-400">K${product.price.toLocaleString()}</span>
-                            </div>
+                            <span class="text-3xl font-bold text-emerald-400">K${product.price.toLocaleString()}</span>
                             <button onclick="event.stopImmediatePropagation(); addToCart(${product.id});" 
                                     class="bg-emerald-400 hover:bg-emerald-300 text-black px-7 py-3 rounded-2xl font-medium text-sm">
                                 Add to Cart
@@ -318,7 +303,9 @@
             document.getElementById('product-modal').classList.remove('hidden');
         }
 
-        function closeModal() { document.getElementById('product-modal').classList.add('hidden'); }
+        function closeModal() {
+            document.getElementById('product-modal').classList.add('hidden');
+        }
 
         function addToCart(id) {
             const product = products.find(p => p.id === id);
@@ -352,6 +339,11 @@
 
         function renderStaffSlideshow() {
             const container = document.getElementById('staff-slideshow');
+            if (!container || staff.length === 0) {
+                container.innerHTML = `<div class="text-center text-white/50 p-10">Staff information loading...</div>`;
+                return;
+            }
+
             let html = '';
             staff.forEach((m, i) => {
                 html += `
@@ -365,16 +357,18 @@
             });
             container.innerHTML = html;
 
+            // Start slideshow
             let index = 0;
             const slides = container.querySelectorAll('.staff-slide');
-            setInterval(() => {
-                slides[index].classList.remove('active');
-                index = (index + 1) % slides.length;
-                slides[index].classList.add('active');
-            }, 8000);
+            if (slides.length > 1) {
+                setInterval(() => {
+                    slides[index].classList.remove('active');
+                    index = (index + 1) % slides.length;
+                    slides[index].classList.add('active');
+                }, 7000);
+            }
         }
 
-        // Services Modal
         function showServices() {
             document.getElementById('services-modal').classList.remove('hidden');
             document.getElementById('services-modal').classList.add('flex');
@@ -385,7 +379,7 @@
             document.getElementById('services-modal').classList.remove('flex');
         }
 
-        // Initialize
+        // Initialize everything
         window.onload = loadData;
     </script>
 </body>
