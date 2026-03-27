@@ -1,119 +1,105 @@
-
-          "company": {
-            "name": "Brito Mobiles",
-            "slogan": "Genuine Phones, Laptops & Accessories",
-            "location": "Shop No. 75, Buntungwa Street, Opposite Ukupopoka Grocery, Kabwe, Zambia",
-            "phone": "+260 961971085",
-            "whatsapp": "+260 979077079",
-            "email": "bandaamos98@gmail.com",
-            "icon": "https://bandaamos98-create.github.io/brito-mobile/images/icon.png"
-          },
-          "products": [
-            {
-              "id": 1,
-              "name": "Samsung Galaxy A17",
-              "category": "phone",
-              "price": 3500,
-              "description": "Powerful camera phone with premium design and smooth performance.",
-              "fullDescription": "The Tecno Camon 50 Pro features a high-resolution camera system, large AMOLED display, fast charging, and powerful processor. Perfect for photography lovers and everyday users who want premium features at an affordable price.",
-              "img": "https://bandaamos98-create.github.io/brito-mobile/images/csao7.jpg"
-            },
-            {
-              "id": 2,
-              "name": "Samsung Galaxy A07",
-              "category": "phone",
-              "price": 4500,
-              "description": "Great value smartphone with big battery and fast charging.",
-              "fullDescription": "Infinix Hot 60i comes with a massive battery, fast charging support, vibrant display, and decent camera setup. Ideal for students and users who need reliable performance on a budget.",
-              "img": "https://bandaamos98-create.github.io/brito-mobile/images/samsung07.jpg"
-            },
-            {
-              "id": 3,
-              "name": "INFIX HOT 50",
-              "category": "phone",
-              "price": 4500,
-              "description": "Reliable Tecno smartphone with good camera and performance.",
-              "fullDescription": "Tecno Spark 20 offers excellent battery life, smooth performance, and a beautiful design. Great choice for daily use, social media, and light gaming.",
-              "img": "https://bandaamos98-create.github.io/brito-mobile/images/infinixhot50.jpg"
-            },
-            {
-              "id": 4,
-              "name": "INFINIX NOTE 50",
-              "category": "phone",
-              "price": 5200,
-              "description": "Popular Samsung phone with excellent display and software support.",
-              "fullDescription": "Samsung Galaxy A15 features a superb Super AMOLED display, long software update support, reliable cameras, and solid build quality. One of the best mid-range phones available.",
-              "img": "https://bandaamos98-create.github.io/brito-mobile/images/infinixnote50.jpg"
-            },
-            {
-              "id": 5,
-              "name": "Bluetooth Speaker Oraimo",
-              "category": "accessory",
-              "price": 250,
-              "description": "Basic phone for calls, SMS and long battery life.",
-              "fullDescription": "Simple and durable feature phone perfect for elderly users or as a secondary phone. Long battery life and easy to use.",
-              "img": "https://bandaamos98-create.github.io/brito-mobile/images/btspeakeroraimo.jpg"
-            },
-            {
-              "id": 6,
-              "name": "Lenovo IdeaPad Laptop",
-              "category": "laptop",
-              "price": 5600,
-              "description": "Budget laptop suitable for students and basic work.",
-              "fullDescription": "Lenovo IdeaPad offers good performance for everyday tasks like browsing, Microsoft Office, online classes, and light multimedia. Reliable and affordable.",
-              "img": "https://bandaamos98-create.github.io/brito-mobile/images/laptop.jpg"
-            },
-            {
-              "id": 7,
-              "name": "Dell Inspiron 14",
-              "category": "laptop",
-              "price": 8500,
-              "description": "Powerful everyday laptop with good battery life.",
-              "fullDescription": "Dell Inspiron 14 is a versatile laptop with excellent build quality, comfortable keyboard, and strong performance for work and study.",
-              "img": "https://bandaamos98-create.github.io/brito-mobile/images/laptop1.jpg"
-            },
-            {
-              "id": 8,
-              "name": "Connest Multiple Thing",
-              "category": "accessory",
-              "price": 350,
-              "description": "Charger, earphones, case and screen protector combo.",
-              "fullDescription": "Complete accessory bundle including fast charger, wired earphones, protective case and tempered glass screen protector.",
-              "img": "https://bandaamos98-create.github.io/brito-mobile/images/connecting.jpg"
-            }
-          ],
-          "staff": [
-            {
-              "name": "AMOS BANDA",
-              "role": "IT SPECIALIST",
-              "quote": "Lets build your websites.",
-              "img": "https://bandaamos98-create.github.io/brito-mobile/images/profile-pic.jpg"
-            },
-            {
-              "name": "John Banda",
-              "role": "Tech Specialist",
-              "quote": "We help our customers find the perfect phone or laptop that matches their needs and budget.",
-              "img": "https://bandaamos98-create.github.io/brito-mobile/images/staff2.jpg"
-            },
-            {
-              "name": "Trisha Mwanza",
-              "role": "Customer Support",
-              "quote": "Our goal is to make every customer happy with their purchase and provide excellent after-sales support.",
-              "img": "https://bandaamos98-create.github.io/brito-mobile/images/staff3.jpg"
-            }
-          ]
-        };
-
-        products = data.products || [];
-        staff = data.staff || [];
-        
-        renderProducts();
-        populateComparisonSelects();
-        renderStaffSlideshow();
-        
-        console.log(`${products.length} products loaded successfully`);
-    } catch(e) {
-        console.error("Error loading data:", e);
-        alert("Failed to load products. Please check console for details.");
+{
+  "company": {
+    "name": "Brito Mobiles",
+    "slogan": "Genuine Phones, Laptops & Accessories",
+    "location": "Shop No. 75, Buntungwa Street, Opposite Ukupopoka Grocery, Kabwe, Zambia",
+    "phone": "+260 961971085",
+    "whatsapp": "+260 979077079",
+    "email": "bandaamos98@gmail.com",
+    "icon": "https://bandaamos98-create.github.io/brito-mobile/images/icon.png"
+  },
+  "products": [
+    {
+      "id": 1,
+      "name": "Samsung Galaxy A17",
+      "category": "phone",
+      "price": 3500,
+      "description": "Powerful camera phone with premium design and smooth performance.",
+      "fullDescription": "The Samsung Galaxy A17 features a powerful camera system, premium design, smooth performance, and excellent battery life. Perfect for photography lovers and everyday users.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/csao7.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Samsung Galaxy A07",
+      "category": "phone",
+      "price": 4500,
+      "description": "Great value smartphone with big battery and fast charging.",
+      "fullDescription": "Samsung Galaxy A07 comes with a massive battery, fast charging support, vibrant display, and decent camera setup.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/samsung07.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Infinix Hot 50",
+      "category": "phone",
+      "price": 4500,
+      "description": "Reliable smartphone with good camera and performance.",
+      "fullDescription": "Infinix Hot 50 offers excellent battery life, smooth performance, and a beautiful design.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/infinixhot50.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Infinix Note 50",
+      "category": "phone",
+      "price": 5200,
+      "description": "Popular phone with excellent display and software support.",
+      "fullDescription": "Infinix Note 50 features a superb display, reliable cameras, and solid build quality.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/infinixnote50.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Bluetooth Speaker Oraimo",
+      "category": "accessory",
+      "price": 250,
+      "description": "High quality portable Bluetooth speaker.",
+      "fullDescription": "Oraimo Bluetooth speaker delivers loud, clear sound with long battery life.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/btspeakeroraimo.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Lenovo IdeaPad Laptop",
+      "category": "laptop",
+      "price": 5600,
+      "description": "Budget laptop suitable for students and basic work.",
+      "fullDescription": "Lenovo IdeaPad offers good performance for everyday tasks.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/laptop.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Dell Inspiron 14",
+      "category": "laptop",
+      "price": 8500,
+      "description": "Powerful everyday laptop with good battery life.",
+      "fullDescription": "Dell Inspiron 14 is a versatile laptop with excellent build quality and strong performance.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/laptop1.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Connest Multiple Thing",
+      "category": "accessory",
+      "price": 350,
+      "description": "Charger, earphones, case and screen protector combo.",
+      "fullDescription": "Complete accessory bundle including fast charger, wired earphones, protective case and tempered glass screen protector.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/connecting.jpg"
     }
+  ],
+  "staff": [
+    {
+      "name": "AMOS BANDA",
+      "role": "IT SPECIALIST",
+      "quote": "Lets build your websites.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/profile-pic.jpg"
+    },
+    {
+      "name": "John Banda",
+      "role": "Tech Specialist",
+      "quote": "We help our customers find the perfect phone or laptop that matches their needs and budget.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/staff2.jpg"
+    },
+    {
+      "name": "Trisha Mwanza",
+      "role": "Customer Support",
+      "quote": "Our goal is to make every customer happy with their purchase and provide excellent after-sales support.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/staff3.jpg"
+    }
+  ]
 }
