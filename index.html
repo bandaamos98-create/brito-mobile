@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
-      
+     
         .logo-font { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: -0.04em; }
         .heading-font { font-family: 'Inter', system-ui, sans-serif; font-weight: 700; letter-spacing: -0.025em; }
         .hero-bg { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); }
@@ -68,7 +68,7 @@
     <nav class="bg-black/90 backdrop-blur-md sticky top-0 z-50 border-b border-white/10">
         <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
             <div class="flex items-center gap-3" id="logo-container">
-                <!-- Logo loaded from JSON (icon.jpg) -->
+                <!-- Logo loaded from JSON (icon.jpg) - NO BM -->
             </div>
             <div class="hidden md:flex gap-8 text-sm font-medium">
                 <a href="#home" class="hover:text-[#34C759]">Home</a>
@@ -115,21 +115,19 @@
     <section id="shop" class="py-20 bg-white text-black">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="heading-font text-5xl font-bold tracking-tight mb-12 text-center">Our Products</h2>
-            
+           
             <div class="mb-16">
                 <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3">
                     <span class="text-[#34C759]">📱</span> Cell Phones
                 </h3>
                 <div id="phones-scroll" class="similar-scroll"></div>
             </div>
-
             <div class="mb-16">
                 <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3">
                     <span class="text-[#34C759]">💻</span> Laptops
                 </h3>
                 <div id="laptops-scroll" class="similar-scroll"></div>
             </div>
-
             <div>
                 <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3">
                     <span class="text-[#34C759]">🔌</span> Accessories
@@ -243,7 +241,7 @@
         </div>
     </div>
 
-    <!-- OTHER SERVICES MODAL (now dynamic with photos from JSON) -->
+    <!-- OTHER SERVICES MODAL -->
     <div id="services-modal" class="modal">
         <div class="modal-content max-w-5xl">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
@@ -285,61 +283,56 @@
             try {
                 const res = await fetch('https://bandaamos98-create.github.io/brito-mobile/products.json');
                 const data = await res.json();
-                
+               
                 company = data.company || {};
                 products = data.products || [];
                 staff = data.staff || [];
-                serviceStaff = data.serviceStaff || [];   // ← NEW: photos & info from JSON
+                serviceStaff = data.serviceStaff || [];
 
                 renderCompanyLogo();
                 renderGroupedProducts();
                 renderStaffSlideshow();
                 populateComparisonSelects();
-                renderServicesModal();   // ← NEW: dynamic services with photos
+                renderServicesModal();
             } catch (e) {
                 console.error(e);
                 renderCompanyLogo();
-                renderServicesModal();   // fallback if JSON fails
+                renderServicesModal();
             }
         }
 
+        // FIXED: No BM fallback - clean logo only
         function renderCompanyLogo() {
             const container = document.getElementById('logo-container');
             const iconSrc = company.icon || "https://bandaamos98-create.github.io/brito-mobile/images/icon.jpg";
 
             container.innerHTML = `
                 <div class="flex items-center gap-3">
-                    <img id="company-icon" 
-                         src="${iconSrc}" 
-                         alt="${company.name || 'Brito Mobiles'}" 
+                    <img id="company-icon"
+                         src="${iconSrc}"
+                         alt="${company.name || 'Brito Mobiles'}"
                          class="w-11 h-11 rounded-3xl object-cover"
-                         onerror="this.style.display='none'; 
-                                  this.parentElement.innerHTML = 
-                                  '<div class=\"w-11 h-11 bg-[#34C759] text-black font-bold text-2xl logo-font rounded-3xl flex items-center justify-center shadow-inner\">BM</div>'">
+                         onerror="this.src='https://via.placeholder.com/400x400/1f2937/ffffff?text=';">
                     <h1 class="logo-font text-3xl text-white">${company.name || 'Brito Mobiles'}</h1>
                 </div>
             `;
         }
 
-        // Staff slideshow (bigger, no green border)
         function renderStaffSlideshow() {
             const container = document.getElementById('staff-slideshow');
             if (staff.length === 0) return;
-
             let html = '';
             staff.forEach((member, i) => {
                 html += `
                 <div class="staff-slide" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:${i===0?1:0};transition:opacity 0.8s ease;">
-                    <img src="${member.img}" 
+                    <img src="${member.img}"
                          class="w-72 h-72 md:w-96 md:h-96 object-cover rounded-3xl mb-8 shadow-2xl"
                          onerror="this.src='https://via.placeholder.com/400x400/1f2937/34C759?text=${encodeURIComponent(member.name)}'">
                     <h3 class="heading-font text-4xl font-bold text-white">${member.name}</h3>
                     <p class="text-[#34C759] text-xl mt-1">${member.role}</p>
                 </div>`;
             });
-
             container.innerHTML = html;
-
             let index = 0;
             const slides = container.querySelectorAll('.staff-slide');
             if (slides.length > 1) {
@@ -351,12 +344,9 @@
             }
         }
 
-        // Dynamic Services Modal with photos from JSON
         function renderServicesModal() {
             const container = document.getElementById('services-staff-container');
             container.innerHTML = '';
-
-            // Fallback data (in case you haven't added serviceStaff to JSON yet)
             const dataToUse = serviceStaff.length > 0 ? serviceStaff : [
                 { service: "Airtel Money", name: "Grace Mwanza", photo: "https://via.placeholder.com/300x300/34C759/white?text=Grace", phone: "+260977123456", message: "Hi! I'm Grace. Ready to help with all your Airtel Money needs – send, receive, withdraw anytime!" },
                 { service: "MTN Money", name: "James Phiri", photo: "https://via.placeholder.com/300x300/34C759/white?text=James", phone: "+260966789012", message: "Hello, I'm James. Fast MTN Money transfers and cash-outs with excellent service." },
@@ -365,18 +355,17 @@
                 { service: "Float / Airtime", name: "Agnes Tembo", photo: "https://via.placeholder.com/300x300/34C759/white?text=Agnes", phone: "+260966333444", message: "Need airtime or float? I'm Agnes and I'm here to help instantly!" },
                 { service: "Cash Exchange", name: "John Banda", photo: "https://via.placeholder.com/300x300/34C759/white?text=John", phone: "+260979077079", message: "Cash to mobile money or vice versa – fast and safe with me!" }
             ];
-
             dataToUse.forEach(person => {
                 const cardHTML = `
                 <div class="bg-zinc-800 p-6 rounded-3xl flex gap-5">
-                    <img src="${person.photo}" 
+                    <img src="${person.photo}"
                          class="w-20 h-20 rounded-2xl object-cover flex-shrink-0"
                          onerror="this.src='https://via.placeholder.com/300x300/34C759/white?text=${encodeURIComponent(person.name)}'">
                     <div class="flex-1">
                         <h3 class="text-2xl font-semibold text-[#34C759]">${person.service}</h3>
                         <p class="font-medium text-white">${person.name}</p>
                         <p class="text-white/70 text-sm mt-2 leading-snug">${person.message}</p>
-                        <a href="tel:${person.phone.replace(/\s/g,'')}" 
+                        <a href="tel:${person.phone.replace(/\s/g,'')}"
                            class="mt-4 inline-flex items-center gap-2 text-[#34C759] hover:text-white">
                             <i class="fa-solid fa-phone"></i> ${person.phone}
                         </a>
@@ -386,8 +375,7 @@
             });
         }
 
-        // Rest of your existing functions (unchanged)
-        function renderGroupedProducts() { /* same as before */ 
+        function renderGroupedProducts() {
             const phones = products.filter(p => p.category === "phone");
             const laptops = products.filter(p => p.category === "laptop");
             const accessories = products.filter(p => p.category === "accessory");
@@ -420,7 +408,7 @@
             });
         }
 
-        function populateComparisonSelects() { /* same as before */ 
+        function populateComparisonSelects() {
             const phones = products.filter(p => p.category === "phone");
             const s1 = document.getElementById('compare1');
             const s2 = document.getElementById('compare2');
@@ -431,7 +419,7 @@
             });
         }
 
-        function performComparison() { /* same as before */ 
+        function performComparison() {
             const id1 = document.getElementById('compare1').value;
             const id2 = document.getElementById('compare2').value;
             if (!id1 || !id2) return alert("Please select two devices to compare.");
@@ -453,7 +441,6 @@
             resultDiv.classList.remove('hidden');
         }
 
-        // Modal open/close functions
         function openQuickOrderModal() { document.getElementById('quick-order-modal').style.display = 'flex'; }
         function closeQuickOrderModal() { document.getElementById('quick-order-modal').style.display = 'none'; }
         function showServices() { document.getElementById('services-modal').style.display = 'flex'; }
