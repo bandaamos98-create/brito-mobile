@@ -13,12 +13,8 @@
         .heading-font { font-family: 'Inter', system-ui, sans-serif; font-weight: 700; letter-spacing: -0.025em; }
         .hero-bg { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); }
         
-        .product-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .product-card:hover {
-            transform: translateY(-8px);
-        }
+        .product-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .product-card:hover { transform: translateY(-8px); }
         
         .live-scroll {
             display: flex;
@@ -62,9 +58,7 @@
             box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
         }
 
-        .search-glow {
-            position: relative;
-        }
+        .search-glow { position: relative; }
         .search-glow::before {
             content: '';
             position: absolute;
@@ -147,6 +141,7 @@
     </style>
 </head>
 <body class="bg-zinc-950 text-white">
+
     <!-- NAVBAR -->
     <nav class="bg-black/90 backdrop-blur-md sticky top-0 z-50 border-b border-white/10">
         <div class="max-w-7xl mx-auto px-4 py-5">
@@ -154,8 +149,8 @@
                 <!-- Logo -->
                 <div class="flex items-center gap-3" id="logo-container"></div>
                 
-                <!-- Search Bar - Optimized for portrait mobile -->
-                <div class="flex-1 mx-2 search-glow relative">
+                <!-- Search Bar - Full width on mobile portrait -->
+                <div class="flex-1 mx-3 search-glow relative">
                     <div class="relative">
                         <input id="search-input" 
                                type="text" 
@@ -167,25 +162,24 @@
                     <div id="search-dropdown" class="search-dropdown"></div>
                 </div>
 
-                <!-- Desktop Navigation (no Compare here anymore) -->
+                <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center gap-6 text-sm font-medium">
-                    <a href="tel:+260961971085" class="flex items-center gap-3 px-6 py-3 rounded-3xl font-semibold bg-red-600 hover:bg-red-700 transition-all">
-                        <i class="fa-solid fa-phone-volume text-xl"></i> 
-                        Call Now
+                    <a href="tel:+260961971085" class="flex items-center gap-3 px-6 py-3 rounded-3xl font-semibold bg-red-600 hover:bg-red-700">
+                        <i class="fa-solid fa-phone-volume text-xl"></i> Call Now
                     </a>
                     <button onclick="openBasketModal()" class="flex items-center gap-2 hover:text-[#34C759]">
                         <i class="fa-solid fa-shopping-basket text-xl"></i>
-                        <span class="font-medium">My Basket</span>
+                        <span>My Basket</span>
                         <span id="nav-basket-count" class="bg-[#34C759] text-black text-xs font-bold px-2 py-0.5 rounded-full">0</span>
                     </button>
                 </div>
 
-                <!-- Mobile Hamburger (☰) -->
+                <!-- Mobile: Call button + ☰ Menu -->
                 <div class="md:hidden flex items-center gap-3">
                     <a href="tel:+260961971085" class="w-11 h-11 flex items-center justify-center rounded-2xl text-2xl bg-red-600">
                         <i class="fa-solid fa-phone-volume"></i>
                     </a>
-                    <button onclick="toggleMainMenu()" class="text-3xl text-white">
+                    <button onclick="toggleMainMenu()" class="text-3xl text-white px-1">
                         <i class="fa-solid fa-bars"></i>
                     </button>
                 </div>
@@ -207,9 +201,6 @@
                     Your Trusted Mobile Partner in Kabwe
                 </h1>
                 <p class="text-xl text-white/80">Genuine phones, laptops & accessories at the best prices in Kabwe, Zambia.</p>
-                <div class="flex flex-wrap gap-4">
-                    <button onclick="showServices()" class="inline-block border-2 border-[#34C759] hover:bg-[#34C759] hover:text-black text-[#34C759] font-semibold px-10 py-4 rounded-3xl text-lg">Other Services</button>
-                </div>
             </div>
             <div>
                 <div class="text-center mb-6">
@@ -251,6 +242,7 @@
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="heading-font text-5xl font-bold tracking-tight mb-12 text-center text-white">Why Choose Brito Mobile?</h2>
             <div class="grid md:grid-cols-3 gap-8">
+                <!-- Why choose cards (6 cards) -->
                 <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:border hover:border-[#34C759] transition-all">
                     <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6"><i class="fa-solid fa-shield-halved text-5xl text-[#34C759]"></i></div>
                     <h3 class="text-2xl font-semibold text-white mb-3">100% Genuine Products</h3>
@@ -377,7 +369,33 @@
         </div>
     </div>
 
-    <!-- MAIN MENU POPUP (☰) - Compare Devices moved here -->
+    <!-- COMPARE MODAL -->
+    <div id="compare-modal" class="modal">
+        <div class="modal-content" style="max-width: 1100px;">
+            <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
+                <h2 class="heading-font text-3xl font-bold">Compare Devices</h2>
+                <button onclick="closeCompareModal()" class="text-4xl hover:text-gray-300">×</button>
+            </div>
+            <div class="p-8 bg-white text-black">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Device 1</label>
+                        <select id="compare1" class="w-full p-4 border border-gray-300 rounded-2xl text-lg"></select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Device 2</label>
+                        <select id="compare2" class="w-full p-4 border border-gray-300 rounded-2xl text-lg"></select>
+                    </div>
+                </div>
+                <button onclick="performComparison()" class="w-full mt-8 bg-[#34C759] hover:bg-[#2E9E4B] text-black py-4 rounded-2xl font-semibold text-lg">
+                    Compare Now
+                </button>
+                <div id="comparison-result" class="hidden mt-8"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ☰ MAIN MENU POPUP - All services/links included -->
     <div id="main-menu-popup" class="menu-popup">
         <div class="bg-zinc-900 rounded-3xl w-full max-w-md p-8 text-white">
             <div class="flex justify-between items-center mb-8">
@@ -443,6 +461,7 @@
                 renderStaffSlideshow();
                 renderServicesModal();
                 startHeroSlideshow();
+                populateComparisonSelects();
             } catch (e) {
                 console.error("Failed to load data:", e);
             }
@@ -516,7 +535,6 @@
                 container.appendChild(card);
             });
 
-            // Auto sliding live tiles
             let scrollPos = 0;
             if (scrollTimers[containerId]) clearInterval(scrollTimers[containerId]);
             scrollTimers[containerId] = setInterval(() => {
@@ -565,7 +583,6 @@
             }
         }
 
-        // Search dropdown - large and mobile friendly
         function handleSearch(e) {
             const term = e.target.value.toLowerCase().trim();
             const dropdown = document.getElementById('search-dropdown');
@@ -681,6 +698,25 @@
             });
         }
 
+        function populateComparisonSelects() {
+            const phones = products.filter(p => p.category === "phone");
+            const s1 = document.getElementById('compare1');
+            const s2 = document.getElementById('compare2');
+            s1.innerHTML = s2.innerHTML = '<option value="">Select Device</option>';
+            phones.forEach(p => {
+                s1.innerHTML += `<option value="${p.id}">${p.name}</option>`;
+                s2.innerHTML += `<option value="${p.id}">${p.name}</option>`;
+            });
+        }
+
+        function performComparison() {
+            const id1 = document.getElementById('compare1').value;
+            const id2 = document.getElementById('compare2').value;
+            if (!id1 || !id2) return alert("Please select two devices.");
+            if (id1 === id2) return alert("Please select two different devices.");
+            alert("Comparison result would appear here.");
+        }
+
         function openBasketModal() {
             const container = document.getElementById('basket-items');
             container.innerHTML = '';
@@ -692,14 +728,14 @@
                 basket.forEach((item, index) => {
                     total += item.price;
                     const div = document.createElement('div');
-                    div.className = "flex gap-4 mb-6 pb-6 border-b last:border-0 last:mb-0";
+                    div.className = "flex gap-4 mb-6 pb-6 border-b last:border-0";
                     div.innerHTML = `
                         <img src="${item.img}" class="w-20 h-20 object-cover rounded-2xl flex-shrink-0" onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(item.name)}'">
                         <div class="flex-1">
-                            <h4 class="font-semibold text-lg">${item.name}</h4>
-                            <p class="text-[#34C759] font-bold mt-1">K${item.price.toLocaleString()}</p>
+                            <h4 class="font-semibold">${item.name}</h4>
+                            <p class="text-[#34C759] font-bold">K${item.price.toLocaleString()}</p>
                         </div>
-                        <button onclick="removeFromBasket(${index}); event.stopImmediatePropagation()" class="text-red-500 hover:text-red-700 self-start">
+                        <button onclick="removeFromBasket(${index}); event.stopImmediatePropagation()" class="text-red-500 hover:text-red-700">
                             <i class="fa-solid fa-trash"></i>
                         </button>
                     `;
@@ -761,15 +797,12 @@
 
         function toggleMainMenu() {
             const popup = document.getElementById('main-menu-popup');
-            popup.style.display = popup.style.display === 'flex' ? 'none' : 'flex';
+            popup.style.display = (popup.style.display === 'flex') ? 'none' : 'flex';
         }
 
-        // Close search dropdown when clicking outside
         document.addEventListener('click', (e) => {
             const dropdown = document.getElementById('search-dropdown');
-            if (!e.target.closest('.search-glow')) {
-                dropdown.style.display = 'none';
-            }
+            if (!e.target.closest('.search-glow')) dropdown.style.display = 'none';
         });
 
         window.onload = loadData;
