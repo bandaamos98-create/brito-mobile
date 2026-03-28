@@ -89,7 +89,7 @@
             text-shadow: 0 0 10px #ff0000;
         }
 
-        /* Animated Glowing Search Bar */
+        /* Glowing Search Bar */
         .search-glow {
             position: relative;
         }
@@ -114,14 +114,14 @@
 </head>
 <body class="bg-zinc-950 text-white">
 
-    <!-- NAVBAR -->
+    <!-- NAVBAR - Exact order requested -->
     <nav class="bg-black/90 backdrop-blur-md sticky top-0 z-50 border-b border-white/10">
         <div class="max-w-7xl mx-auto px-6 py-5">
             <div class="flex items-center justify-between">
                 <!-- Logo -->
                 <div class="flex items-center gap-3" id="logo-container"></div>
 
-                <!-- Search Bar (right after "Brito Mobiles") -->
+                <!-- Search Bar right after Brito Mobiles -->
                 <div class="flex-1 max-w-md mx-8 hidden md:block search-glow">
                     <div class="relative">
                         <input id="search-input"
@@ -217,7 +217,7 @@
     <section id="shop" class="py-20 bg-white text-black">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="heading-font text-5xl font-bold tracking-tight mb-12 text-center">Our Products</h2>
-       
+      
             <div class="mb-16">
                 <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3">
                     <span class="text-[#34C759]">📱</span> Cell Phones
@@ -236,7 +236,7 @@
                 </h3>
                 <div id="accessories-scroll" class="similar-scroll"></div>
             </div>
-          
+         
             <div>
                 <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3">
                     <span class="text-[#34C759]">🛠️</span> Other Services
@@ -246,7 +246,7 @@
         </div>
     </section>
 
-    <!-- WHY CHOOSE US -->
+    <!-- WHY CHOOSE US - Fully restored -->
     <section class="py-20 bg-zinc-950">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="heading-font text-5xl font-bold tracking-tight mb-12 text-center text-white">Why Choose Brito Mobiles?</h2>
@@ -308,7 +308,7 @@
         </div>
     </section>
 
-    <!-- PRODUCT DETAIL MODAL -->
+    <!-- PRODUCT DETAIL MODAL - Dual buttons restored -->
     <div id="product-modal" class="modal">
         <div class="modal-content">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
@@ -326,13 +326,11 @@
                         <div class="mt-8 grid grid-cols-2 gap-4">
                             <a id="modal-buy-btn" href="#" target="_blank"
                                class="bg-[#34C759] hover:bg-[#2E9E4B] text-black text-center py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-2">
-                                <i class="fa-brands fa-whatsapp"></i>
-                                Buy via WhatsApp
+                                <i class="fa-brands fa-whatsapp"></i> Buy via WhatsApp
                             </a>
-                            <button id="modal-add-btn" onclick="addToBasketFromModal()"
+                            <button id="modal-add-btn" onclick="addToBasketFromModal(); event.stopImmediatePropagation()"
                                     class="bg-zinc-900 hover:bg-black text-white text-center py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-cart-plus"></i>
-                                Add to Basket
+                                <i class="fa-solid fa-cart-plus"></i> Add to Basket
                             </button>
                         </div>
                     </div>
@@ -345,9 +343,84 @@
         </div>
     </div>
 
-    <!-- BASKET MODAL, QUICK ORDER, COMPARE, SERVICES MODAL, FOOTER remain the same as your provided code -->
+    <!-- BASKET MODAL -->
+    <div id="basket-modal" class="modal">
+        <div class="modal-content" style="max-width: 720px;">
+            <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
+                <h2 class="heading-font text-3xl font-bold flex items-center gap-3">
+                    <i class="fa-solid fa-shopping-basket"></i> My Basket
+                </h2>
+                <button onclick="closeBasketModal()" class="text-4xl hover:text-gray-300">×</button>
+            </div>
+            <div id="basket-items" class="p-6 bg-white text-black overflow-y-auto"></div>
+            <div class="p-6 border-t bg-zinc-50">
+                <div class="flex justify-between items-center text-xl font-bold mb-6">
+                    <span>Total Amount:</span>
+                    <span id="basket-total" class="text-[#34C759]">K0</span>
+                </div>
+                <button onclick="orderBasketViaWhatsApp()" 
+                        class="w-full bg-[#34C759] hover:bg-[#2E9E4B] text-black py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-3">
+                    <i class="fa-brands fa-whatsapp text-2xl"></i> ORDER NOW VIA WHATSAPP
+                </button>
+            </div>
+        </div>
+    </div>
 
-    <!-- (For brevity, the rest of the modals and footer are identical to your last version) -->
+    <!-- QUICK ORDER MODAL -->
+    <div id="quick-order-modal" class="modal">
+        <div class="modal-content" style="max-width: 920px;">
+            <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
+                <h2 class="heading-font text-3xl font-bold">Quick Order Request</h2>
+                <button onclick="closeQuickOrderModal()" class="text-4xl hover:text-gray-300">×</button>
+            </div>
+            <div class="p-4 bg-white overflow-hidden">
+                <iframe id="quick-order-frame"
+                        src="https://docs.google.com/forms/d/e/1FAIpQLSe-LG2Jf_SobnqQ3Ui1RbKpV7MmRZSCQxL4e2Q5GU7rgHC4rA/viewform?embedded=true"
+                        width="100%" height="720" frameborder="0" marginheight="0" marginwidth="0">
+                    Loading...
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- COMPARE MODAL -->
+    <div id="compare-modal" class="modal">
+        <div class="modal-content max-w-5xl">
+            <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
+                <h2 class="heading-font text-3xl font-bold">Compare Devices</h2>
+                <button onclick="closeCompareModal()" class="text-4xl hover:text-gray-300">×</button>
+            </div>
+            <div class="p-8 bg-white text-black">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Device 1</label>
+                        <select id="compare1" class="w-full p-4 border border-gray-300 rounded-2xl text-lg"></select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Device 2</label>
+                        <select id="compare2" class="w-full p-4 border border-gray-300 rounded-2xl text-lg"></select>
+                    </div>
+                </div>
+                <button onclick="performComparison()" class="mt-8 w-full bg-[#34C759] hover:bg-[#2E9E4B] text-black py-4 rounded-2xl font-semibold text-lg">
+                    Compare Now
+                </button>
+                <div id="comparison-result" class="mt-8 hidden grid grid-cols-1 md:grid-cols-2 gap-8"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SERVICES MODAL -->
+    <div id="services-modal" class="modal">
+        <div class="modal-content max-w-5xl">
+            <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
+                <h2 class="heading-font text-3xl font-bold">Other Services (Mini Bank)</h2>
+                <button onclick="closeServices()" class="text-4xl hover:text-gray-300">×</button>
+            </div>
+            <div class="p-8 bg-zinc-900 text-white overflow-y-auto max-h-[75vh]">
+                <div id="services-staff-container" class="grid md:grid-cols-2 gap-6"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- FOOTER -->
     <footer class="bg-black py-16 text-center">
@@ -380,13 +453,12 @@
             try {
                 const res = await fetch('https://bandaamos98-create.github.io/brito-mobile/products.json');
                 const data = await res.json();
-            
                 company = data.company || {};
                 products = data.products || [];
                 allProducts = [...products];
                 staff = data.staff || [];
                 serviceStaff = data.serviceStaff || [];
-             
+                
                 renderCompanyLogo();
                 renderGroupedProducts();
                 renderStaffSlideshow();
@@ -485,8 +557,7 @@
                             <h4 class="font-semibold text-lg">${item.name}</h4>
                             <p class="text-[#34C759] font-bold mt-1">K${item.price.toLocaleString()}</p>
                         </div>
-                        <button onclick="removeFromBasket(${index}); event.stopImmediatePropagation()"
-                                class="text-red-500 hover:text-red-700 self-start">
+                        <button onclick="removeFromBasket(${index}); event.stopImmediatePropagation()" class="text-red-500 hover:text-red-700 self-start">
                             <i class="fa-solid fa-trash"></i>
                         </button>
                     `;
@@ -559,8 +630,7 @@
                         <h3 class="font-semibold text-xl text-zinc-900">${service.service}</h3>
                         <p class="text-[#34C759] font-medium mt-1">${service.name}</p>
                         <p class="text-zinc-600 text-sm mt-3 line-clamp-4">${service.message}</p>
-                        <a href="tel:${service.phone.replace(/\s/g,'')}"
-                           class="mt-4 inline-flex items-center gap-2 text-[#34C759] hover:text-[#2E9E4B]">
+                        <a href="tel:${service.phone.replace(/\s/g,'')}" class="mt-4 inline-flex items-center gap-2 text-[#34C759] hover:text-[#2E9E4B]">
                             <i class="fa-solid fa-phone"></i> ${service.phone}
                         </a>
                     </div>
@@ -577,7 +647,6 @@
             const phones = products.filter(p => p.category === "phone");
             const laptops = products.filter(p => p.category === "laptop");
             const accessories = products.filter(p => p.category === "accessory");
-        
             renderCategory("phones-scroll", phones);
             renderCategory("laptops-scroll", laptops);
             renderCategory("accessories-scroll", accessories);
@@ -589,10 +658,10 @@
             document.getElementById('modal-product-img').src = product.img;
             document.getElementById('modal-product-price').textContent = `K${product.price.toLocaleString()}`;
             document.getElementById('modal-product-desc').textContent = product.fullDescription || product.description;
-        
+            
             const waLink = `https://wa.me/260979077079?text=Hello Brito Mobiles, I want to buy ${encodeURIComponent(product.name)} at K${product.price}`;
             document.getElementById('modal-buy-btn').href = waLink;
-        
+            
             renderSimilarProducts(product);
             document.getElementById('product-modal').style.display = 'flex';
         }
@@ -700,44 +769,21 @@
                 renderGroupedProducts();
                 return;
             }
-
-            const filtered = allProducts.filter(p => 
-                p.name.toLowerCase().includes(term)
-            );
-
+            const filtered = allProducts.filter(p => p.name.toLowerCase().includes(term));
             document.getElementById('phones-scroll').innerHTML = '';
             document.getElementById('laptops-scroll').innerHTML = '';
             document.getElementById('accessories-scroll').innerHTML = '';
             document.getElementById('services-scroll').innerHTML = '';
-
             if (filtered.length === 0) {
-                const msg = `<p class="col-span-full text-center text-gray-500 py-12 text-lg">No products found for "${term}"</p>`;
-                document.getElementById('phones-scroll').innerHTML = msg;
+                document.getElementById('phones-scroll').innerHTML = `<p class="text-center text-gray-500 py-12 text-lg">No products found for "${term}"</p>`;
                 return;
             }
-
-            const container = document.getElementById('phones-scroll');
-            filtered.forEach(product => {
-                const card = document.createElement('div');
-                card.className = `product-card flex-shrink-0 w-72 md:w-80 bg-white rounded-3xl overflow-hidden border border-zinc-200 cursor-pointer`;
-                card.innerHTML = `
-                    <img src="${product.img}" alt="${product.name}" class="w-full h-56 object-cover"
-                         onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(product.name)}'">
-                    <div class="p-6">
-                        <h3 class="font-semibold text-xl text-zinc-900">${product.name}</h3>
-                        <p class="text-zinc-600 text-sm mt-3 line-clamp-4">${product.fullDescription || product.description}</p>
-                        <div class="mt-6 text-3xl font-bold text-[#34C759]">K${product.price.toLocaleString()}</div>
-                        <button onclick="handleAddToBasket(this, ${JSON.stringify(product).replace(/"/g, '&quot;')}); event.stopImmediatePropagation()"
-                                class="mt-4 w-full bg-zinc-900 hover:bg-black text-white py-3.5 rounded-2xl font-medium flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-cart-plus"></i> ADD TO BASKET
-                        </button>
-                    </div>
-                `;
-                card.onclick = (e) => {
-                    if (!e.target.closest('button')) showProductDetail(product);
-                };
-                container.appendChild(card);
-            });
+            const phones = filtered.filter(p => p.category === "phone");
+            const laptops = filtered.filter(p => p.category === "laptop");
+            const accessories = filtered.filter(p => p.category === "accessory");
+            if (phones.length) renderCategory("phones-scroll", phones);
+            if (laptops.length) renderCategory("laptops-scroll", laptops);
+            if (accessories.length) renderCategory("accessories-scroll", accessories);
         }
 
         window.onload = loadData;
