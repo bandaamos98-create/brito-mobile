@@ -60,9 +60,22 @@
             border-radius: 24px;
             width: 100%;
             max-width: 1100px;
-            max-height: 92vh;
+            max-height: 95vh;
             overflow: hidden;
             box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+        }
+        /* Fix for Compare Modal Scrolling */
+        #comparison-result {
+            max-height: 58vh;
+            overflow-y: auto;
+            padding-right: 12px;
+        }
+        #comparison-result::-webkit-scrollbar {
+            width: 6px;
+        }
+        #comparison-result::-webkit-scrollbar-thumb {
+            background: #34C759;
+            border-radius: 20px;
         }
         #basket-items {
             max-height: 58vh;
@@ -219,7 +232,6 @@
         </div>
     </section>
 
-    <!-- WHY CHOOSE US + ABOUT US + Modals (same as your version) -->
     <!-- WHY CHOOSE US -->
     <section class="py-20 bg-zinc-950">
         <div class="max-w-7xl mx-auto px-6">
@@ -286,12 +298,10 @@
                             <p id="modal-product-desc" class="mt-4 text-gray-700 leading-relaxed"></p>
                         </div>
                         <div class="mt-8 grid grid-cols-2 gap-4">
-                            <a id="modal-buy-btn" href="#" target="_blank"
-                               class="bg-[#34C759] hover:bg-[#2E9E4B] text-black text-center py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-2">
+                            <a id="modal-buy-btn" href="#" target="_blank" class="bg-[#34C759] hover:bg-[#2E9E4B] text-black text-center py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-2">
                                 <i class="fa-brands fa-whatsapp"></i> Buy via WhatsApp
                             </a>
-                            <button id="modal-add-btn"
-                                    onclick="addToBasketFromModal()"
+                            <button id="modal-add-btn" onclick="addToBasketFromModal()" 
                                     class="add-to-basket-btn bg-zinc-900 hover:bg-black text-white text-center py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-2">
                                 <i class="fa-solid fa-cart-plus"></i> Add to Basket
                             </button>
@@ -306,7 +316,6 @@
         </div>
     </div>
 
-    <!-- BASKET, QUICK ORDER, COMPARE, SERVICES MODALS (unchanged from your version) -->
     <!-- BASKET MODAL -->
     <div id="basket-modal" class="modal">
         <div class="modal-content" style="max-width: 720px;">
@@ -333,7 +342,7 @@
     <div id="quick-order-modal" class="modal">
         <div class="modal-content" style="max-width: 920px;">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
-                <h2 class="heading-font text-3xl font-bold">Make Your Orders and Requests With Us Right Here</h2>
+                <h2 class="heading-font text-3xl font-bold">Make Your Orders and Request Right Here</h2>
                 <button onclick="closeQuickOrderModal()" class="text-4xl hover:text-gray-300">×</button>
             </div>
             <div class="p-4 bg-white overflow-hidden">
@@ -346,9 +355,9 @@
         </div>
     </div>
 
-    <!-- COMPARE MODAL -->
+    <!-- COMPARE MODAL - Fixed scrolling -->
     <div id="compare-modal" class="modal">
-        <div class="modal-content max-w-5xl">
+        <div class="modal-content" style="max-width: 1100px; max-height: 95vh;">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
                 <div>
                     <h2 class="heading-font text-3xl font-bold">Compare Devices</h2>
@@ -356,8 +365,8 @@
                 </div>
                 <button onclick="closeCompareModal()" class="text-4xl hover:text-gray-300">×</button>
             </div>
-            <div class="p-8 bg-white text-black">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="p-8 bg-white text-black" style="max-height: calc(95vh - 85px); overflow-y: auto;">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                     <div>
                         <label class="block text-sm font-medium mb-2">Device 1</label>
                         <select id="compare1" class="w-full p-4 border border-gray-300 rounded-2xl text-lg"></select>
@@ -367,10 +376,10 @@
                         <select id="compare2" class="w-full p-4 border border-gray-300 rounded-2xl text-lg"></select>
                     </div>
                 </div>
-                <button onclick="performComparison()" class="mt-8 w-full bg-[#34C759] hover:bg-[#2E9E4B] text-black py-4 rounded-2xl font-semibold text-lg">
+                <button onclick="performComparison()" class="w-full bg-[#34C759] hover:bg-[#2E9E4B] text-black py-4 rounded-2xl font-semibold text-lg mb-8">
                     Compare Now
                 </button>
-                <div id="comparison-result" class="mt-10 hidden"></div>
+                <div id="comparison-result" class="hidden"></div>
             </div>
         </div>
     </div>
@@ -480,7 +489,6 @@
             }
         }
 
-        // Universal Add to Basket Feedback Function
         function showAddedFeedback(button) {
             if (!button) return;
             const originalHTML = button.innerHTML;
@@ -492,7 +500,7 @@
 
             setTimeout(() => {
                 button.innerHTML = originalHTML;
-                button.className = originalClass;   // Restore original style completely
+                button.className = originalClass;
             }, 1400);
         }
 
