@@ -118,7 +118,6 @@
         <div class="max-w-7xl mx-auto px-6 py-5">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3" id="logo-container"></div>
-
                 <div class="flex-1 max-w-md mx-8 hidden md:block search-glow">
                     <div class="relative">
                         <input id="search-input" type="text" placeholder="Search for product"
@@ -127,23 +126,19 @@
                         <i class="fa-solid fa-magnifying-glass absolute left-5 top-1/2 -translate-y-1/2 text-zinc-400"></i>
                     </div>
                 </div>
-
                 <div class="hidden md:flex items-center gap-6 text-sm font-medium">
                     <a href="#" onclick="openQuickOrderModal()" class="hover:text-[#34C759]">Quick Order</a>
                     <a href="#" onclick="openCompareModal()" class="hover:text-[#34C759]">Compare Devices</a>
                     <a href="#about" class="hover:text-[#34C759]">About Us</a>
-                    
                     <a href="tel:+260961971085" class="call-btn flex items-center gap-2 px-6 py-3 rounded-3xl font-semibold hover:scale-105 transition-all">
                         <i class="fa-solid fa-phone"></i> Call Now
                     </a>
-
                     <button onclick="openBasketModal()" class="flex items-center gap-2 hover:text-[#34C759]">
                         <i class="fa-solid fa-shopping-basket text-xl"></i>
                         <span class="font-medium">My Basket</span>
                         <span id="nav-basket-count" class="bg-[#34C759] text-black text-xs font-bold px-2 py-0.5 rounded-full">0</span>
                     </button>
                 </div>
-
                 <div class="md:hidden flex items-center gap-3">
                     <a href="tel:+260961971085" class="call-btn w-11 h-11 flex items-center justify-center rounded-2xl text-xl">
                         <i class="fa-solid fa-phone"></i>
@@ -159,12 +154,9 @@
                     <a href="#" onclick="openQuickOrderModal(); toggleMobileMenu()" class="hover:text-[#34C759]">Quick Order</a>
                     <a href="#" onclick="openCompareModal(); toggleMobileMenu()" class="hover:text-[#34C759]">Compare Devices</a>
                     <a href="#about" onclick="toggleMobileMenu()" class="hover:text-[#34C759]">About Us</a>
-                    
-                    <a href="tel:+260961971085" onclick="toggleMobileMenu()" 
-                       class="call-btn flex items-center gap-3 px-6 py-4 rounded-3xl font-semibold justify-center">
+                    <a href="tel:+260961971085" onclick="toggleMobileMenu()" class="call-btn flex items-center gap-3 px-6 py-4 rounded-3xl font-semibold justify-center">
                         <i class="fa-solid fa-phone"></i> Call Now
                     </a>
-
                     <button onclick="openBasketModal(); toggleMobileMenu()" class="flex items-center gap-2 hover:text-[#34C759]">
                         <i class="fa-solid fa-shopping-basket"></i> My Basket (<span id="mobile-basket-count">0</span>)
                     </button>
@@ -206,7 +198,7 @@
     <section id="shop" class="py-20 bg-white text-black">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="heading-font text-5xl font-bold tracking-tight mb-12 text-center">Our Products</h2>
-            
+           
             <div class="mb-16">
                 <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-[#34C759]">📱</span> Cell Phones</h3>
                 <div id="phones-scroll" class="similar-scroll"></div>
@@ -219,7 +211,7 @@
                 <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-[#34C759]">🔌</span> Accessories</h3>
                 <div id="accessories-scroll" class="similar-scroll"></div>
             </div>
-            
+           
             <div>
                 <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-[#34C759]">🛠️</span> Other Services</h3>
                 <div id="services-scroll" class="similar-scroll"></div>
@@ -227,6 +219,7 @@
         </div>
     </section>
 
+    <!-- WHY CHOOSE US + ABOUT US + Modals (same as your version) -->
     <!-- WHY CHOOSE US -->
     <section class="py-20 bg-zinc-950">
         <div class="max-w-7xl mx-auto px-6">
@@ -297,10 +290,9 @@
                                class="bg-[#34C759] hover:bg-[#2E9E4B] text-black text-center py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-2">
                                 <i class="fa-brands fa-whatsapp"></i> Buy via WhatsApp
                             </a>
-                            <!-- Fixed Add to Basket Button -->
-                            <button id="modal-add-btn" 
-                                    onclick="addToBasketFromModal()" 
-                                    class="bg-zinc-900 hover:bg-black text-white text-center py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-2">
+                            <button id="modal-add-btn"
+                                    onclick="addToBasketFromModal()"
+                                    class="add-to-basket-btn bg-zinc-900 hover:bg-black text-white text-center py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-2">
                                 <i class="fa-solid fa-cart-plus"></i> Add to Basket
                             </button>
                         </div>
@@ -314,6 +306,7 @@
         </div>
     </div>
 
+    <!-- BASKET, QUICK ORDER, COMPARE, SERVICES MODALS (unchanged from your version) -->
     <!-- BASKET MODAL -->
     <div id="basket-modal" class="modal">
         <div class="modal-content" style="max-width: 720px;">
@@ -329,8 +322,7 @@
                     <span>Total Amount:</span>
                     <span id="basket-total" class="text-[#34C759]">K0</span>
                 </div>
-                <button onclick="orderBasketViaWhatsApp()" 
-                        class="w-full bg-[#34C759] hover:bg-[#2E9E4B] text-black py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-3">
+                <button onclick="orderBasketViaWhatsApp()" class="w-full bg-[#34C759] hover:bg-[#2E9E4B] text-black py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-3">
                     <i class="fa-brands fa-whatsapp text-2xl"></i> ORDER NOW VIA WHATSAPP
                 </button>
             </div>
@@ -341,7 +333,7 @@
     <div id="quick-order-modal" class="modal">
         <div class="modal-content" style="max-width: 920px;">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
-                <h2 class="heading-font text-3xl font-bold">Make You Orders and Request Right Here</h2>
+                <h2 class="heading-font text-3xl font-bold">Make Your Orders and Request Right Here</h2>
                 <button onclick="closeQuickOrderModal()" class="text-4xl hover:text-gray-300">×</button>
             </div>
             <div class="p-4 bg-white overflow-hidden">
@@ -412,7 +404,7 @@
         <a href="tel:+260961971085" class="call-btn w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition text-2xl">
             <i class="fa-solid fa-phone"></i>
         </a>
-        <a href="https://wa.me/260979077079?text=Hello%20Brito%20Mobile%2C%20I%20would%20like%20to%20inquire%20about%20a%20product" 
+        <a href="https://wa.me/260979077079?text=Hello%20Brito%20Mobile%2C%20I%20would%20like%20to%20inquire%20about%20a%20product"
            target="_blank" class="floating-btn">
             <i class="fa-brands fa-whatsapp text-2xl"></i>
             <span>Inquire Now</span>
@@ -437,7 +429,7 @@
                 allProducts = [...products];
                 staff = data.staff || [];
                 serviceStaff = data.serviceStaff || [];
-               
+              
                 renderCompanyLogo();
                 renderGroupedProducts();
                 renderStaffSlideshow();
@@ -488,24 +480,20 @@
             }
         }
 
+        // Universal Add to Basket Feedback Function
         function showAddedFeedback(button) {
             if (!button) return;
             const originalHTML = button.innerHTML;
+            const originalClass = button.className;
+
             button.style.transition = "all 0.2s";
             button.innerHTML = `<i class="fa-solid fa-check"></i> Added!`;
-            button.classList.add('!bg-green-600', 'text-white');
+            button.classList.add('!bg-green-600', '!text-white');
+
             setTimeout(() => {
                 button.innerHTML = originalHTML;
-                button.classList.remove('!bg-green-600', 'text-white');
+                button.className = originalClass;   // Restore original style completely
             }, 1400);
-        }
-
-        function resetModalAddButton() {
-            const addBtn = document.getElementById('modal-add-btn');
-            if (addBtn) {
-                addBtn.innerHTML = `<i class="fa-solid fa-cart-plus"></i> Add to Basket`;
-                addBtn.classList.remove('!bg-green-600', 'text-white');
-            }
         }
 
         function addToBasket(product, buttonElement = null) {
@@ -594,7 +582,7 @@
                         <p class="text-zinc-600 text-sm mt-3 line-clamp-4">${product.fullDescription || product.description}</p>
                         <div class="mt-6 text-3xl font-bold text-[#34C759]">K${product.price.toLocaleString()}</div>
                         <button onclick="handleAddToBasket(this, ${JSON.stringify(product).replace(/"/g, '&quot;')}); event.stopImmediatePropagation()"
-                                class="mt-4 w-full bg-zinc-900 hover:bg-black text-white py-3.5 rounded-2xl font-medium flex items-center justify-center gap-2">
+                                class="add-to-basket-btn mt-4 w-full bg-zinc-900 hover:bg-black text-white py-3.5 rounded-2xl font-medium flex items-center justify-center gap-2">
                             <i class="fa-solid fa-cart-plus"></i> ADD TO BASKET
                         </button>
                     </div>
@@ -602,28 +590,6 @@
                 card.onclick = (e) => {
                     if (!e.target.closest('button')) showProductDetail(product);
                 };
-                container.appendChild(card);
-            });
-        }
-
-        function renderOtherServices() {
-            const container = document.getElementById('services-scroll');
-            container.innerHTML = '';
-            serviceStaff.forEach(service => {
-                const card = document.createElement('div');
-                card.className = `flex-shrink-0 w-72 md:w-80 bg-white rounded-3xl overflow-hidden border border-zinc-200`;
-                card.innerHTML = `
-                    <img src="${service.photo}" alt="${service.service}" class="w-full h-56 object-cover"
-                         onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(service.service)}'">
-                    <div class="p-6">
-                        <h3 class="font-semibold text-xl text-zinc-900">${service.service}</h3>
-                        <p class="text-[#34C759] font-medium mt-1">${service.name}</p>
-                        <p class="text-zinc-600 text-sm mt-3 line-clamp-4">${service.message}</p>
-                        <a href="tel:${service.phone.replace(/\s/g,'')}" class="mt-4 inline-flex items-center gap-2 text-[#34C759] hover:text-[#2E9E4B]">
-                            <i class="fa-solid fa-phone"></i> ${service.phone}
-                        </a>
-                    </div>
-                `;
                 container.appendChild(card);
             });
         }
@@ -643,10 +609,6 @@
 
         function showProductDetail(product) {
             currentProduct = product;
-            
-            // Reset the Add to Basket button every time we open a new product
-            resetModalAddButton();
-
             document.getElementById('modal-product-name').textContent = product.name;
             document.getElementById('modal-product-img').src = product.img;
             document.getElementById('modal-product-price').textContent = `K${product.price.toLocaleString()}`;
@@ -706,6 +668,28 @@
             });
         }
 
+        function renderOtherServices() {
+            const container = document.getElementById('services-scroll');
+            container.innerHTML = '';
+            serviceStaff.forEach(service => {
+                const card = document.createElement('div');
+                card.className = `flex-shrink-0 w-72 md:w-80 bg-white rounded-3xl overflow-hidden border border-zinc-200`;
+                card.innerHTML = `
+                    <img src="${service.photo}" alt="${service.service}" class="w-full h-56 object-cover"
+                         onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(service.service)}'">
+                    <div class="p-6">
+                        <h3 class="font-semibold text-xl text-zinc-900">${service.service}</h3>
+                        <p class="text-[#34C759] font-medium mt-1">${service.name}</p>
+                        <p class="text-zinc-600 text-sm mt-3 line-clamp-4">${service.message}</p>
+                        <a href="tel:${service.phone.replace(/\s/g,'')}" class="mt-4 inline-flex items-center gap-2 text-[#34C759] hover:text-[#2E9E4B]">
+                            <i class="fa-solid fa-phone"></i> ${service.phone}
+                        </a>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
         function openQuickOrderModal() { document.getElementById('quick-order-modal').style.display = 'flex'; }
         function closeQuickOrderModal() { document.getElementById('quick-order-modal').style.display = 'none'; }
         function showServices() { document.getElementById('services-modal').style.display = 'flex'; }
@@ -728,10 +712,10 @@
             const id1 = document.getElementById('compare1').value;
             const id2 = document.getElementById('compare2').value;
             if (!id1 || !id2) return alert("Please select two devices to compare.");
-            
+           
             const p1 = products.find(p => p.id == id1);
             const p2 = products.find(p => p.id == id2);
-            
+           
             const resultDiv = document.getElementById('comparison-result');
             resultDiv.innerHTML = `
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
