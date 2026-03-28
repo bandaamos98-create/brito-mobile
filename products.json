@@ -101,5 +101,49 @@
       "quote": "Our goal is to make every customer happy with their purchase and provide excellent after-sales support.",
       "img": "https://bandaamos98-create.github.io/brito-mobile/images/mary.jpg"
     }
+  ],
+  "serviceStaff": [
+    {
+      "service": "Airtel Money",
+      "name": "Grace Mwanza",
+      "photo": "https://bandaamos98-create.github.io/brito-mobile/images/grace.jpg",
+      "phone": "+260977123456",
+      "message": "Hi! I'm Grace. Ready to help with all your Airtel Money needs – send, receive, withdraw anytime!"
+    },
+    {
+      "service": "MTN Money",
+      "name": "James Phiri",
+      "photo": "https://bandaamos98-create.github.io/brito-mobile/images/james.jpg",
+      "phone": "+260966789012",
+      "message": "Hello, I'm James. Fast MTN Money transfers and cash-outs with excellent service."
+    },
+    {
+      "service": "Zanaco Bank",
+      "name": "Mary Banda",
+      "photo": "https://bandaamos98-create.github.io/brito-mobile/images/mary.jpg",
+      "phone": "+260955555555",
+      "message": "Hi, I'm Mary. I handle all Zanaco deposits, withdrawals and transfers professionally."
+    },
+    {
+      "service": "FNB Bank",
+      "name": "Peter Zulu",
+      "photo": "https://bandaamos98-create.github.io/brito-mobile/images/peter.jpg",
+      "phone": "+260977111222",
+      "message": "Hello! Peter here – your trusted FNB bank expert at Brito Mobiles."
+    },
+    {
+      "service": "Float / Airtime",
+      "name": "Agnes Tembo",
+      "photo": "https://bandaamos98-create.github.io/brito-mobile/images/agnes.jpg",
+      "phone": "+260966333444",
+      "message": "Need airtime or float? I'm Agnes and I'm here to help you instantly with all networks!"
+    },
+    {
+      "service": "Cash Exchange",
+      "name": "John Banda",
+      "photo": "https://bandaamos98-create.github.io/brito-mobile/images/john.jpg",
+      "phone": "+260979077079",
+      "message": "Cash to mobile money or vice versa – fast, safe and reliable service with me!"
+    }
   ]
 }
