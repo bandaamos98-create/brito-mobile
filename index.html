@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -266,7 +267,9 @@
     <!-- WHY CHOOSE US -->
     <section class="py-20 bg-zinc-950">
         <div class="max-w-7xl mx-auto px-6">
-            <h2 class="heading-font text-5xl font-bold tracking-tight mb-12 text-center text-white">Why Choose Brito Mobiles?</h2>
+            <h2 class="heading-font text-5xl font-bold tracking-tight mb-12 text-center text-white">Why Choose Brito Mobile
+
+?</h2>
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:border hover:border-[#34C759] transition-all">
                     <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6">
@@ -441,13 +444,13 @@
 
     <!-- FOOTER -->
     <footer class="bg-black py-16 text-center">
-        <h1 class="logo-font text-3xl text-white mb-4">Brito Mobiles</h1>
+        <h1 class="logo-font text-3xl text-white mb-4">Brito Mobile</h1>
         <p class="text-white/60">Shop No. 75, Buntungwa Street, Kabwe, Zambia</p>
         <div class="mt-6 space-y-1">
             <a href="tel:+260961971085" class="text-[#34C759] block text-lg font-medium">+260 961 971 085</a>
             <a href="https://wa.me/260979077079" class="text-[#34C759] block">WhatsApp: +260 979 077 079</a>
         </div>
-        <p class="text-white/50 text-sm mt-10">© 2026 Brito Mobiles • All transactions at the branch only</p>
+        <p class="text-white/50 text-sm mt-10">© 2026 Brito Mobile • All transactions at the branch only</p>
     </footer>
 
     <!-- Floating Action Buttons -->
@@ -503,7 +506,7 @@
                 <div class="flex items-center gap-3">
                     <img src="${iconSrc}" alt="${company.name}" class="w-11 h-11 rounded-3xl object-cover"
                          onerror="this.src='https://via.placeholder.com/400x400/1f2937/ffffff?text=';">
-                    <h1 class="logo-font text-3xl text-white">${company.name || 'Brito Mobiles'}</h1>
+                    <h1 class="logo-font text-3xl text-white">${company.name || 'Brito Mobile'}</h1>
                 </div>
             `;
         }
@@ -608,7 +611,7 @@
 
         function orderBasketViaWhatsApp() {
             if (basket.length === 0) return;
-            let message = "Hello Brito Mobiles,%0AI want to order:%0A%0A";
+            let message = "Hello Brito Mobile,%0AI want to order:%0A%0A";
             let total = 0;
             basket.forEach(item => {
                 message += `• ${item.name} - K${item.price.toLocaleString()}%0A`;
@@ -687,7 +690,7 @@
             document.getElementById('modal-product-price').textContent = `K${product.price.toLocaleString()}`;
             document.getElementById('modal-product-desc').textContent = product.fullDescription || product.description;
            
-            const waLink = `https://wa.me/260979077079?text=Hello Brito Mobiles, I want to buy ${encodeURIComponent(product.name)} at K${product.price}`;
+            const waLink = `https://wa.me/260979077079?text=Hello Brito Mobile, I want to buy ${encodeURIComponent(product.name)} at K${product.price}`;
             document.getElementById('modal-buy-btn').href = waLink;
            
             renderSimilarProducts(product);
