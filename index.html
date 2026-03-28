@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
-    
+   
         .logo-font { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: -0.04em; }
         .heading-font { font-family: 'Inter', system-ui, sans-serif; font-weight: 700; letter-spacing: -0.025em; }
         .hero-bg { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); }
@@ -39,29 +39,51 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.4);
             z-index: 10000;
         }
-        .modal { 
-            display: none; 
-            position: fixed; 
-            inset: 0; 
-            background: rgba(0,0,0,0.9); 
-            z-index: 60000; 
-            align-items: center; 
-            justify-content: center; 
-            padding: 20px; 
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 60000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
-        .modal-content { 
-            background: white; 
-            border-radius: 24px; 
-            width: 100%; 
-            max-width: 1100px; 
-            max-height: 95vh; 
-            overflow: hidden; 
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); 
+        .modal-content {
+            background: white;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 1100px;
+            max-height: 92vh;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+        }
+
+        /* Scrolling fixes */
+        #basket-items {
+            max-height: 58vh;
+            overflow-y: auto;
+            padding-right: 8px;
+            scrollbar-width: thin;
+            scrollbar-color: #34C759 #f3f4f6;
+        }
+        #basket-items::-webkit-scrollbar {
+            width: 6px;
+        }
+        #basket-items::-webkit-scrollbar-thumb {
+            background: #34C759;
+            border-radius: 20px;
+        }
+
+        #quick-order-frame {
+            width: 100%;
+            height: 720px;
+            border: none;
+            overflow-y: auto;
         }
     </style>
 </head>
 <body class="bg-zinc-950 text-white">
-
     <!-- NAVBAR -->
     <nav class="bg-black/90 backdrop-blur-md sticky top-0 z-50 border-b border-white/10">
         <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
@@ -73,13 +95,12 @@
                 <a href="#" onclick="openCompareModal()" class="hover:text-[#34C759]">Compare Devices</a>
                 <a href="#" onclick="showServices()" class="hover:text-[#34C759]">Other Services</a>
                 <a href="#about" class="hover:text-[#34C759]">About Us</a>
-                
-                <!-- My Basket in Navbar -->
-                <button onclick="openBasketModal()" 
+               
+                <button onclick="openBasketModal()"
                         class="flex items-center gap-2 hover:text-[#34C759] transition-colors">
                     <i class="fa-solid fa-shopping-basket text-xl"></i>
                     <span class="font-medium">My Basket</span>
-                    <span id="nav-basket-count" 
+                    <span id="nav-basket-count"
                           class="bg-[#34C759] text-black text-xs font-bold px-2 py-0.5 rounded-full">0</span>
                 </button>
             </div>
@@ -120,7 +141,7 @@
     <section id="shop" class="py-20 bg-white text-black">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="heading-font text-5xl font-bold tracking-tight mb-12 text-center">Our Products</h2>
-           
+          
             <div class="mb-16">
                 <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3">
                     <span class="text-[#34C759]">📱</span> Cell Phones
@@ -147,6 +168,7 @@
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="heading-font text-5xl font-bold tracking-tight mb-12 text-center text-white">Why Choose Brito Mobiles?</h2>
             <div class="grid md:grid-cols-3 gap-8">
+                <!-- All why choose us cards remain unchanged -->
                 <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:border hover:border-[#34C759] transition-all">
                     <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6">
                         <i class="fa-solid fa-shield-halved text-5xl text-[#34C759]"></i>
@@ -204,7 +226,7 @@
         </div>
     </section>
 
-    <!-- PRODUCT DETAIL MODAL -->
+    <!-- PRODUCT DETAIL MODAL - Updated with two buttons -->
     <div id="product-modal" class="modal">
         <div class="modal-content">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
@@ -219,10 +241,20 @@
                             <div id="modal-product-price" class="text-4xl font-bold text-[#34C759]"></div>
                             <p id="modal-product-desc" class="mt-4 text-gray-700 leading-relaxed"></p>
                         </div>
-                        <a id="modal-buy-btn" href="#" target="_blank"
-                           class="mt-8 block w-full bg-[#34C759] hover:bg-[#2E9E4B] text-black text-center py-4 rounded-2xl font-semibold text-lg">
-                            Buy Now via WhatsApp
-                        </a>
+
+                        <!-- Two buttons side by side -->
+                        <div class="mt-8 grid grid-cols-2 gap-4">
+                            <a id="modal-buy-btn" href="#" target="_blank"
+                               class="bg-[#34C759] hover:bg-[#2E9E4B] text-black text-center py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-2">
+                                <i class="fa-brands fa-whatsapp"></i>
+                                Buy via WhatsApp
+                            </a>
+                            <button onclick="addToBasketFromModal(); event.stopImmediatePropagation()"
+                                    class="bg-zinc-900 hover:bg-black text-white text-center py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-cart-plus"></i>
+                                Add to Basket
+                            </button>
+                        </div>
                     </div>
                     <div>
                         <h3 class="text-xl font-semibold mb-4 text-zinc-800">Similar Products</h3>
@@ -235,14 +267,14 @@
 
     <!-- BASKET MODAL -->
     <div id="basket-modal" class="modal">
-        <div class="modal-content" style="max-width: 700px;">
+        <div class="modal-content" style="max-width: 720px;">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
                 <h2 class="heading-font text-3xl font-bold flex items-center gap-3">
                     <i class="fa-solid fa-shopping-basket"></i> My Basket
                 </h2>
                 <button onclick="closeBasketModal()" class="text-4xl hover:text-gray-300">×</button>
             </div>
-            <div class="p-6 bg-white text-black overflow-auto max-h-[70vh]" id="basket-items">
+            <div id="basket-items" class="p-6 bg-white text-black overflow-y-auto">
                 <!-- Populated by JS -->
             </div>
             <div class="p-6 border-t bg-zinc-50">
@@ -250,7 +282,7 @@
                     <span>Total Amount:</span>
                     <span id="basket-total" class="text-[#34C759]">K0</span>
                 </div>
-                <button onclick="orderBasketViaWhatsApp()" 
+                <button onclick="orderBasketViaWhatsApp()"
                         class="w-full bg-[#34C759] hover:bg-[#2E9E4B] text-black py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-3">
                     <i class="fa-brands fa-whatsapp text-2xl"></i>
                     ORDER NOW VIA WHATSAPP
@@ -259,16 +291,21 @@
         </div>
     </div>
 
-    <!-- QUICK ORDER MODAL -->
+    <!-- QUICK ORDER MODAL - Fixed scrolling -->
     <div id="quick-order-modal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content" style="max-width: 920px;">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
                 <h2 class="heading-font text-3xl font-bold">Quick Order Request</h2>
                 <button onclick="closeQuickOrderModal()" class="text-4xl hover:text-gray-300">×</button>
             </div>
-            <div class="p-4 bg-white">
-                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe-LG2Jf_SobnqQ3Ui1RbKpV7MmRZSCQxL4e2Q5GU7rgHC4rA/viewform?embedded=true"
-                        width="100%" height="920" frameborder="0" marginheight="0" marginwidth="0">
+            <div class="p-4 bg-white overflow-hidden">
+                <iframe id="quick-order-frame"
+                        src="https://docs.google.com/forms/d/e/1FAIpQLSe-LG2Jf_SobnqQ3Ui1RbKpV7MmRZSCQxL4e2Q5GU7rgHC4rA/viewform?embedded=true"
+                        width="100%" 
+                        height="720"
+                        frameborder="0" 
+                        marginheight="0" 
+                        marginwidth="0">
                     Loading Quick Order Form...
                 </iframe>
             </div>
@@ -326,7 +363,7 @@
     </footer>
 
     <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/260979077079?text=Hello%20Brito%20Mobiles%2C%20I%20would%20like%20to%20inquire%20about%20a%20product" 
+    <a href="https://wa.me/260979077079?text=Hello%20Brito%20Mobiles%2C%20I%20would%20like%20to%20inquire%20about%20a%20product"
        target="_blank" class="floating-btn">
         <i class="fa-brands fa-whatsapp text-2xl"></i>
         <span>Inquire Now</span>
@@ -338,17 +375,18 @@
         let company = {};
         let serviceStaff = [];
         let basket = [];
+        let currentProduct = null;   // To store current product in modal for "Add to Basket"
 
         async function loadData() {
             try {
                 const res = await fetch('https://bandaamos98-create.github.io/brito-mobile/products.json');
                 const data = await res.json();
-               
+              
                 company = data.company || {};
                 products = data.products || [];
                 staff = data.staff || [];
                 serviceStaff = data.serviceStaff || [];
-                
+               
                 renderCompanyLogo();
                 renderGroupedProducts();
                 renderStaffSlideshow();
@@ -371,17 +409,16 @@
             `;
         }
 
-        // Fixed Staff Slideshow
         function renderStaffSlideshow() {
             const container = document.getElementById('staff-slideshow');
             if (staff.length === 0) return;
-            
+           
             let html = '';
             staff.forEach((member, i) => {
                 html += `
-                <div class="staff-slide absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-1000" 
+                <div class="staff-slide absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-1000"
                      style="opacity: ${i === 0 ? 1 : 0};">
-                    <img src="${member.img}" 
+                    <img src="${member.img}"
                          class="w-60 h-60 md:w-72 md:h-72 object-cover rounded-3xl mb-6 shadow-2xl"
                          onerror="this.src='https://via.placeholder.com/400x400/1f2937/34C759?text=${encodeURIComponent(member.name)}'">
                     <h3 class="heading-font text-3xl font-bold text-white">${member.name}</h3>
@@ -390,10 +427,9 @@
                 </div>`;
             });
             container.innerHTML = html;
-
             let index = 0;
             const slides = container.querySelectorAll('.staff-slide');
-            
+           
             if (slides.length > 1) {
                 setInterval(() => {
                     slides.forEach(s => s.style.opacity = 0);
@@ -408,6 +444,19 @@
             updateBasketCount();
         }
 
+        function addToBasketFromModal() {
+            if (currentProduct) {
+                addToBasket(currentProduct);
+                // Optional feedback
+                const btn = event.currentTarget;
+                const originalText = btn.innerHTML;
+                btn.innerHTML = `<i class="fa-solid fa-check"></i> Added!`;
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                }, 1200);
+            }
+        }
+
         function updateBasketCount() {
             const count = basket.length;
             document.getElementById('nav-basket-count').textContent = count;
@@ -416,7 +465,6 @@
         function openBasketModal() {
             const container = document.getElementById('basket-items');
             container.innerHTML = '';
-
             if (basket.length === 0) {
                 container.innerHTML = `<p class="text-center text-gray-500 py-12 text-lg">Your basket is empty</p>`;
                 document.getElementById('basket-total').textContent = 'K0';
@@ -427,13 +475,13 @@
                     const div = document.createElement('div');
                     div.className = "flex gap-4 mb-6 pb-6 border-b last:border-0 last:mb-0";
                     div.innerHTML = `
-                        <img src="${item.img}" class="w-20 h-20 object-cover rounded-2xl flex-shrink-0" 
+                        <img src="${item.img}" class="w-20 h-20 object-cover rounded-2xl flex-shrink-0"
                              onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(item.name)}'">
                         <div class="flex-1">
                             <h4 class="font-semibold text-lg">${item.name}</h4>
                             <p class="text-[#34C759] font-bold mt-1">K${item.price.toLocaleString()}</p>
                         </div>
-                        <button onclick="removeFromBasket(${index}); event.stopImmediatePropagation()" 
+                        <button onclick="removeFromBasket(${index}); event.stopImmediatePropagation()"
                                 class="text-red-500 hover:text-red-700 self-start">
                             <i class="fa-solid fa-trash"></i>
                         </button>
@@ -457,15 +505,15 @@
 
         function orderBasketViaWhatsApp() {
             if (basket.length === 0) return;
-            
+           
             let message = "Hello Brito Mobiles,%0AI want to order:%0A%0A";
             let total = 0;
-            
+           
             basket.forEach(item => {
                 message += `• ${item.name} - K${item.price.toLocaleString()}%0A`;
                 total += item.price;
             });
-            
+           
             message += `%0ATotal: K${total.toLocaleString()}`;
             window.open(`https://wa.me/260979077079?text=${message}`, '_blank');
             closeBasketModal();
@@ -474,11 +522,11 @@
         function renderCategory(containerId, categoryProducts) {
             const container = document.getElementById(containerId);
             container.innerHTML = '';
-            
+           
             categoryProducts.forEach(product => {
                 const card = document.createElement('div');
                 card.className = `product-card flex-shrink-0 w-72 md:w-80 bg-white rounded-3xl overflow-hidden border border-zinc-200 cursor-pointer`;
-                
+               
                 card.innerHTML = `
                     <img src="${product.img}" alt="${product.name}" class="w-full h-56 object-cover"
                          onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(product.name)}'">
@@ -486,19 +534,19 @@
                         <h3 class="font-semibold text-xl text-zinc-900">${product.name}</h3>
                         <p class="text-zinc-600 text-sm mt-3 line-clamp-4">${product.fullDescription || product.description}</p>
                         <div class="mt-6 text-3xl font-bold text-[#34C759]">K${product.price.toLocaleString()}</div>
-                        
-                        <button onclick="addToBasket(${JSON.stringify(product).replace(/"/g, '&quot;')}); event.stopImmediatePropagation()" 
+                       
+                        <button onclick="addToBasket(${JSON.stringify(product).replace(/"/g, '&quot;')}); event.stopImmediatePropagation()"
                                 class="mt-4 w-full bg-zinc-900 hover:bg-black text-white py-3.5 rounded-2xl font-medium flex items-center justify-center gap-2">
                             <i class="fa-solid fa-cart-plus"></i>
                             ADD TO BASKET
                         </button>
                     </div>
                 `;
-                
+               
                 card.onclick = (e) => {
                     if (!e.target.closest('button')) showProductDetail(product);
                 };
-                
+               
                 container.appendChild(card);
             });
         }
@@ -507,21 +555,22 @@
             const phones = products.filter(p => p.category === "phone");
             const laptops = products.filter(p => p.category === "laptop");
             const accessories = products.filter(p => p.category === "accessory");
-            
+           
             renderCategory("phones-scroll", phones);
             renderCategory("laptops-scroll", laptops);
             renderCategory("accessories-scroll", accessories);
         }
 
         function showProductDetail(product) {
+            currentProduct = product;   // Store for Add to Basket button
             document.getElementById('modal-product-name').textContent = product.name;
             document.getElementById('modal-product-img').src = product.img;
             document.getElementById('modal-product-price').textContent = `K${product.price.toLocaleString()}`;
             document.getElementById('modal-product-desc').textContent = product.fullDescription || product.description;
-            
+           
             const waLink = `https://wa.me/260979077079?text=Hello Brito Mobiles, I want to buy ${encodeURIComponent(product.name)} at K${product.price}`;
             document.getElementById('modal-buy-btn').href = waLink;
-            
+           
             renderSimilarProducts(product);
             document.getElementById('product-modal').style.display = 'flex';
         }
@@ -534,7 +583,7 @@
             const container = document.getElementById('similar-products-scroll');
             container.innerHTML = '';
             const similar = products.filter(p => p.category === current.category && p.id !== current.id).slice(0, 10);
-            
+           
             similar.forEach(p => {
                 const div = document.createElement('div');
                 div.className = "flex-shrink-0 w-64 bg-white rounded-3xl overflow-hidden border border-zinc-200 cursor-pointer";
@@ -575,8 +624,12 @@
             });
         }
 
-        function openQuickOrderModal() { document.getElementById('quick-order-modal').style.display = 'flex'; }
-        function closeQuickOrderModal() { document.getElementById('quick-order-modal').style.display = 'none'; }
+        function openQuickOrderModal() { 
+            document.getElementById('quick-order-modal').style.display = 'flex'; 
+        }
+        function closeQuickOrderModal() { 
+            document.getElementById('quick-order-modal').style.display = 'none'; 
+        }
         function showServices() { document.getElementById('services-modal').style.display = 'flex'; }
         function closeServices() { document.getElementById('services-modal').style.display = 'none'; }
         function openCompareModal() { document.getElementById('compare-modal').style.display = 'flex'; }
@@ -597,10 +650,10 @@
             const id1 = document.getElementById('compare1').value;
             const id2 = document.getElementById('compare2').value;
             if (!id1 || !id2) return alert("Please select two devices to compare.");
-            
+           
             const p1 = products.find(p => p.id == id1);
             const p2 = products.find(p => p.id == id2);
-            
+           
             const resultDiv = document.getElementById('comparison-result');
             resultDiv.innerHTML = `
                 <div class="border border-gray-300 p-6 rounded-2xl">
