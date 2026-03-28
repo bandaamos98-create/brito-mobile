@@ -168,7 +168,6 @@
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="heading-font text-5xl font-bold tracking-tight mb-12 text-center text-white">Why Choose Brito Mobiles?</h2>
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- All why choose us cards remain unchanged -->
                 <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:border hover:border-[#34C759] transition-all">
                     <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6">
                         <i class="fa-solid fa-shield-halved text-5xl text-[#34C759]"></i>
@@ -226,7 +225,7 @@
         </div>
     </section>
 
-    <!-- PRODUCT DETAIL MODAL - Updated with two buttons -->
+    <!-- PRODUCT DETAIL MODAL -->
     <div id="product-modal" class="modal">
         <div class="modal-content">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
@@ -249,7 +248,8 @@
                                 <i class="fa-brands fa-whatsapp"></i>
                                 Buy via WhatsApp
                             </a>
-                            <button onclick="addToBasketFromModal(); event.stopImmediatePropagation()"
+                            <button id="modal-add-btn"
+                                    onclick="addToBasketFromModal()"
                                     class="bg-zinc-900 hover:bg-black text-white text-center py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-2">
                                 <i class="fa-solid fa-cart-plus"></i>
                                 Add to Basket
@@ -291,7 +291,7 @@
         </div>
     </div>
 
-    <!-- QUICK ORDER MODAL - Fixed scrolling -->
+    <!-- QUICK ORDER MODAL -->
     <div id="quick-order-modal" class="modal">
         <div class="modal-content" style="max-width: 920px;">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
@@ -375,7 +375,7 @@
         let company = {};
         let serviceStaff = [];
         let basket = [];
-        let currentProduct = null;   // To store current product in modal for "Add to Basket"
+        let currentProduct = null;
 
         async function loadData() {
             try {
@@ -439,21 +439,38 @@
             }
         }
 
+        function showAddedFeedback(button) {
+            const originalHTML = button.innerHTML;
+            button.style.transition = "all 0.2s";
+            button.innerHTML = `<i class="fa-solid fa-check"></i> Added!`;
+            button.classList.add('!bg-green-600');
+            
+            setTimeout(() => {
+                button.innerHTML = originalHTML;
+                button.classList.remove('!bg-green-600');
+            }, 1500);
+        }
+
         function addToBasket(product) {
             basket.push(product);
             updateBasketCount();
+            
+            // Show feedback on the card button that was clicked
+            const buttons = document.querySelectorAll('button[onclick*="addToBasket"]');
+            buttons.forEach(btn => {
+                if (btn.textContent.includes("ADD TO BASKET")) {
+                    showAddedFeedback(btn);
+                }
+            });
         }
 
         function addToBasketFromModal() {
             if (currentProduct) {
-                addToBasket(currentProduct);
-                // Optional feedback
-                const btn = event.currentTarget;
-                const originalText = btn.innerHTML;
-                btn.innerHTML = `<i class="fa-solid fa-check"></i> Added!`;
-                setTimeout(() => {
-                    btn.innerHTML = originalText;
-                }, 1200);
+                basket.push(currentProduct);
+                updateBasketCount();
+                
+                const modalBtn = document.getElementById('modal-add-btn');
+                showAddedFeedback(modalBtn);
             }
         }
 
@@ -562,7 +579,7 @@
         }
 
         function showProductDetail(product) {
-            currentProduct = product;   // Store for Add to Basket button
+            currentProduct = product;
             document.getElementById('modal-product-name').textContent = product.name;
             document.getElementById('modal-product-img').src = product.img;
             document.getElementById('modal-product-price').textContent = `K${product.price.toLocaleString()}`;
