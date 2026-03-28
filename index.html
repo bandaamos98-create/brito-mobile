@@ -113,14 +113,12 @@
 </head>
 <body class="bg-zinc-950 text-white">
 
-    <!-- NAVBAR - Clean as requested -->
+    <!-- NAVBAR -->
     <nav class="bg-black/90 backdrop-blur-md sticky top-0 z-50 border-b border-white/10">
         <div class="max-w-7xl mx-auto px-6 py-5">
             <div class="flex items-center justify-between">
-                <!-- Logo -->
                 <div class="flex items-center gap-3" id="logo-container"></div>
 
-                <!-- Search -->
                 <div class="flex-1 max-w-md mx-8 hidden md:block search-glow">
                     <div class="relative">
                         <input id="search-input" type="text" placeholder="Search for product"
@@ -130,14 +128,12 @@
                     </div>
                 </div>
 
-                <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center gap-6 text-sm font-medium">
                     <a href="#" onclick="openQuickOrderModal()" class="hover:text-[#34C759]">Quick Order</a>
                     <a href="#" onclick="openCompareModal()" class="hover:text-[#34C759]">Compare Devices</a>
                     <a href="#about" class="hover:text-[#34C759]">About Us</a>
                     
-                    <a href="tel:+260961971085" 
-                       class="call-btn flex items-center gap-2 px-6 py-3 rounded-3xl font-semibold hover:scale-105 transition-all">
+                    <a href="tel:+260961971085" class="call-btn flex items-center gap-2 px-6 py-3 rounded-3xl font-semibold hover:scale-105 transition-all">
                         <i class="fa-solid fa-phone"></i> Call Now
                     </a>
 
@@ -148,7 +144,6 @@
                     </button>
                 </div>
 
-                <!-- Mobile -->
                 <div class="md:hidden flex items-center gap-3">
                     <a href="tel:+260961971085" class="call-btn w-11 h-11 flex items-center justify-center rounded-2xl text-xl">
                         <i class="fa-solid fa-phone"></i>
@@ -159,7 +154,6 @@
                 </div>
             </div>
 
-            <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden md:hidden mt-4 py-4 border-t border-white/10">
                 <div class="flex flex-col gap-4 text-sm font-medium">
                     <a href="#" onclick="openQuickOrderModal(); toggleMobileMenu()" class="hover:text-[#34C759]">Quick Order</a>
@@ -185,7 +179,7 @@
         <span class="text-white">All purchases & transactions MUST be done at the branch in Kabwe • No online sales or delivery</span>
     </div>
 
-    <!-- HERO - Cleaner (no Browse Products button) -->
+    <!-- HERO -->
     <section id="home" class="hero-bg min-h-screen flex items-center">
         <div class="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
             <div class="space-y-8">
@@ -214,28 +208,20 @@
             <h2 class="heading-font text-5xl font-bold tracking-tight mb-12 text-center">Our Products</h2>
             
             <div class="mb-16">
-                <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3">
-                    <span class="text-[#34C759]">📱</span> Cell Phones
-                </h3>
+                <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-[#34C759]">📱</span> Cell Phones</h3>
                 <div id="phones-scroll" class="similar-scroll"></div>
             </div>
             <div class="mb-16">
-                <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3">
-                    <span class="text-[#34C759]">💻</span> Laptops
-                </h3>
+                <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-[#34C759]">💻</span> Laptops</h3>
                 <div id="laptops-scroll" class="similar-scroll"></div>
             </div>
             <div class="mb-16">
-                <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3">
-                    <span class="text-[#34C759]">🔌</span> Accessories
-                </h3>
+                <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-[#34C759]">🔌</span> Accessories</h3>
                 <div id="accessories-scroll" class="similar-scroll"></div>
             </div>
             
             <div>
-                <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3">
-                    <span class="text-[#34C759]">🛠️</span> Other Services
-                </h3>
+                <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-[#34C759]">🛠️</span> Other Services</h3>
                 <div id="services-scroll" class="similar-scroll"></div>
             </div>
         </div>
@@ -247,44 +233,32 @@
             <h2 class="heading-font text-5xl font-bold tracking-tight mb-12 text-center text-white">Why Choose Brito Mobile?</h2>
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:border hover:border-[#34C759] transition-all">
-                    <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6">
-                        <i class="fa-solid fa-shield-halved text-5xl text-[#34C759]"></i>
-                    </div>
+                    <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6"><i class="fa-solid fa-shield-halved text-5xl text-[#34C759]"></i></div>
                     <h3 class="text-2xl font-semibold text-white mb-3">100% Genuine Products</h3>
                     <p class="text-white/70">Every item comes with official manufacturer warranty. No fakes, ever.</p>
                 </div>
                 <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:border hover:border-[#34C759] transition-all">
-                    <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6">
-                        <i class="fa-solid fa-tags text-5xl text-[#34C759]"></i>
-                    </div>
+                    <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6"><i class="fa-solid fa-tags text-5xl text-[#34C759]"></i></div>
                     <h3 class="text-2xl font-semibold text-white mb-3">Best Prices in Kabwe</h3>
                     <p class="text-white/70">We offer the most competitive prices with no hidden charges.</p>
                 </div>
                 <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:border hover:border-[#34C759] transition-all">
-                    <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6">
-                        <i class="fa-solid fa-headset text-5xl text-[#34C759]"></i>
-                    </div>
+                    <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6"><i class="fa-solid fa-headset text-5xl text-[#34C759]"></i></div>
                     <h3 class="text-2xl font-semibold text-white mb-3">Expert Support</h3>
                     <p class="text-white/70">Our friendly team helps you choose the perfect device for your needs.</p>
                 </div>
                 <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:border hover:border-[#34C759] transition-all">
-                    <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6">
-                        <i class="fa-solid fa-wrench text-5xl text-[#34C759]"></i>
-                    </div>
+                    <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6"><i class="fa-solid fa-wrench text-5xl text-[#34C759]"></i></div>
                     <h3 class="text-2xl font-semibold text-white mb-3">After-Sales Service</h3>
                     <p class="text-white/70">Free setup, software updates, and reliable support after purchase.</p>
                 </div>
                 <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:border hover:border-[#34C759] transition-all">
-                    <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6">
-                        <i class="fa-solid fa-money-bill-wave text-5xl text-[#34C759]"></i>
-                    </div>
+                    <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6"><i class="fa-solid fa-money-bill-wave text-5xl text-[#34C759]"></i></div>
                     <h3 class="text-2xl font-semibold text-white mb-3">Mini Bank Services</h3>
                     <p class="text-white/70">Airtel Money, MTN, Zanaco, FNB, Float & Cash Exchange all in one place.</p>
                 </div>
                 <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:border hover:border-[#34C759] transition-all">
-                    <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6">
-                        <i class="fa-solid fa-clock text-5xl text-[#34C759]"></i>
-                    </div>
+                    <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6"><i class="fa-solid fa-clock text-5xl text-[#34C759]"></i></div>
                     <h3 class="text-2xl font-semibold text-white mb-3">Open 6 Days</h3>
                     <p class="text-white/70">Convenient hours to serve you better. Monday to Saturday.</p>
                 </div>
@@ -319,10 +293,13 @@
                             <p id="modal-product-desc" class="mt-4 text-gray-700 leading-relaxed"></p>
                         </div>
                         <div class="mt-8 grid grid-cols-2 gap-4">
-                            <a id="modal-buy-btn" href="#" target="_blank" class="bg-[#34C759] hover:bg-[#2E9E4B] text-black text-center py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-2">
+                            <a id="modal-buy-btn" href="#" target="_blank"
+                               class="bg-[#34C759] hover:bg-[#2E9E4B] text-black text-center py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-2">
                                 <i class="fa-brands fa-whatsapp"></i> Buy via WhatsApp
                             </a>
-                            <button id="modal-add-btn" onclick="addToBasketFromModal(); event.stopImmediatePropagation()" 
+                            <!-- Fixed Add to Basket Button -->
+                            <button id="modal-add-btn" 
+                                    onclick="addToBasketFromModal()" 
                                     class="bg-zinc-900 hover:bg-black text-white text-center py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-2">
                                 <i class="fa-solid fa-cart-plus"></i> Add to Basket
                             </button>
@@ -364,7 +341,7 @@
     <div id="quick-order-modal" class="modal">
         <div class="modal-content" style="max-width: 920px;">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
-                <h2 class="heading-font text-3xl font-bold">Quick Order Request</h2>
+                <h2 class="heading-font text-3xl font-bold">Make You Orders and Request Right Here</h2>
                 <button onclick="closeQuickOrderModal()" class="text-4xl hover:text-gray-300">×</button>
             </div>
             <div class="p-4 bg-white overflow-hidden">
@@ -377,7 +354,7 @@
         </div>
     </div>
 
-    <!-- COMPARE MODAL - Improved with images and subtitle -->
+    <!-- COMPARE MODAL -->
     <div id="compare-modal" class="modal">
         <div class="modal-content max-w-5xl">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
@@ -432,8 +409,7 @@
 
     <!-- Floating Buttons -->
     <div class="fixed bottom-6 right-6 flex flex-col gap-3 z-[10000]">
-        <a href="tel:+260961971085" 
-           class="call-btn w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition text-2xl">
+        <a href="tel:+260961971085" class="call-btn w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition text-2xl">
             <i class="fa-solid fa-phone"></i>
         </a>
         <a href="https://wa.me/260979077079?text=Hello%20Brito%20Mobile%2C%20I%20would%20like%20to%20inquire%20about%20a%20product" 
@@ -522,6 +498,14 @@
                 button.innerHTML = originalHTML;
                 button.classList.remove('!bg-green-600', 'text-white');
             }, 1400);
+        }
+
+        function resetModalAddButton() {
+            const addBtn = document.getElementById('modal-add-btn');
+            if (addBtn) {
+                addBtn.innerHTML = `<i class="fa-solid fa-cart-plus"></i> Add to Basket`;
+                addBtn.classList.remove('!bg-green-600', 'text-white');
+            }
         }
 
         function addToBasket(product, buttonElement = null) {
@@ -659,6 +643,10 @@
 
         function showProductDetail(product) {
             currentProduct = product;
+            
+            // Reset the Add to Basket button every time we open a new product
+            resetModalAddButton();
+
             document.getElementById('modal-product-name').textContent = product.name;
             document.getElementById('modal-product-img').src = product.img;
             document.getElementById('modal-product-price').textContent = `K${product.price.toLocaleString()}`;
