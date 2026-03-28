@@ -97,7 +97,7 @@
       "price": 250,
       "description": "Heavy duty extension cable.",
       "fullDescription": "Reliable extension cable for multiple devices.",
-      "img": "https://bandaamos98-create.github.io/brito-mobile/images/adapto.jpg"
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/adaptor.jpg"
     },
     {
       "id": 14,
@@ -155,7 +155,7 @@
     },
     {
       "id": 8,
-      "name": "Connest Multiple Thing",
+      "name": "Connect Multiple Thing",
       "category": "accessory",
       "price": 350,
       "description": "Charger, earphones, case and screen protector combo.",
