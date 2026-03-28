@@ -54,109 +54,102 @@
       "fullDescription": "Oraimo Bluetooth speaker delivers loud, clear sound with long battery life.",
       "img": "https://bandaamos98-create.github.io/brito-mobile/images/btspeakeroraimo.jpg"
     },
-        {
-      "id": 5,
+    {
+      "id": 9,
       "name": "LAPTOP MOUSE",
       "category": "accessory",
       "price": 250,
-      "description": "High quality portable Bluetooth speaker.",
-      "fullDescription": "Oraimo Bluetooth speaker delivers loud, clear sound with long battery life.",
+      "description": "High quality laptop mouse.",
+      "fullDescription": "Wireless laptop mouse with smooth tracking and long battery life.",
       "img": "https://bandaamos98-create.github.io/brito-mobile/images/mouse.jpg"
     },
-        {
-      "id": 5,
+    {
+      "id": 10,
       "name": "Gaming Controller",
       "category": "accessory",
       "price": 250,
-      "description": "High quality portable Bluetooth speaker.",
-      "fullDescription": "Oraimo Bluetooth speaker delivers loud, clear sound with long battery life.",
+      "description": "High quality gaming controller.",
+      "fullDescription": "Compatible with PC and consoles for the best gaming experience.",
       "img": "https://bandaamos98-create.github.io/brito-mobile/images/game.jpg"
     },
-       
     {
-      "id": 5,
-      "name": "Electric kettles",
+      "id": 11,
+      "name": "Electric Kettles",
       "category": "accessory",
       "price": 250,
-      "description": "High quality portable Bluetooth speaker.",
-      "fullDescription": "Oraimo Bluetooth speaker delivers loud, clear sound with long battery life.",
+      "description": "Fast boiling electric kettle.",
+      "fullDescription": "Quick and safe electric kettle for daily use.",
       "img": "https://bandaamos98-create.github.io/brito-mobile/images/catle.jpg"
     },
-       
     {
-      "id": 5,
+      "id": 12,
       "name": "Laptop Chargers",
       "category": "accessory",
       "price": 250,
-      "description": "High quality portable Bluetooth speaker.",
-      "fullDescription": "Oraimo Bluetooth speaker delivers loud, clear sound with long battery life.",
+      "description": "Universal laptop charger.",
+      "fullDescription": "High quality laptop charger compatible with most brands.",
       "img": "https://bandaamos98-create.github.io/brito-mobile/images/charger.jpg"
     },
-       
     {
-      "id": 5,
+      "id": 13,
       "name": "Extension Cables",
       "category": "accessory",
       "price": 250,
-      "description": "High quality portable Bluetooth speaker.",
-      "fullDescription": "Oraimo Bluetooth speaker delivers loud, clear sound with long battery life.",
+      "description": "Heavy duty extension cable.",
+      "fullDescription": "Reliable extension cable for multiple devices.",
       "img": "https://bandaamos98-create.github.io/brito-mobile/images/adapto.jpg"
     },
-       
     {
-      "id": 5,
+      "id": 14,
       "name": "Bluetooth Speakers",
       "category": "accessory",
       "price": 250,
-      "description": "High quality portable Bluetooth speaker.",
-      "fullDescription": "Oraimo Bluetooth speaker delivers loud, clear sound with long battery life.",
+      "description": "Portable Bluetooth speaker.",
+      "fullDescription": "Loud and clear sound with long battery life.",
       "img": "https://bandaamos98-create.github.io/brito-mobile/images/bts.jpg"
     },
-      
-     {
-      "id": 5,
+    {
+      "id": 15,
       "name": "Affordable Bluetooth Speakers",
       "category": "accessory",
       "price": 250,
-      "description": "High quality portable Bluetooth speaker.",
-      "fullDescription": "Oraimo Bluetooth speaker delivers loud, clear sound with long battery life.",
+      "description": "Budget friendly Bluetooth speaker.",
+      "fullDescription": "Great sound quality at an affordable price.",
       "img": "https://bandaamos98-create.github.io/brito-mobile/images/btspeaker.jpg"
-    }
-    
+    },
     {
-      "id": 6,
+      "id": 16,
       "name": "All in one Laptop",
       "category": "laptop",
       "price": 5600,
-      "description": "Budget laptop suitable for students and basic work.",
+      "description": "All-in-one laptop for students and professionals.",
       "fullDescription": "Offering everything a student and a pro editor may need.",
       "img": "https://bandaamos98-create.github.io/brito-mobile/images/bestlap.jpg"
     },
-       
     {
-      "id": 6,
+      "id": 17,
       "name": "PLENT TO PICK FROM!!",
       "category": "laptop",
       "price": 5600,
-      "description": "Budget laptop suitable for students and basic work.",
+      "description": "Multiple laptop options available.",
       "fullDescription": "Lenovo IdeaPad offers good performance for everyday tasks.",
       "img": "https://bandaamos98-create.github.io/brito-mobile/images/laps.jpg"
-    },   
+    },
     {
-      "id": 6,
+      "id": 18,
       "name": "HP LAPTOP DESIGNED FOR YOU",
       "category": "laptop",
       "price": 5600,
-      "description": "Budget laptop suitable for students and basic work.",
+      "description": "HP laptop designed for everyday use.",
       "fullDescription": "Lenovo IdeaPad offers good performance for everyday tasks.",
       "img": "https://bandaamos98-create.github.io/brito-mobile/images/lap.jpg"
-    },   
+    },
     {
-      "id": 6,
+      "id": 19,
       "name": "HP LAPTOPS BEST FOR YOU",
       "category": "laptop",
       "price": 5600,
-      "description": "Budget laptop suitable for students and basic work.",
+      "description": "Best HP laptops for you.",
       "fullDescription": "Lenovo IdeaPad offers good performance for everyday tasks.",
       "img": "https://bandaamos98-create.github.io/brito-mobile/images/laps1.jpg"
     },
@@ -169,7 +162,6 @@
       "fullDescription": "Complete accessory bundle including fast charger, wired earphones, protective case and tempered glass screen protector.",
       "img": "https://bandaamos98-create.github.io/brito-mobile/images/connecting.jpg"
     }
-
   ],
   "staff": [
     {
