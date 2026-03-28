@@ -13,17 +13,16 @@
         .hero-bg { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); }
         .product-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .product-card:hover { transform: translateY(-8px); }
-        
-        .live-scroll {
+        .similar-scroll {
             display: flex;
             gap: 1.25rem;
             overflow-x: auto;
             padding-bottom: 1rem;
-            scrollbar-width: none;
+            scrollbar-width: thin;
             scroll-behavior: smooth;
         }
-        .live-scroll::-webkit-scrollbar { display: none; }
-
+        .similar-scroll::-webkit-scrollbar { height: 6px; }
+        .similar-scroll::-webkit-scrollbar-thumb { background: #34C759; border-radius: 20px; }
         .floating-btn {
             position: fixed;
             bottom: 24px;
@@ -43,8 +42,9 @@
             background: #ef4444;
             color: white;
         }
-        .call-btn:hover { background: #dc2626; }
-
+        .call-btn:hover {
+            background: #dc2626;
+        }
         .modal {
             display: none;
             position: fixed;
@@ -64,13 +64,19 @@
             overflow: hidden;
             box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
         }
+        /* Fix for Compare Modal Scrolling */
         #comparison-result {
             max-height: 58vh;
             overflow-y: auto;
             padding-right: 12px;
         }
-        #comparison-result::-webkit-scrollbar { width: 6px; }
-        #comparison-result::-webkit-scrollbar-thumb { background: #34C759; border-radius: 20px; }
+        #comparison-result::-webkit-scrollbar {
+            width: 6px;
+        }
+        #comparison-result::-webkit-scrollbar-thumb {
+            background: #34C759;
+            border-radius: 20px;
+        }
         #basket-items {
             max-height: 58vh;
             overflow-y: auto;
@@ -80,16 +86,51 @@
         }
         #basket-items::-webkit-scrollbar { width: 6px; }
         #basket-items::-webkit-scrollbar-thumb { background: #34C759; border-radius: 20px; }
+        #quick-order-frame {
+            width: 100%;
+            height: 720px;
+            border: none;
+            overflow-y: auto;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        .blink-live {
+            animation: blink 1.2s infinite;
+            color: #ff0000;
+            font-weight: 700;
+            text-shadow: 0 0 10px #ff0000;
+        }
+        .search-glow {
+            position: relative;
+        }
+        .search-glow::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            background: linear-gradient(90deg, #000000, #ffffff, #34C759, #000000);
+            background-size: 300% 300%;
+            border-radius: 9999px;
+            z-index: -1;
+            animation: glowMove 3s linear infinite;
+            opacity: 0.75;
+            filter: blur(10px);
+        }
+        @keyframes glowMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
     </style>
 </head>
 <body class="bg-zinc-950 text-white">
 
-    <!-- NAVBAR - Clean version -->
+    <!-- NAVBAR -->
     <nav class="bg-black/90 backdrop-blur-md sticky top-0 z-50 border-b border-white/10">
         <div class="max-w-7xl mx-auto px-6 py-5">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3" id="logo-container"></div>
-
                 <div class="flex-1 max-w-md mx-8 hidden md:block search-glow">
                     <div class="relative">
                         <input id="search-input" type="text" placeholder="Search for product"
@@ -98,7 +139,6 @@
                         <i class="fa-solid fa-magnifying-glass absolute left-5 top-1/2 -translate-y-1/2 text-zinc-400"></i>
                     </div>
                 </div>
-
                 <div class="hidden md:flex items-center gap-6 text-sm font-medium">
                     <a href="#" onclick="openQuickOrderModal()" class="hover:text-[#34C759]">Quick Order</a>
                     <a href="#" onclick="openCompareModal()" class="hover:text-[#34C759]">Compare Devices</a>
@@ -112,7 +152,6 @@
                         <span id="nav-basket-count" class="bg-[#34C759] text-black text-xs font-bold px-2 py-0.5 rounded-full">0</span>
                     </button>
                 </div>
-
                 <div class="md:hidden flex items-center gap-3">
                     <a href="tel:+260961971085" class="call-btn w-11 h-11 flex items-center justify-center rounded-2xl text-xl">
                         <i class="fa-solid fa-phone"></i>
@@ -123,7 +162,6 @@
                 </div>
             </div>
 
-            <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden md:hidden mt-4 py-4 border-t border-white/10">
                 <div class="flex flex-col gap-4 text-sm font-medium">
                     <a href="#" onclick="openQuickOrderModal(); toggleMobileMenu()" class="hover:text-[#34C759]">Quick Order</a>
@@ -169,27 +207,27 @@
         </div>
     </section>
 
-    <!-- SHOP SECTION - Auto Swiping Live Tiles -->
+    <!-- SHOP SECTION -->
     <section id="shop" class="py-20 bg-white text-black">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="heading-font text-5xl font-bold tracking-tight mb-12 text-center">Our Products</h2>
-            
+           
             <div class="mb-16">
                 <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-[#34C759]">📱</span> Cell Phones</h3>
-                <div id="phones-scroll" class="live-scroll"></div>
+                <div id="phones-scroll" class="similar-scroll"></div>
             </div>
             <div class="mb-16">
                 <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-[#34C759]">💻</span> Laptops</h3>
-                <div id="laptops-scroll" class="live-scroll"></div>
+                <div id="laptops-scroll" class="similar-scroll"></div>
             </div>
             <div class="mb-16">
                 <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-[#34C759]">🔌</span> Accessories</h3>
-                <div id="accessories-scroll" class="live-scroll"></div>
+                <div id="accessories-scroll" class="similar-scroll"></div>
             </div>
-            
+           
             <div>
                 <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-[#34C759]">🛠️</span> Other Services</h3>
-                <div id="services-scroll" class="live-scroll"></div>
+                <div id="services-scroll" class="similar-scroll"></div>
             </div>
         </div>
     </section>
@@ -317,7 +355,7 @@
         </div>
     </div>
 
-    <!-- COMPARE MODAL -->
+    <!-- COMPARE MODAL - Fixed scrolling -->
     <div id="compare-modal" class="modal">
         <div class="modal-content" style="max-width: 1100px; max-height: 95vh;">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
@@ -390,7 +428,6 @@
         let basket = [];
         let currentProduct = null;
         let allProducts = [];
-        let scrollTimers = {};
 
         async function loadData() {
             try {
@@ -403,10 +440,11 @@
                 serviceStaff = data.serviceStaff || [];
               
                 renderCompanyLogo();
-                renderLiveCategories();
+                renderGroupedProducts();
                 renderStaffSlideshow();
                 populateComparisonSelects();
                 renderServicesModal();
+                renderOtherServices();
             } catch (e) {
                 console.error("Failed to load data:", e);
             }
@@ -424,76 +462,31 @@
             `;
         }
 
-        // ====================== AUTO SWIPING LIVE TILES ======================
-        function renderLiveCategories() {
-            const phones = products.filter(p => p.category === "phone");
-            const laptops = products.filter(p => p.category === "laptop");
-            const accessories = products.filter(p => p.category === "accessory");
-
-            renderLiveScroll("phones-scroll", phones, 4000);     // Phones: 4s
-            renderLiveScroll("laptops-scroll", laptops, 5000);   // Laptops: 5s
-            renderLiveScroll("accessories-scroll", accessories, 3500); // Accessories: 3.5s
-            renderLiveScroll("services-scroll", serviceStaff, 4500);   // Services: 4.5s
-        }
-
-        function renderLiveScroll(containerId, items, interval) {
-            const container = document.getElementById(containerId);
-            container.innerHTML = '';
-
-            items.forEach(item => {
-                const card = document.createElement('div');
-                card.className = `product-card flex-shrink-0 w-72 md:w-80 bg-white rounded-3xl overflow-hidden border border-zinc-200 cursor-pointer`;
-
-                if (item.service) {
-                    // Service card
-                    card.innerHTML = `
-                        <img src="${item.photo}" class="w-full h-56 object-cover"
-                             onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(item.service)}'">
-                        <div class="p-6">
-                            <h3 class="font-semibold text-xl text-zinc-900">${item.service}</h3>
-                            <p class="text-[#34C759] font-medium mt-1">${item.name}</p>
-                            <p class="text-zinc-600 text-sm mt-3 line-clamp-4">${item.message}</p>
-                        </div>
-                    `;
-                } else {
-                    // Product card
-                    card.innerHTML = `
-                        <img src="${item.img}" class="w-full h-56 object-cover"
-                             onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(item.name)}'">
-                        <div class="p-6">
-                            <h3 class="font-semibold text-xl text-zinc-900">${item.name}</h3>
-                            <p class="text-zinc-600 text-sm mt-3 line-clamp-4">${item.fullDescription || item.description}</p>
-                            <div class="mt-6 text-3xl font-bold text-[#34C759]">K${item.price.toLocaleString()}</div>
-                            <button onclick="handleAddToBasket(this, ${JSON.stringify(item).replace(/"/g, '&quot;')}); event.stopImmediatePropagation()" 
-                                    class="add-to-basket-btn mt-4 w-full bg-zinc-900 hover:bg-black text-white py-3.5 rounded-2xl font-medium flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-cart-plus"></i> ADD TO BASKET
-                            </button>
-                        </div>
-                    `;
-                    card.onclick = (e) => {
-                        if (!e.target.closest('button')) showProductDetail(item);
-                    };
-                }
-                container.appendChild(card);
+        function renderStaffSlideshow() {
+            const container = document.getElementById('staff-slideshow');
+            if (staff.length === 0) return;
+            let html = '';
+            staff.forEach((member, i) => {
+                html += `
+                <div class="staff-slide absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-1000"
+                     style="opacity: ${i === 0 ? 1 : 0};">
+                    <img src="${member.img}" class="w-60 h-60 md:w-72 md:h-72 object-cover rounded-3xl mb-6 shadow-2xl"
+                         onerror="this.src='https://via.placeholder.com/400x400/1f2937/34C759?text=${encodeURIComponent(member.name)}'">
+                    <h3 class="heading-font text-3xl font-bold text-white">${member.name}</h3>
+                    <p class="text-[#34C759] text-lg mt-1">${member.role}</p>
+                    ${member.quote ? `<p class="text-white/80 text-center mt-3 max-w-xs text-sm px-4">${member.quote}</p>` : ''}
+                </div>`;
             });
-
-            // Auto scroll
-            let scrollPos = 0;
-            scrollTimers[containerId] = setInterval(() => {
-                scrollPos += 280;
-                if (scrollPos > container.scrollWidth - container.clientWidth - 100) scrollPos = 0;
-                container.scrollTo({ left: scrollPos, behavior: 'smooth' });
-            }, interval);
-
-            // Pause on hover
-            container.addEventListener('mouseenter', () => clearInterval(scrollTimers[containerId]));
-            container.addEventListener('mouseleave', () => {
-                scrollTimers[containerId] = setInterval(() => {
-                    scrollPos += 280;
-                    if (scrollPos > container.scrollWidth - container.clientWidth - 100) scrollPos = 0;
-                    container.scrollTo({ left: scrollPos, behavior: 'smooth' });
-                }, interval);
-            });
+            container.innerHTML = html;
+            let index = 0;
+            const slides = container.querySelectorAll('.staff-slide');
+            if (slides.length > 1) {
+                setInterval(() => {
+                    slides.forEach(s => s.style.opacity = 0);
+                    index = (index + 1) % slides.length;
+                    slides[index].style.opacity = 1;
+                }, 6000);
+            }
         }
 
         function showAddedFeedback(button) {
@@ -583,8 +576,43 @@
             closeBasketModal();
         }
 
+        function renderCategory(containerId, categoryProducts) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            categoryProducts.forEach(product => {
+                const card = document.createElement('div');
+                card.className = `product-card flex-shrink-0 w-72 md:w-80 bg-white rounded-3xl overflow-hidden border border-zinc-200 cursor-pointer`;
+                card.innerHTML = `
+                    <img src="${product.img}" alt="${product.name}" class="w-full h-56 object-cover"
+                         onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(product.name)}'">
+                    <div class="p-6">
+                        <h3 class="font-semibold text-xl text-zinc-900">${product.name}</h3>
+                        <p class="text-zinc-600 text-sm mt-3 line-clamp-4">${product.fullDescription || product.description}</p>
+                        <div class="mt-6 text-3xl font-bold text-[#34C759]">K${product.price.toLocaleString()}</div>
+                        <button onclick="handleAddToBasket(this, ${JSON.stringify(product).replace(/"/g, '&quot;')}); event.stopImmediatePropagation()"
+                                class="add-to-basket-btn mt-4 w-full bg-zinc-900 hover:bg-black text-white py-3.5 rounded-2xl font-medium flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-cart-plus"></i> ADD TO BASKET
+                        </button>
+                    </div>
+                `;
+                card.onclick = (e) => {
+                    if (!e.target.closest('button')) showProductDetail(product);
+                };
+                container.appendChild(card);
+            });
+        }
+
+        function handleAddToBasket(buttonElement, product) {
+            addToBasket(product, buttonElement);
+        }
+
         function renderGroupedProducts() {
-            // Not used anymore - we use live scroll
+            const phones = products.filter(p => p.category === "phone");
+            const laptops = products.filter(p => p.category === "laptop");
+            const accessories = products.filter(p => p.category === "accessory");
+            renderCategory("phones-scroll", phones);
+            renderCategory("laptops-scroll", laptops);
+            renderCategory("accessories-scroll", accessories);
         }
 
         function showProductDetail(product) {
@@ -648,6 +676,28 @@
             });
         }
 
+        function renderOtherServices() {
+            const container = document.getElementById('services-scroll');
+            container.innerHTML = '';
+            serviceStaff.forEach(service => {
+                const card = document.createElement('div');
+                card.className = `flex-shrink-0 w-72 md:w-80 bg-white rounded-3xl overflow-hidden border border-zinc-200`;
+                card.innerHTML = `
+                    <img src="${service.photo}" alt="${service.service}" class="w-full h-56 object-cover"
+                         onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(service.service)}'">
+                    <div class="p-6">
+                        <h3 class="font-semibold text-xl text-zinc-900">${service.service}</h3>
+                        <p class="text-[#34C759] font-medium mt-1">${service.name}</p>
+                        <p class="text-zinc-600 text-sm mt-3 line-clamp-4">${service.message}</p>
+                        <a href="tel:${service.phone.replace(/\s/g,'')}" class="mt-4 inline-flex items-center gap-2 text-[#34C759] hover:text-[#2E9E4B]">
+                            <i class="fa-solid fa-phone"></i> ${service.phone}
+                        </a>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
         function openQuickOrderModal() { document.getElementById('quick-order-modal').style.display = 'flex'; }
         function closeQuickOrderModal() { document.getElementById('quick-order-modal').style.display = 'none'; }
         function showServices() { document.getElementById('services-modal').style.display = 'flex'; }
@@ -705,18 +755,24 @@
         function handleSearch(e) {
             const term = e.target.value.toLowerCase().trim();
             if (!term) {
-                renderLiveCategories();
+                renderGroupedProducts();
                 return;
             }
-            // Simple search - re-render live scrolls with filtered items
             const filtered = allProducts.filter(p => p.name.toLowerCase().includes(term));
+            document.getElementById('phones-scroll').innerHTML = '';
+            document.getElementById('laptops-scroll').innerHTML = '';
+            document.getElementById('accessories-scroll').innerHTML = '';
+            document.getElementById('services-scroll').innerHTML = '';
+            if (filtered.length === 0) {
+                document.getElementById('phones-scroll').innerHTML = `<p class="text-center text-gray-500 py-12 text-lg">No products found for "${term}"</p>`;
+                return;
+            }
             const phones = filtered.filter(p => p.category === "phone");
             const laptops = filtered.filter(p => p.category === "laptop");
             const accessories = filtered.filter(p => p.category === "accessory");
-
-            renderLiveScroll("phones-scroll", phones, 4000);
-            renderLiveScroll("laptops-scroll", laptops, 5000);
-            renderLiveScroll("accessories-scroll", accessories, 3500);
+            if (phones.length) renderCategory("phones-scroll", phones);
+            if (laptops.length) renderCategory("laptops-scroll", laptops);
+            if (accessories.length) renderCategory("accessories-scroll", accessories);
         }
 
         window.onload = loadData;
