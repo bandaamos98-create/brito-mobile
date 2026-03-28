@@ -8,83 +8,62 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+       
+        .logo-font { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: -0.04em; }
+        .heading-font { font-family: 'Inter', system-ui, sans-serif; font-weight: 700; letter-spacing: -0.025em; }
+        .hero-bg { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); }
 
-        .logo-font { 
-            font-family: 'Space Grotesk', sans-serif; 
-            font-weight: 700; 
-            letter-spacing: -0.04em; 
-        }
-        .heading-font { 
-            font-family: 'Inter', system-ui, sans-serif; 
-            font-weight: 700; 
-            letter-spacing: -0.025em; 
-        }
-        .hero-bg { 
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); 
-        }
-        .product-card { 
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
-        }
-        .product-card:hover { 
-            transform: translateY(-12px); 
-            box-shadow: 0 25px 50px -12px rgb(52 199 89 / 0.3); 
-        }
-        .similar-scroll { 
-            display: flex; 
-            gap: 1.25rem; 
-            overflow-x: auto; 
-            padding-bottom: 1rem; 
-            scrollbar-width: thin; 
-            scroll-behavior: smooth; 
+        .product-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .product-card:hover { transform: translateY(-12px); box-shadow: 0 25px 50px -12px rgb(52 199 89 / 0.3); }
+
+        .similar-scroll {
+            display: flex;
+            gap: 1.25rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+            scrollbar-width: thin;
+            scroll-behavior: smooth;
         }
         .similar-scroll::-webkit-scrollbar { height: 6px; }
-        .similar-scroll::-webkit-scrollbar-thumb { 
-            background: #34C759; 
-            border-radius: 20px; 
+        .similar-scroll::-webkit-scrollbar-thumb { background: #34C759; border-radius: 20px; }
+
+        .floating-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            padding: 14px 24px;
+            border-radius: 9999px;
+            background: #34C759;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            z-index: 10000;
         }
-        .floating-btn { 
-            position: fixed; 
-            bottom: 24px; 
-            right: 24px; 
-            padding: 14px 24px; 
-            border-radius: 9999px; 
-            background: #34C759; 
-            color: white; 
-            display: flex; 
-            align-items: center; 
-            gap: 10px; 
-            font-weight: 600; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4); 
-            z-index: 10000; 
+
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        .blink-live { animation: blink 1.2s infinite; color: #ff0000; font-weight: 700; text-shadow: 0 0 10px #ff0000; }
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 60000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
-        @keyframes blink { 
-            0%, 100% { opacity: 1; } 
-            50% { opacity: 0; } 
-        }
-        .blink-live { 
-            animation: blink 1.2s infinite; 
-            color: #ff0000; 
-            font-weight: 700; 
-            text-shadow: 0 0 10px #ff0000; 
-        }
-        .modal { 
-            display: none; 
-            position: fixed; 
-            inset: 0; 
-            background: rgba(0,0,0,0.9); 
-            z-index: 60000; 
-            align-items: center; 
-            justify-content: center; 
-            padding: 20px; 
-        }
-        .modal-content { 
-            background: white; 
-            border-radius: 24px; 
-            width: 100%; 
-            max-width: 920px; 
-            max-height: 95vh; 
-            overflow: hidden; 
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); 
+        .modal-content {
+            background: white;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 920px;
+            max-height: 95vh;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
         }
     </style>
 </head>
@@ -93,10 +72,10 @@
     <!-- NAVBAR -->
     <nav class="bg-black/90 backdrop-blur-md sticky top-0 z-50 border-b border-white/10">
         <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-            <div class="flex items-center gap-3" id="logo-container">
-                <!-- Logo populated by JS from JSON -->
+            <div class="flex items-center gap-3">
+                <img id="company-icon" src="https://bandaamos98-create.github.io/brito-mobile/images/icon.png" alt="Brito Mobiles" class="w-11 h-11 rounded-3xl object-cover">
+                <h1 class="logo-font text-3xl text-white">Brito Mobiles</h1>
             </div>
-
             <div class="hidden md:flex gap-8 text-sm font-medium">
                 <a href="#home" class="hover:text-[#34C759]">Home</a>
                 <a href="#shop" class="hover:text-[#34C759]">Shop</a>
@@ -121,15 +100,13 @@
                 <h1 class="heading-font text-6xl md:text-7xl font-bold tracking-tighter leading-none text-white">
                     Your Trusted Mobile Partner<br>in Kabwe
                 </h1>
-                <p id="slogan" class="text-xl text-white/80">Genuine phones, laptops & accessories at the best prices in Kabwe, Zambia.</p>
-                
+                <p class="text-xl text-white/80">Genuine phones, laptops & accessories at the best prices in Kabwe, Zambia.</p>
                 <div class="flex flex-wrap gap-4">
                     <a href="#shop" class="inline-block bg-[#34C759] hover:bg-[#2E9E4B] text-black font-semibold px-10 py-4 rounded-3xl text-lg">Browse Products</a>
                     <button onclick="openQuickOrderModal()" class="inline-block bg-white hover:bg-gray-100 text-black font-semibold px-10 py-4 rounded-3xl text-lg">Quick Order</button>
                     <button onclick="showServices()" class="inline-block border-2 border-[#34C759] hover:bg-[#34C759] hover:text-black text-[#34C759] font-semibold px-10 py-4 rounded-3xl text-lg">Other Services</button>
                 </div>
             </div>
-
             <div>
                 <div class="text-center mb-6">
                     <h2 class="heading-font text-4xl font-bold tracking-tight text-white">Meet Our Staff</h2>
@@ -140,7 +117,7 @@
         </div>
     </section>
 
-    <!-- SHOP SECTION -->
+    <!-- SHOP SECTION - Grouped by Category -->
     <section id="shop" class="py-20 bg-white text-black">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="heading-font text-5xl font-bold tracking-tight mb-12 text-center">Our Products</h2>
@@ -171,78 +148,138 @@
         </div>
     </section>
 
-    <!-- WHY CHOOSE US SECTION -->
-    <section class="py-20 bg-zinc-950">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="heading-font text-5xl font-bold tracking-tight mb-12 text-center text-white">Why Choose Brito Mobiles?</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:border hover:border-[#34C759] transition-all">
-                    <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6">
-                        <i class="fa-solid fa-shield-halved text-5xl text-[#34C759]"></i>
+    <!-- QUICK ORDER MODAL -->
+    <div id="quick-order-modal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
+                <h2 class="heading-font text-3xl font-bold">Quick Order Request</h2>
+                <button onclick="closeQuickOrderModal()" class="text-4xl hover:text-gray-300">×</button>
+            </div>
+            <div class="p-4 bg-white">
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe-LG2Jf_SobnqQ3Ui1RbKpV7MmRZSCQxL4e2Q5GU7rgHC4rA/viewform?embedded=true" 
+                        width="100%" height="920" frameborder="0" marginheight="0" marginwidth="0">
+                    Loading Quick Order Form...
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- COMPARE DEVICES MODAL (Fixed - Black Text) -->
+    <div id="compare-modal" class="modal">
+        <div class="modal-content max-w-5xl">
+            <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
+                <h2 class="heading-font text-3xl font-bold">Compare Devices</h2>
+                <button onclick="closeCompareModal()" class="text-4xl hover:text-gray-300">×</button>
+            </div>
+            <div class="p-8 bg-white text-black">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Device 1</label>
+                        <select id="compare1" class="w-full p-4 border border-gray-300 rounded-2xl text-lg"></select>
                     </div>
-                    <h3 class="text-2xl font-semibold text-white mb-3">100% Genuine Products</h3>
-                    <p class="text-white/70">Every item comes with official manufacturer warranty. No fakes, ever.</p>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Device 2</label>
+                        <select id="compare2" class="w-full p-4 border border-gray-300 rounded-2xl text-lg"></select>
+                    </div>
                 </div>
-                <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:border hover:border-[#34C759] transition-all">
-                    <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6">
-                        <i class="fa-solid fa-tags text-5xl text-[#34C759]"></i>
+                <button onclick="performComparison()" 
+                        class="mt-8 w-full bg-[#34C759] hover:bg-[#2E9E4B] text-black py-4 rounded-2xl font-semibold text-lg">
+                    Compare Now
+                </button>
+                <div id="comparison-result" class="mt-8 hidden grid grid-cols-1 md:grid-cols-2 gap-8"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- OTHER SERVICES MODAL -->
+    <div id="services-modal" class="modal">
+        <div class="modal-content max-w-5xl">
+            <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
+                <h2 class="heading-font text-3xl font-bold">Other Services (Mini Bank)</h2>
+                <button onclick="closeServices()" class="text-4xl hover:text-gray-300">×</button>
+            </div>
+            <div class="p-8 bg-zinc-900 text-white overflow-y-auto max-h-[75vh]">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-zinc-800 p-6 rounded-3xl flex gap-5">
+                        <div class="w-20 h-20 bg-[#34C759] rounded-2xl flex items-center justify-center text-4xl">💰</div>
+                        <div>
+                            <h3 class="text-2xl font-semibold text-[#34C759]">Airtel Money</h3>
+                            <p class="text-white/70">Send, receive & withdraw</p>
+                            <p class="mt-4 font-medium">Grace Mwanza</p>
+                            <a href="tel:+260977123456" class="text-[#34C759]">+260 977 123 456</a>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-semibold text-white mb-3">Best Prices in Kabwe</h3>
-                    <p class="text-white/70">We offer the most competitive prices with no hidden charges.</p>
-                </div>
-                <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:border hover:border-[#34C759] transition-all">
-                    <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6">
-                        <i class="fa-solid fa-headset text-5xl text-[#34C759]"></i>
+                    <div class="bg-zinc-800 p-6 rounded-3xl flex gap-5">
+                        <div class="w-20 h-20 bg-[#34C759] rounded-2xl flex items-center justify-center text-4xl">📱</div>
+                        <div>
+                            <h3 class="text-2xl font-semibold text-[#34C759]">MTN Money</h3>
+                            <p class="text-white/70">Fast mobile money transfers</p>
+                            <p class="mt-4 font-medium">James Phiri</p>
+                            <a href="tel:+260966789012" class="text-[#34C759]">+260 966 789 012</a>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-semibold text-white mb-3">Expert Support</h3>
-                    <p class="text-white/70">Our friendly team helps you choose the perfect device for your needs.</p>
-                </div>
-                <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:border hover:border-[#34C759] transition-all">
-                    <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6">
-                        <i class="fa-solid fa-wrench text-5xl text-[#34C759]"></i>
+                    <div class="bg-zinc-800 p-6 rounded-3xl flex gap-5">
+                        <div class="w-20 h-20 bg-[#34C759] rounded-2xl flex items-center justify-center text-4xl">🏦</div>
+                        <div>
+                            <h3 class="text-2xl font-semibold text-[#34C759]">Zanaco Bank</h3>
+                            <p class="text-white/70">Bank deposits & withdrawals</p>
+                            <p class="mt-4 font-medium">Mary Banda</p>
+                            <a href="tel:+260955555555" class="text-[#34C759]">+260 955 555 555</a>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-semibold text-white mb-3">After-Sales Service</h3>
-                    <p class="text-white/70">Free setup, software updates, and reliable support after purchase.</p>
-                </div>
-                <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:border hover:border-[#34C759] transition-all">
-                    <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6">
-                        <i class="fa-solid fa-money-bill-wave text-5xl text-[#34C759]"></i>
+                    <div class="bg-zinc-800 p-6 rounded-3xl flex gap-5">
+                        <div class="w-20 h-20 bg-[#34C759] rounded-2xl flex items-center justify-center text-4xl">🏦</div>
+                        <div>
+                            <h3 class="text-2xl font-semibold text-[#34C759]">FNB Bank</h3>
+                            <p class="text-white/70">FNB deposits & transfers</p>
+                            <p class="mt-4 font-medium">Peter Zulu</p>
+                            <a href="tel:+260977111222" class="text-[#34C759]">+260 977 111 222</a>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-semibold text-white mb-3">Mini Bank Services</h3>
-                    <p class="text-white/70">Airtel Money, MTN, Zanaco, FNB, Float & Cash Exchange all in one place.</p>
-                </div>
-                <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:border hover:border-[#34C759] transition-all">
-                    <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6">
-                        <i class="fa-solid fa-clock text-5xl text-[#34C759]"></i>
+                    <div class="bg-zinc-800 p-6 rounded-3xl flex gap-5">
+                        <div class="w-20 h-20 bg-[#34C759] rounded-2xl flex items-center justify-center text-4xl">📶</div>
+                        <div>
+                            <h3 class="text-2xl font-semibold text-[#34C759]">Float / Airtime</h3>
+                            <p class="text-white/70">Airtime & data for all networks</p>
+                            <p class="mt-4 font-medium">Agnes Tembo</p>
+                            <a href="tel:+260966333444" class="text-[#34C759]">+260 966 333 444</a>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-semibold text-white mb-3">Open 7 Days</h3>
-                    <p class="text-white/70">Convenient hours to serve you better. Monday to Sunday.</p>
+                    <div class="bg-zinc-800 p-6 rounded-3xl flex gap-5">
+                        <div class="w-20 h-20 bg-[#34C759] rounded-2xl flex items-center justify-center text-4xl">💱</div>
+                        <div>
+                            <h3 class="text-2xl font-semibold text-[#34C759]">Cash Exchange</h3>
+                            <p class="text-white/70">Cash to Airtel Money & vice versa</p>
+                            <p class="mt-4 font-medium">John Banda</p>
+                            <a href="tel:+260979077079" class="text-[#34C759]">+260 979 077 079</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- ABOUT US -->
     <section id="about" class="py-20 bg-white text-black">
         <div class="max-w-7xl mx-auto px-6 text-center">
             <h2 class="heading-font text-5xl font-bold tracking-tight mb-6">About Brito Mobiles</h2>
-            <p id="location" class="max-w-3xl mx-auto text-zinc-700 text-lg"></p>
+            <p class="max-w-3xl mx-auto text-zinc-700 text-lg">Shop No. 75, Buntungwa Street, Opposite Ukupopoka Grocery, Kabwe, Zambia.<br>We sell only genuine products with warranty and excellent after-sales support.</p>
         </div>
     </section>
 
     <!-- FOOTER -->
     <footer class="bg-black py-16 text-center">
-        <h1 id="footer-name" class="logo-font text-3xl text-white mb-4"></h1>
-        <p id="footer-location" class="text-white/60"></p>
+        <h1 class="logo-font text-3xl text-white mb-4">Brito Mobiles</h1>
+        <p class="text-white/60">Shop No. 75, Buntungwa Street, Kabwe, Zambia</p>
         <div class="mt-6 space-y-1">
-            <a id="footer-phone" href="#" class="text-[#34C759] block"></a>
-            <a id="footer-whatsapp" href="#" class="text-[#34C759] block"></a>
+            <a href="tel:+260961971085" class="text-[#34C759] block">+260 961 971 085</a>
+            <a href="https://wa.me/260979077079" class="text-[#34C759] block">WhatsApp: +260 979 077 079</a>
         </div>
         <p class="text-white/50 text-sm mt-10">© 2026 Brito Mobiles • All transactions at the branch only</p>
     </footer>
 
     <!-- Floating Inquire Now -->
-    <a id="floating-whatsapp" href="#" target="_blank" class="floating-btn">
+    <a href="https://wa.me/260979077079?text=Hello%20Brito%20Mobiles%2C%20I%20would%20like%20to%20inquire%20about%20a%20product" target="_blank" class="floating-btn">
         <i class="fa-brands fa-whatsapp text-2xl"></i>
         <span>Inquire Now</span>
     </a>
@@ -250,68 +287,17 @@
     <script>
         let products = [];
         let staff = [];
-        let company = {};
 
         async function loadData() {
             try {
                 const res = await fetch('https://bandaamos98-create.github.io/brito-mobile/products.json');
                 const data = await res.json();
-
-                company = data.company || {};
                 products = data.products || [];
                 staff = data.staff || [];
-
-                renderCompanyInfo();
                 renderGroupedProducts();
                 renderStaffSlideshow();
                 populateComparisonSelects();
-            } catch (e) {
-                console.error("Failed to load data:", e);
-            }
-        }
-
-        function renderCompanyInfo() {
-            // Navbar Logo (Fixed using JSON icon)
-            const logoContainer = document.getElementById('logo-container');
-            logoContainer.innerHTML = `
-                <div class="flex items-center gap-3">
-                    <img id="company-icon" 
-                         src="${company.icon || ''}" 
-                         alt="${company.name || 'Brito Mobiles'}" 
-                         class="w-11 h-11 rounded-3xl object-cover"
-                         onerror="this.outerHTML = '<div class=\"w-11 h-11 bg-[#34C759] rounded-3xl flex items-center justify-center text-black font-bold text-2xl logo-font shadow-inner\">BM</div>'">
-                    <h1 class="logo-font text-3xl text-white">${company.name || 'Brito Mobiles'}</h1>
-                </div>
-            `;
-
-            // Slogan in Hero
-            document.getElementById('slogan').textContent = company.slogan || "Genuine phones, laptops & accessories at the best prices in Kabwe, Zambia.";
-
-            // About Location
-            document.getElementById('location').innerHTML = `
-                ${company.location || "Shop No. 75, Buntungwa Street, Opposite Ukupopoka Grocery, Kabwe, Zambia."}<br>
-                We are committed to providing genuine products with excellent customer service.
-            `;
-
-            // Footer
-            document.getElementById('footer-name').textContent = company.name || 'Brito Mobiles';
-            document.getElementById('footer-location').textContent = company.location || '';
-
-            if (company.phone) {
-                const phoneEl = document.getElementById('footer-phone');
-                phoneEl.textContent = company.phone;
-                phoneEl.href = `tel:${company.phone.replace(/\s+/g, '')}`;
-            }
-
-            if (company.whatsapp) {
-                const waEl = document.getElementById('footer-whatsapp');
-                waEl.textContent = `WhatsApp: ${company.whatsapp}`;
-                waEl.href = `https://wa.me/${company.whatsapp.replace(/\D/g, '')}`;
-
-                // Floating button
-                const floating = document.getElementById('floating-whatsapp');
-                floating.href = `https://wa.me/${company.whatsapp.replace(/\D/g, '')}?text=Hello%20Brito%20Mobiles%2C%20I%20would%20like%20to%20inquire%20about%20a%20product`;
-            }
+            } catch (e) { console.error(e); }
         }
 
         function renderGroupedProducts() {
@@ -331,7 +317,6 @@
             categoryProducts.forEach(product => {
                 const card = document.createElement('div');
                 card.className = `product-card flex-shrink-0 w-72 md:w-80 bg-white rounded-3xl overflow-hidden border border-zinc-200 cursor-pointer`;
-
                 card.innerHTML = `
                     <img src="${product.img}" alt="${product.name}" class="w-full h-56 object-cover"
                          onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(product.name)}'">
@@ -339,7 +324,7 @@
                         <h3 class="font-semibold text-xl text-zinc-900">${product.name}</h3>
                         <p class="text-zinc-600 text-sm mt-3 line-clamp-2">${product.description}</p>
                         <div class="mt-6 text-3xl font-bold text-[#34C759]">K${product.price.toLocaleString()}</div>
-                        <a href="https://wa.me/${(company.whatsapp || '260979077079').replace(/\D/g,'')}?text=Hello Brito Mobiles, I want to order ${encodeURIComponent(product.name)} (K${product.price})" 
+                        <a href="https://wa.me/260979077079?text=Hello Brito Mobiles, I want to order ${encodeURIComponent(product.name)} (K${product.price})" 
                            target="_blank"
                            class="mt-6 block w-full bg-[#34C759] hover:bg-[#2E9E4B] text-black text-center py-4 rounded-2xl font-semibold text-lg">
                             Order Now
@@ -353,23 +338,20 @@
         function renderStaffSlideshow() {
             const container = document.getElementById('staff-slideshow');
             if (staff.length === 0) return;
-
             let html = '';
             staff.forEach((member, i) => {
                 html += `
-                    <div class="staff-slide" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity: ${i===0?1:0};transition:opacity 0.8s ease;">
-                        <img src="${member.img}" class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-3xl mb-8 shadow-2xl border-4 border-[#34C759]"
-                             onerror="this.src='https://via.placeholder.com/400x400/1f2937/34C759?text=${encodeURIComponent(member.name)}'">
-                        <h3 class="heading-font text-4xl font-bold text-white">${member.name}</h3>
-                        <p class="text-[#34C759] text-xl mt-1">${member.role}</p>
-                    </div>`;
+                <div class="staff-slide ${i === 0 ? 'active' : ''}" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:${i===0?1:0};transition:opacity 0.8s ease;">
+                    <img src="${member.img}" class="w-64 h-64 md:w-80 md:h-80 object-cover rounded-3xl mb-8 shadow-2xl border-4 border-[#34C759]"
+                         onerror="this.src='https://via.placeholder.com/400x400/1f2937/34C759?text=${encodeURIComponent(member.name)}'">
+                    <h3 class="heading-font text-4xl font-bold text-white">${member.name}</h3>
+                    <p class="text-[#34C759] text-xl mt-1">${member.role}</p>
+                </div>`;
             });
-
             container.innerHTML = html;
 
             let index = 0;
             const slides = container.querySelectorAll('.staff-slide');
-
             if (slides.length > 1) {
                 setInterval(() => {
                     slides.forEach(s => s.style.opacity = 0);
@@ -379,38 +361,39 @@
             }
         }
 
-        function populateComparisonSelects() {
-            const phones = products.filter(p => p.category === "phone");
-            const s1 = document.getElementById('compare1');
-            const s2 = document.getElementById('compare2');
-            
-            if (!s1 || !s2) return;
-
-            s1.innerHTML = s2.innerHTML = '<option value="">Select Device</option>';
-            phones.forEach(p => {
-                s1.innerHTML += `<option value="${p.id}">${p.name}</option>`;
-                s2.innerHTML += `<option value="${p.id}">${p.name}</option>`;
-            });
-        }
-
-        // Modal Functions
+        // Quick Order Modal
         function openQuickOrderModal() {
             document.getElementById('quick-order-modal').style.display = 'flex';
         }
         function closeQuickOrderModal() {
             document.getElementById('quick-order-modal').style.display = 'none';
         }
+
+        // Services Modal
+        function showServices() {
+            document.getElementById('services-modal').style.display = 'flex';
+        }
+        function closeServices() {
+            document.getElementById('services-modal').style.display = 'none';
+        }
+
+        // Compare Devices Modal
         function openCompareModal() {
             document.getElementById('compare-modal').style.display = 'flex';
         }
         function closeCompareModal() {
             document.getElementById('compare-modal').style.display = 'none';
         }
-        function showServices() {
-            document.getElementById('services-modal').style.display = 'flex';
-        }
-        function closeServices() {
-            document.getElementById('services-modal').style.display = 'none';
+
+        function populateComparisonSelects() {
+            const phones = products.filter(p => p.category === "phone");
+            const s1 = document.getElementById('compare1');
+            const s2 = document.getElementById('compare2');
+            s1.innerHTML = s2.innerHTML = '<option value="">Select Device</option>';
+            phones.forEach(p => {
+                s1.innerHTML += `<option value="${p.id}">${p.name}</option>`;
+                s2.innerHTML += `<option value="${p.id}">${p.name}</option>`;
+            });
         }
 
         function performComparison() {
@@ -423,17 +406,15 @@
 
             const resultDiv = document.getElementById('comparison-result');
             resultDiv.innerHTML = `
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="border border-gray-300 p-6 rounded-2xl">
-                        <h3 class="font-bold text-2xl mb-2">${p1.name}</h3>
-                        <p class="text-4xl font-bold text-[#34C759]">K${p1.price.toLocaleString()}</p>
-                        <p class="mt-4 text-gray-700">${p1.fullDescription || p1.description}</p>
-                    </div>
-                    <div class="border border-gray-300 p-6 rounded-2xl">
-                        <h3 class="font-bold text-2xl mb-2">${p2.name}</h3>
-                        <p class="text-4xl font-bold text-[#34C759]">K${p2.price.toLocaleString()}</p>
-                        <p class="mt-4 text-gray-700">${p2.fullDescription || p2.description}</p>
-                    </div>
+                <div class="border border-gray-300 p-6 rounded-2xl">
+                    <h3 class="font-bold text-2xl mb-2">${p1.name}</h3>
+                    <p class="text-4xl font-bold text-[#34C759]">K${p1.price.toLocaleString()}</p>
+                    <p class="mt-4 text-gray-700">${p1.fullDescription || p1.description}</p>
+                </div>
+                <div class="border border-gray-300 p-6 rounded-2xl">
+                    <h3 class="font-bold text-2xl mb-2">${p2.name}</h3>
+                    <p class="text-4xl font-bold text-[#34C759]">K${p2.price.toLocaleString()}</p>
+                    <p class="mt-4 text-gray-700">${p2.fullDescription || p2.description}</p>
                 </div>
             `;
             resultDiv.classList.remove('hidden');
