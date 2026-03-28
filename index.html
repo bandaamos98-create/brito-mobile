@@ -14,7 +14,7 @@
         .product-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .product-card:hover { transform: translateY(-8px); }
         
-        .live-scroll {
+        .live-scroll, .similar-scroll {
             display: flex;
             gap: 1.25rem;
             overflow-x: auto;
@@ -22,7 +22,7 @@
             scrollbar-width: none;
             scroll-behavior: smooth;
         }
-        .live-scroll::-webkit-scrollbar { display: none; }
+        .live-scroll::-webkit-scrollbar, .similar-scroll::-webkit-scrollbar { display: none; }
 
         .floating-btn {
             position: fixed;
@@ -71,25 +71,15 @@
         }
         #comparison-result::-webkit-scrollbar { width: 6px; }
         #comparison-result::-webkit-scrollbar-thumb { background: #34C759; border-radius: 20px; }
-        #basket-items {
-            max-height: 58vh;
-            overflow-y: auto;
-            padding-right: 8px;
-            scrollbar-width: thin;
-            scrollbar-color: #34C759 #f3f4f6;
-        }
-        #basket-items::-webkit-scrollbar { width: 6px; }
-        #basket-items::-webkit-scrollbar-thumb { background: #34C759; border-radius: 20px; }
     </style>
 </head>
 <body class="bg-zinc-950 text-white">
 
-    <!-- NAVBAR - Clean version -->
+    <!-- NAVBAR -->
     <nav class="bg-black/90 backdrop-blur-md sticky top-0 z-50 border-b border-white/10">
         <div class="max-w-7xl mx-auto px-6 py-5">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3" id="logo-container"></div>
-
                 <div class="flex-1 max-w-md mx-8 hidden md:block search-glow">
                     <div class="relative">
                         <input id="search-input" type="text" placeholder="Search for product"
@@ -98,7 +88,6 @@
                         <i class="fa-solid fa-magnifying-glass absolute left-5 top-1/2 -translate-y-1/2 text-zinc-400"></i>
                     </div>
                 </div>
-
                 <div class="hidden md:flex items-center gap-6 text-sm font-medium">
                     <a href="#" onclick="openQuickOrderModal()" class="hover:text-[#34C759]">Quick Order</a>
                     <a href="#" onclick="openCompareModal()" class="hover:text-[#34C759]">Compare Devices</a>
@@ -112,7 +101,6 @@
                         <span id="nav-basket-count" class="bg-[#34C759] text-black text-xs font-bold px-2 py-0.5 rounded-full">0</span>
                     </button>
                 </div>
-
                 <div class="md:hidden flex items-center gap-3">
                     <a href="tel:+260961971085" class="call-btn w-11 h-11 flex items-center justify-center rounded-2xl text-xl">
                         <i class="fa-solid fa-phone"></i>
@@ -123,7 +111,6 @@
                 </div>
             </div>
 
-            <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden md:hidden mt-4 py-4 border-t border-white/10">
                 <div class="flex flex-col gap-4 text-sm font-medium">
                     <a href="#" onclick="openQuickOrderModal(); toggleMobileMenu()" class="hover:text-[#34C759]">Quick Order</a>
@@ -146,12 +133,12 @@
         <span class="text-white">All purchases & transactions MUST be done at the branch in Kabwe • No online sales or delivery</span>
     </div>
 
-    <!-- HERO -->
+    <!-- HERO with Rotating Tagline Slideshow -->
     <section id="home" class="hero-bg min-h-screen flex items-center">
         <div class="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
             <div class="space-y-8">
-                <h1 class="heading-font text-6xl md:text-7xl font-bold tracking-tighter leading-none text-white">
-                    Your Trusted Mobile Partner<br>in Kabwe
+                <h1 id="hero-tagline" class="heading-font text-6xl md:text-7xl font-bold tracking-tighter leading-none text-white min-h-[160px]">
+                    Your Trusted Mobile Partner in Kabwe
                 </h1>
                 <p class="text-xl text-white/80">Genuine phones, laptops & accessories at the best prices in Kabwe, Zambia.</p>
                 <div class="flex flex-wrap gap-4">
@@ -278,6 +265,7 @@
         </div>
     </div>
 
+    <!-- BASKET, QUICK ORDER, COMPARE, SERVICES MODALS (unchanged) -->
     <!-- BASKET MODAL -->
     <div id="basket-modal" class="modal">
         <div class="modal-content" style="max-width: 720px;">
@@ -392,6 +380,16 @@
         let allProducts = [];
         let scrollTimers = {};
 
+        // Hero Tagline Slideshow Messages
+        const heroMessages = [
+            "Your Trusted Mobile Partner in Kabwe",
+            "Best Prices on Genuine Phones & Laptops",
+            "Expert Support & After-Sales Service",
+            "Mini Bank Services Available Here",
+            "Quality You Can Trust • Service You Deserve"
+        ];
+        let currentMessageIndex = 0;
+
         async function loadData() {
             try {
                 const res = await fetch('https://britomobile51-ship-it.github.io/brito-mobile/products.json');
@@ -407,6 +405,7 @@
                 renderStaffSlideshow();
                 populateComparisonSelects();
                 renderServicesModal();
+                startHeroSlideshow();
             } catch (e) {
                 console.error("Failed to load data:", e);
             }
@@ -424,16 +423,29 @@
             `;
         }
 
-        // ====================== AUTO SWIPING LIVE TILES ======================
+        // Hero Slideshow
+        function startHeroSlideshow() {
+            const tagline = document.getElementById('hero-tagline');
+            setInterval(() => {
+                currentMessageIndex = (currentMessageIndex + 1) % heroMessages.length;
+                tagline.style.opacity = '0';
+                setTimeout(() => {
+                    tagline.textContent = heroMessages[currentMessageIndex];
+                    tagline.style.opacity = '1';
+                }, 400);
+            }, 4000);
+        }
+
+        // Live Auto-Swiping Categories
         function renderLiveCategories() {
             const phones = products.filter(p => p.category === "phone");
             const laptops = products.filter(p => p.category === "laptop");
             const accessories = products.filter(p => p.category === "accessory");
 
-            renderLiveScroll("phones-scroll", phones, 4000);     // Phones: 4s
-            renderLiveScroll("laptops-scroll", laptops, 5000);   // Laptops: 5s
-            renderLiveScroll("accessories-scroll", accessories, 3500); // Accessories: 3.5s
-            renderLiveScroll("services-scroll", serviceStaff, 4500);   // Services: 4.5s
+            renderLiveScroll("phones-scroll", phones, 4000);
+            renderLiveScroll("laptops-scroll", laptops, 5000);
+            renderLiveScroll("accessories-scroll", accessories, 3500);
+            renderLiveScroll("services-scroll", serviceStaff, 4500);
         }
 
         function renderLiveScroll(containerId, items, interval) {
@@ -445,7 +457,6 @@
                 card.className = `product-card flex-shrink-0 w-72 md:w-80 bg-white rounded-3xl overflow-hidden border border-zinc-200 cursor-pointer`;
 
                 if (item.service) {
-                    // Service card
                     card.innerHTML = `
                         <img src="${item.photo}" class="w-full h-56 object-cover"
                              onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(item.service)}'">
@@ -456,7 +467,6 @@
                         </div>
                     `;
                 } else {
-                    // Product card
                     card.innerHTML = `
                         <img src="${item.img}" class="w-full h-56 object-cover"
                              onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(item.name)}'">
@@ -477,7 +487,6 @@
                 container.appendChild(card);
             });
 
-            // Auto scroll
             let scrollPos = 0;
             scrollTimers[containerId] = setInterval(() => {
                 scrollPos += 280;
@@ -485,7 +494,6 @@
                 container.scrollTo({ left: scrollPos, behavior: 'smooth' });
             }, interval);
 
-            // Pause on hover
             container.addEventListener('mouseenter', () => clearInterval(scrollTimers[containerId]));
             container.addEventListener('mouseleave', () => {
                 scrollTimers[containerId] = setInterval(() => {
@@ -583,10 +591,6 @@
             closeBasketModal();
         }
 
-        function renderGroupedProducts() {
-            // Not used anymore - we use live scroll
-        }
-
         function showProductDetail(product) {
             currentProduct = product;
             document.getElementById('modal-product-name').textContent = product.name;
@@ -645,6 +649,28 @@
                     </div>
                 </div>`;
                 container.innerHTML += cardHTML;
+            });
+        }
+
+        function renderOtherServices() {
+            const container = document.getElementById('services-scroll');
+            container.innerHTML = '';
+            serviceStaff.forEach(service => {
+                const card = document.createElement('div');
+                card.className = `flex-shrink-0 w-72 md:w-80 bg-white rounded-3xl overflow-hidden border border-zinc-200`;
+                card.innerHTML = `
+                    <img src="${service.photo}" alt="${service.service}" class="w-full h-56 object-cover"
+                         onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(service.service)}'">
+                    <div class="p-6">
+                        <h3 class="font-semibold text-xl text-zinc-900">${service.service}</h3>
+                        <p class="text-[#34C759] font-medium mt-1">${service.name}</p>
+                        <p class="text-zinc-600 text-sm mt-3 line-clamp-4">${service.message}</p>
+                        <a href="tel:${service.phone.replace(/\s/g,'')}" class="mt-4 inline-flex items-center gap-2 text-[#34C759] hover:text-[#2E9E4B]">
+                            <i class="fa-solid fa-phone"></i> ${service.phone}
+                        </a>
+                    </div>
+                `;
+                container.appendChild(card);
             });
         }
 
@@ -708,7 +734,6 @@
                 renderLiveCategories();
                 return;
             }
-            // Simple search - re-render live scrolls with filtered items
             const filtered = allProducts.filter(p => p.name.toLowerCase().includes(term));
             const phones = filtered.filter(p => p.category === "phone");
             const laptops = filtered.filter(p => p.category === "laptop");
