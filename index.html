@@ -13,29 +13,76 @@
         .heading-font { font-family: 'Inter', system-ui, sans-serif; font-weight: 700; letter-spacing: -0.025em; }
         .hero-bg { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); }
         
-        .product-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .product-card:hover { transform: translateY(-8px); }
+        .product-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .product-card:hover {
+            transform: translateY(-8px);
+        }
         
-        .live-scroll { display: flex; gap: 1.25rem; overflow-x: auto; padding-bottom: 1rem; scrollbar-width: none; scroll-behavior: smooth; }
+        .live-scroll {
+            display: flex;
+            gap: 1.25rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+            scrollbar-width: none;
+            scroll-behavior: smooth;
+        }
         .live-scroll::-webkit-scrollbar { display: none; }
         
-        .similar-scroll { display: flex; flex-direction: column; gap: 1rem; max-height: 420px; overflow-y: auto; padding-right: 8px; scrollbar-width: thin; }
+        .similar-scroll {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-height: 420px;
+            overflow-y: auto;
+            padding-right: 8px;
+            scrollbar-width: thin;
+        }
         .similar-scroll::-webkit-scrollbar { width: 6px; }
         .similar-scroll::-webkit-scrollbar-thumb { background: #34C759; border-radius: 20px; }
 
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 60000; align-items: center; justify-content: center; padding: 16px; }
-        .modal-content { background: white; border-radius: 24px; width: 100%; max-width: 1100px; max-height: 95vh; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
-
-        .search-glow { position: relative; }
-        .search-glow::before {
-            content: ''; position: absolute; inset: -4px;
-            background: linear-gradient(90deg, #000000, #34C759, #ffffff, #34C759, #000000);
-            background-size: 300% 300%; border-radius: 9999px; z-index: -1;
-            animation: glowMove 4s linear infinite; opacity: 0.85; filter: blur(12px);
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 60000;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
         }
-        @keyframes glowMove { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+        .modal-content {
+            background: white;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 1100px;
+            max-height: 95vh;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+        }
 
-        /* FIXED: Large, visible search dropdown on portrait mobile */
+        .search-glow {
+            position: relative;
+        }
+        .search-glow::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            background: linear-gradient(90deg, #000000, #34C759, #ffffff, #34C759, #000000);
+            background-size: 300% 300%;
+            border-radius: 9999px;
+            z-index: -1;
+            animation: glowMove 4s linear infinite;
+            opacity: 0.85;
+            filter: blur(12px);
+        }
+        @keyframes glowMove {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .search-dropdown {
             position: absolute;
             top: 100%;
@@ -76,12 +123,26 @@
             color: white;
         }
 
-        .blink-live { animation: blink 1.2s infinite; color: #ff0000; font-weight: 700; text-shadow: 0 0 10px #ff0000; }
-        @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .blink-live {
+            animation: blink 1.2s infinite;
+            color: #ff0000;
+            font-weight: 700;
+            text-shadow: 0 0 10px #ff0000;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
 
         .menu-popup {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 70000;
-            display: none; align-items: center; justify-content: center; padding: 20px;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 70000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
     </style>
 </head>
@@ -90,12 +151,15 @@
     <nav class="bg-black/90 backdrop-blur-md sticky top-0 z-50 border-b border-white/10">
         <div class="max-w-7xl mx-auto px-4 py-5">
             <div class="flex items-center justify-between">
+                <!-- Logo -->
                 <div class="flex items-center gap-3" id="logo-container"></div>
                 
-                <!-- Search - Full width on mobile, no shrink -->
+                <!-- Search Bar - Optimized for portrait mobile -->
                 <div class="flex-1 mx-2 search-glow relative">
                     <div class="relative">
-                        <input id="search-input" type="text" placeholder="Search phones, laptops..." 
+                        <input id="search-input" 
+                               type="text" 
+                               placeholder="Search phones, laptops & accessories..."
                                onkeyup="handleSearch(event)"
                                class="w-full bg-zinc-900 text-white border border-zinc-700 focus:border-[#34C759] rounded-3xl py-4 pl-12 pr-6 text-base focus:outline-none">
                         <i class="fa-solid fa-magnifying-glass absolute left-5 top-1/2 -translate-y-1/2 text-zinc-400 text-xl"></i>
@@ -103,20 +167,20 @@
                     <div id="search-dropdown" class="search-dropdown"></div>
                 </div>
 
-                <!-- Desktop Nav -->
+                <!-- Desktop Navigation (no Compare here anymore) -->
                 <div class="hidden md:flex items-center gap-6 text-sm font-medium">
-                    <a href="#" onclick="openCompareModal()" class="hover:text-[#34C759]">Compare Devices</a>
                     <a href="tel:+260961971085" class="flex items-center gap-3 px-6 py-3 rounded-3xl font-semibold bg-red-600 hover:bg-red-700 transition-all">
-                        <i class="fa-solid fa-phone-volume text-xl"></i> Call Now
+                        <i class="fa-solid fa-phone-volume text-xl"></i> 
+                        Call Now
                     </a>
                     <button onclick="openBasketModal()" class="flex items-center gap-2 hover:text-[#34C759]">
                         <i class="fa-solid fa-shopping-basket text-xl"></i>
-                        <span>My Basket</span>
+                        <span class="font-medium">My Basket</span>
                         <span id="nav-basket-count" class="bg-[#34C759] text-black text-xs font-bold px-2 py-0.5 rounded-full">0</span>
                     </button>
                 </div>
 
-                <!-- Mobile Hamburger -->
+                <!-- Mobile Hamburger (☰) -->
                 <div class="md:hidden flex items-center gap-3">
                     <a href="tel:+260961971085" class="w-11 h-11 flex items-center justify-center rounded-2xl text-2xl bg-red-600">
                         <i class="fa-solid fa-phone-volume"></i>
@@ -135,14 +199,190 @@
         <span class="text-white">All purchases & transactions MUST be done at the branch in Kabwe • No online sales or delivery</span>
     </div>
 
-    <!-- HERO, SHOP, WHY US, ABOUT sections remain the same as previous version -->
+    <!-- HERO -->
+    <section id="home" class="hero-bg min-h-screen flex items-center">
+        <div class="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-8">
+                <h1 id="hero-tagline" class="heading-font text-6xl md:text-7xl font-bold tracking-tighter leading-none text-white min-h-[180px] transition-opacity duration-700">
+                    Your Trusted Mobile Partner in Kabwe
+                </h1>
+                <p class="text-xl text-white/80">Genuine phones, laptops & accessories at the best prices in Kabwe, Zambia.</p>
+                <div class="flex flex-wrap gap-4">
+                    <button onclick="showServices()" class="inline-block border-2 border-[#34C759] hover:bg-[#34C759] hover:text-black text-[#34C759] font-semibold px-10 py-4 rounded-3xl text-lg">Other Services</button>
+                </div>
+            </div>
+            <div>
+                <div class="text-center mb-6">
+                    <h2 class="heading-font text-4xl font-bold tracking-tight text-white">Meet Our Staff</h2>
+                    <p class="text-[#34C759]">The friendly team ready to serve you</p>
+                </div>
+                <div id="staff-slideshow" class="relative h-[520px] bg-zinc-900 rounded-3xl overflow-hidden shadow-2xl"></div>
+            </div>
+        </div>
+    </section>
 
-    <!-- MAIN MENU POPUP (☰) -->
+    <!-- SHOP SECTION - Live Sliding Tiles -->
+    <section id="shop" class="py-20 bg-white text-black">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="heading-font text-5xl font-bold tracking-tight mb-12 text-center">Our Products</h2>
+           
+            <div class="mb-16">
+                <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-[#34C759]">📱</span> Cell Phones</h3>
+                <div id="phones-scroll" class="live-scroll"></div>
+            </div>
+            <div class="mb-16">
+                <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-[#34C759]">💻</span> Laptops</h3>
+                <div id="laptops-scroll" class="live-scroll"></div>
+            </div>
+            <div class="mb-16">
+                <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-[#34C759]">🔌</span> Accessories</h3>
+                <div id="accessories-scroll" class="live-scroll"></div>
+            </div>
+           
+            <div>
+                <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-[#34C759]">🛠️</span> Other Services</h3>
+                <div id="services-scroll" class="live-scroll"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section id="why-us" class="py-20 bg-zinc-950">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="heading-font text-5xl font-bold tracking-tight mb-12 text-center text-white">Why Choose Brito Mobile?</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:border hover:border-[#34C759] transition-all">
+                    <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6"><i class="fa-solid fa-shield-halved text-5xl text-[#34C759]"></i></div>
+                    <h3 class="text-2xl font-semibold text-white mb-3">100% Genuine Products</h3>
+                    <p class="text-white/70">Every item comes with official manufacturer warranty. No fakes, ever.</p>
+                </div>
+                <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:border hover:border-[#34C759] transition-all">
+                    <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6"><i class="fa-solid fa-tags text-5xl text-[#34C759]"></i></div>
+                    <h3 class="text-2xl font-semibold text-white mb-3">Best Prices in Kabwe</h3>
+                    <p class="text-white/70">We offer the most competitive prices with no hidden charges.</p>
+                </div>
+                <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:border hover:border-[#34C759] transition-all">
+                    <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6"><i class="fa-solid fa-headset text-5xl text-[#34C759]"></i></div>
+                    <h3 class="text-2xl font-semibold text-white mb-3">Expert Support</h3>
+                    <p class="text-white/70">Our friendly team helps you choose the perfect device for your needs.</p>
+                </div>
+                <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:border hover:border-[#34C759] transition-all">
+                    <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6"><i class="fa-solid fa-wrench text-5xl text-[#34C759]"></i></div>
+                    <h3 class="text-2xl font-semibold text-white mb-3">After-Sales Service</h3>
+                    <p class="text-white/70">Free setup, software updates, and reliable support after purchase.</p>
+                </div>
+                <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:border hover:border-[#34C759] transition-all">
+                    <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6"><i class="fa-solid fa-money-bill-wave text-5xl text-[#34C759]"></i></div>
+                    <h3 class="text-2xl font-semibold text-white mb-3">Mini Bank Services</h3>
+                    <p class="text-white/70">Airtel Money, MTN, Zanaco, FNB, Float & Cash Exchange all in one place.</p>
+                </div>
+                <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:border hover:border-[#34C759] transition-all">
+                    <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6"><i class="fa-solid fa-clock text-5xl text-[#34C759]"></i></div>
+                    <h3 class="text-2xl font-semibold text-white mb-3">Open 6 Days</h3>
+                    <p class="text-white/70">Convenient hours to serve you better. Monday to Saturday.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT US -->
+    <section id="about" class="py-20 bg-white text-black">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="heading-font text-5xl font-bold tracking-tight mb-6">About Brito Mobile</h2>
+            <p class="max-w-3xl mx-auto text-zinc-700 text-lg leading-relaxed">
+                Shop No. 75, Buntungwa Street, Opposite Ukupopoka Grocery, Kabwe, Zambia.<br>
+                We are committed to providing only genuine products with manufacturer warranty and excellent customer service.
+            </p>
+        </div>
+    </section>
+
+    <!-- PRODUCT DETAIL MODAL -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
+                <h2 id="modal-product-name" class="heading-font text-3xl font-bold"></h2>
+                <button onclick="closeProductModal()" class="text-4xl hover:text-gray-300">×</button>
+            </div>
+            <div class="p-8 bg-white text-black overflow-auto max-h-[85vh]">
+                <div class="grid md:grid-cols-2 gap-10">
+                    <div>
+                        <img id="modal-product-img" class="w-full rounded-3xl shadow-xl" alt="">
+                        <div class="mt-6">
+                            <div id="modal-product-price" class="text-4xl font-bold text-[#34C759]"></div>
+                            <p id="modal-product-desc" class="mt-4 text-gray-700 leading-relaxed"></p>
+                        </div>
+                        <div class="mt-8 grid grid-cols-2 gap-4">
+                            <a id="modal-buy-btn" href="#" target="_blank" class="bg-[#34C759] hover:bg-[#2E9E4B] text-black text-center py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-2">
+                                <i class="fa-brands fa-whatsapp"></i> Buy via WhatsApp
+                            </a>
+                            <button id="modal-add-btn" onclick="addToBasketFromModal()" class="bg-zinc-900 hover:bg-black text-white text-center py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-cart-plus"></i> Add to Basket
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4 text-zinc-800">Similar Products</h3>
+                        <div id="similar-products-scroll" class="similar-scroll"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BASKET MODAL -->
+    <div id="basket-modal" class="modal">
+        <div class="modal-content" style="max-width: 720px;">
+            <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
+                <h2 class="heading-font text-3xl font-bold flex items-center gap-3">
+                    <i class="fa-solid fa-shopping-basket"></i> My Basket
+                </h2>
+                <button onclick="closeBasketModal()" class="text-4xl hover:text-gray-300">×</button>
+            </div>
+            <div id="basket-items" class="p-6 bg-white text-black overflow-y-auto"></div>
+            <div class="p-6 border-t bg-zinc-50">
+                <div class="flex justify-between items-center text-xl font-bold mb-6">
+                    <span>Total Amount:</span>
+                    <span id="basket-total" class="text-[#34C759]">K0</span>
+                </div>
+                <button onclick="orderBasketViaWhatsApp()" class="w-full bg-[#34C759] hover:bg-[#2E9E4B] text-black py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-3">
+                    <i class="fa-brands fa-whatsapp text-2xl"></i> ORDER NOW VIA WHATSAPP
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SERVICES MODAL -->
+    <div id="services-modal" class="modal">
+        <div class="modal-content max-w-5xl">
+            <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
+                <h2 class="heading-font text-3xl font-bold">Other Services (Mini Bank)</h2>
+                <button onclick="closeServices()" class="text-4xl hover:text-gray-300">×</button>
+            </div>
+            <div class="p-8 bg-zinc-900 text-white overflow-y-auto max-h-[75vh]">
+                <div id="services-staff-container" class="grid md:grid-cols-2 gap-6"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUICK ORDER MODAL -->
+    <div id="quick-order-modal" class="modal">
+        <div class="modal-content" style="max-width: 920px;">
+            <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
+                <h2 class="heading-font text-3xl font-bold">Quick Order</h2>
+                <button onclick="closeQuickOrderModal()" class="text-4xl hover:text-gray-300">×</button>
+            </div>
+            <div class="p-4 bg-white overflow-hidden">
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeP_msNh6xDGOx8yxVk-FiHWD2e4RZuhONQW_zE3zFD91Xddg/viewform?embedded=true" width="100%" height="720" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN MENU POPUP (☰) - Compare Devices moved here -->
     <div id="main-menu-popup" class="menu-popup">
         <div class="bg-zinc-900 rounded-3xl w-full max-w-md p-8 text-white">
             <div class="flex justify-between items-center mb-8">
                 <h2 class="text-3xl font-bold">Menu</h2>
-                <button onclick="toggleMainMenu()" class="text-4xl">×</button>
+                <button onclick="toggleMainMenu()" class="text-4xl leading-none">×</button>
             </div>
             <div class="flex flex-col gap-6 text-lg font-medium">
                 <a href="#" onclick="openQuickOrderModal(); toggleMainMenu()" class="hover:text-[#34C759]">Quick Order</a>
@@ -150,49 +390,182 @@
                 <a href="#shop" onclick="toggleMainMenu()" class="hover:text-[#34C759]">Shop</a>
                 <a href="#why-us" onclick="toggleMainMenu()" class="hover:text-[#34C759]">Why Choose Us</a>
                 <a href="#about" onclick="toggleMainMenu()" class="hover:text-[#34C759]">About Us</a>
-                <a href="https://web.facebook.com/profile.php?id=100051715276179" target="_blank" onclick="toggleMainMenu()" class="hover:text-[#34C759] flex items-center gap-3">
+                <a href="#" onclick="openCompareModal(); toggleMainMenu()" class="hover:text-[#34C759]">Compare Devices</a>
+                <a href="https://www.facebook.com/100051715276179" target="_blank" onclick="toggleMainMenu()" class="hover:text-[#34C759] flex items-center gap-3">
                     <i class="fa-brands fa-facebook text-2xl"></i> Official Facebook Page
                 </a>
             </div>
         </div>
     </div>
 
-    <!-- Compare Modal with built-in search (same style as main search) -->
-    <div id="compare-modal" class="modal">
-        <div class="modal-content" style="max-width: 1100px;">
-            <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
-                <h2 class="heading-font text-3xl font-bold">Compare Devices</h2>
-                <button onclick="closeCompareModal()" class="text-4xl">×</button>
-            </div>
-            <div class="p-8 bg-white text-black">
-                <input id="compare-search" type="text" placeholder="Type to search devices..." 
-                       onkeyup="filterCompareOptions()" 
-                       class="w-full p-4 border border-gray-300 rounded-2xl mb-6 text-lg">
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Device 1</label>
-                        <select id="compare1" class="w-full p-4 border border-gray-300 rounded-2xl text-lg"></select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Device 2</label>
-                        <select id="compare2" class="w-full p-4 border border-gray-300 rounded-2xl text-lg"></select>
-                    </div>
-                </div>
-                <button onclick="performComparison()" class="w-full mt-8 bg-[#34C759] hover:bg-[#2E9E4B] text-black py-4 rounded-2xl font-semibold text-lg">
-                    Compare Now
-                </button>
-                <div id="comparison-result" class="hidden mt-8"></div>
-            </div>
+    <!-- FOOTER -->
+    <footer class="bg-black py-16 text-center">
+        <h1 class="logo-font text-3xl text-white mb-4">Brito Mobile</h1>
+        <p class="text-white/60">Shop No. 75, Buntungwa Street, Kabwe, Zambia</p>
+        <div class="mt-6 space-y-1">
+            <a href="tel:+260961971085" class="text-[#34C759] block text-lg font-medium">+260 961 971 085</a>
+            <a href="https://wa.me/260979077079" class="text-[#34C759] block">WhatsApp: +260 979 077 079</a>
         </div>
-    </div>
-
-    <!-- Rest of your modals (product, basket, services, quick order) - same as before -->
+        <p class="text-white/50 text-sm mt-10">© 2026 Brito Mobile • All transactions at the branch only</p>
+    </footer>
 
     <script>
-        // ... (keep all your existing variables, loadData, render functions, addToBasket, showProductDetail, etc.)
+        let products = [];
+        let staff = [];
+        let company = {};
+        let serviceStaff = [];
+        let basket = [];
+        let currentProduct = null;
+        let allProducts = [];
+        let scrollTimers = {};
 
-        // Improved mobile-friendly search dropdown
+        const heroMessages = [
+            "Your Trusted Mobile Partner in Kabwe",
+            "Best Prices on Genuine Phones & Laptops",
+            "Expert Support You Can Count On",
+            "Quality Products • Honest Service",
+            "Your One-Stop Mobile Shop in Kabwe"
+        ];
+        let currentMessageIndex = 0;
+
+        async function loadData() {
+            try {
+                const res = await fetch('https://britomobile51-ship-it.github.io/brito-mobile/products.json');
+                const data = await res.json();
+                company = data.company || {};
+                products = data.products || [];
+                allProducts = [...products];
+                staff = data.staff || [];
+                serviceStaff = data.serviceStaff || [];
+             
+                renderCompanyLogo();
+                renderLiveCategories();
+                renderStaffSlideshow();
+                renderServicesModal();
+                startHeroSlideshow();
+            } catch (e) {
+                console.error("Failed to load data:", e);
+            }
+        }
+
+        function renderCompanyLogo() {
+            const container = document.getElementById('logo-container');
+            const iconSrc = company.icon || "https://via.placeholder.com/400x400/34C759/white?text=BM";
+            container.innerHTML = `
+                <div class="flex items-center gap-3">
+                    <img src="${iconSrc}" alt="Brito Mobile" class="w-11 h-11 rounded-3xl object-cover">
+                    <h1 class="logo-font text-3xl text-white">Brito Mobile</h1>
+                </div>
+            `;
+        }
+
+        function startHeroSlideshow() {
+            const tagline = document.getElementById('hero-tagline');
+            setInterval(() => {
+                currentMessageIndex = (currentMessageIndex + 1) % heroMessages.length;
+                tagline.style.opacity = '0';
+                setTimeout(() => {
+                    tagline.textContent = heroMessages[currentMessageIndex];
+                    tagline.style.opacity = '1';
+                }, 500);
+            }, 4000);
+        }
+
+        function renderLiveCategories() {
+            renderLiveScroll("phones-scroll", products.filter(p => p.category === "phone"), 4000);
+            renderLiveScroll("laptops-scroll", products.filter(p => p.category === "laptop"), 5000);
+            renderLiveScroll("accessories-scroll", products.filter(p => p.category === "accessory"), 3500);
+            renderLiveScroll("services-scroll", serviceStaff, 4500);
+        }
+
+        function renderLiveScroll(containerId, items, interval) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            container.innerHTML = '';
+
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = `product-card flex-shrink-0 w-72 md:w-80 bg-white rounded-3xl overflow-hidden border border-zinc-200 cursor-pointer`;
+
+                if (item.service) {
+                    card.innerHTML = `
+                        <img src="${item.photo}" class="w-full h-56 object-cover" onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(item.service)}'">
+                        <div class="p-6">
+                            <h3 class="font-semibold text-xl text-zinc-900">${item.service}</h3>
+                            <p class="text-[#34C759] font-medium mt-1">${item.name}</p>
+                            <p class="text-zinc-600 text-sm mt-3 line-clamp-4">${item.message}</p>
+                        </div>
+                    `;
+                } else {
+                    card.innerHTML = `
+                        <img src="${item.img}" class="w-full h-56 object-cover" onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(item.name)}'">
+                        <div class="p-6">
+                            <h3 class="font-semibold text-xl text-zinc-900">${item.name}</h3>
+                            <p class="text-zinc-600 text-sm mt-3 line-clamp-4">${item.fullDescription || item.description}</p>
+                            <div class="mt-6 text-3xl font-bold text-[#34C759]">K${item.price.toLocaleString()}</div>
+                            <button onclick="handleAddToBasket(event, ${JSON.stringify(item).replace(/"/g, '&quot;')}); event.stopImmediatePropagation()" 
+                                    class="mt-4 w-full bg-zinc-900 hover:bg-black text-white py-3.5 rounded-2xl font-medium flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-cart-plus"></i> ADD TO BASKET
+                            </button>
+                        </div>
+                    `;
+                    card.onclick = (e) => {
+                        if (!e.target.closest('button')) showProductDetail(item);
+                    };
+                }
+                container.appendChild(card);
+            });
+
+            // Auto sliding live tiles
+            let scrollPos = 0;
+            if (scrollTimers[containerId]) clearInterval(scrollTimers[containerId]);
+            scrollTimers[containerId] = setInterval(() => {
+                scrollPos += 290;
+                if (scrollPos > container.scrollWidth - container.clientWidth - 50) scrollPos = 0;
+                container.scrollTo({ left: scrollPos, behavior: 'smooth' });
+            }, interval);
+
+            container.addEventListener('mouseenter', () => clearInterval(scrollTimers[containerId]));
+            container.addEventListener('mouseleave', () => {
+                scrollTimers[containerId] = setInterval(() => {
+                    scrollPos += 290;
+                    if (scrollPos > container.scrollWidth - container.clientWidth - 50) scrollPos = 0;
+                    container.scrollTo({ left: scrollPos, behavior: 'smooth' });
+                }, interval);
+            });
+        }
+
+        function handleAddToBasket(e, productStr) {
+            e.stopImmediatePropagation();
+            const product = JSON.parse(productStr);
+            basket.push(product);
+            updateBasketCount();
+            showAddedFeedback(e.currentTarget);
+        }
+
+        function showAddedFeedback(button) {
+            const originalHTML = button.innerHTML;
+            button.innerHTML = `<i class="fa-solid fa-check"></i> Added!`;
+            button.classList.add('!bg-green-600', '!text-white');
+            setTimeout(() => {
+                button.innerHTML = originalHTML;
+                button.classList.remove('!bg-green-600', '!text-white');
+            }, 1400);
+        }
+
+        function updateBasketCount() {
+            document.getElementById('nav-basket-count').textContent = basket.length;
+        }
+
+        function addToBasketFromModal() {
+            if (currentProduct) {
+                basket.push(currentProduct);
+                updateBasketCount();
+                showAddedFeedback(document.getElementById('modal-add-btn'));
+            }
+        }
+
+        // Search dropdown - large and mobile friendly
         function handleSearch(e) {
             const term = e.target.value.toLowerCase().trim();
             const dropdown = document.getElementById('search-dropdown');
@@ -213,7 +586,7 @@
                     </div>
                 `;
             });
-            dropdown.innerHTML = html || `<div class="p-12 text-center text-zinc-400">No results</div>`;
+            dropdown.innerHTML = html || `<div class="p-12 text-center text-zinc-400">No results found</div>`;
             dropdown.style.display = 'block';
         }
 
@@ -223,27 +596,167 @@
             showProductDetail(product);
         }
 
-        // Compare modal with search filter
-        function filterCompareOptions() {
-            const term = document.getElementById('compare-search').value.toLowerCase().trim();
-            const phones = products.filter(p => p.category === "phone");
-            const filtered = term ? phones.filter(p => p.name.toLowerCase().includes(term)) : phones;
-            
-            const s1 = document.getElementById('compare1');
-            const s2 = document.getElementById('compare2');
-            s1.innerHTML = s2.innerHTML = '<option value="">Select Device</option>';
-            filtered.forEach(p => {
-                s1.innerHTML += `<option value="${p.id}">${p.name}</option>`;
-                s2.innerHTML += `<option value="${p.id}">${p.name}</option>`;
+        function showProductDetail(product) {
+            currentProduct = product;
+            document.getElementById('modal-product-name').textContent = product.name;
+            document.getElementById('modal-product-img').src = product.img;
+            document.getElementById('modal-product-price').textContent = `K${product.price.toLocaleString()}`;
+            document.getElementById('modal-product-desc').textContent = product.fullDescription || product.description;
+
+            const waLink = `https://wa.me/260979077079?text=Hello Brito Mobile, I want to buy ${encodeURIComponent(product.name)} at K${product.price}`;
+            document.getElementById('modal-buy-btn').href = waLink;
+
+            renderSimilarProducts(product);
+            document.getElementById('product-modal').style.display = 'flex';
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal').style.display = 'none';
+        }
+
+        function renderSimilarProducts(current) {
+            const container = document.getElementById('similar-products-scroll');
+            container.innerHTML = '';
+            const similar = products.filter(p => p.category === current.category && p.id !== current.id).slice(0, 8);
+            similar.forEach(p => {
+                const div = document.createElement('div');
+                div.className = "flex gap-4 p-4 bg-white border border-zinc-200 rounded-2xl cursor-pointer hover:border-[#34C759]";
+                div.innerHTML = `
+                    <img src="${p.img}" class="w-24 h-24 object-cover rounded-xl" onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(p.name)}'">
+                    <div class="flex-1">
+                        <h4 class="font-semibold text-lg">${p.name}</h4>
+                        <p class="text-[#34C759] font-bold mt-1">K${p.price.toLocaleString()}</p>
+                    </div>
+                `;
+                div.onclick = () => {
+                    closeProductModal();
+                    setTimeout(() => showProductDetail(p), 300);
+                };
+                container.appendChild(div);
             });
         }
 
-        function performComparison() {
-            const id1 = document.getElementById('compare1').value;
-            const id2 = document.getElementById('compare2').value;
-            if (!id1 || !id2) return alert("Select two devices");
-            if (id1 === id2) return alert("Choose two different devices");
-            // existing comparison logic...
+        function renderStaffSlideshow() {
+            const container = document.getElementById('staff-slideshow');
+            if (staff.length === 0) return;
+            let html = '';
+            staff.forEach((member, i) => {
+                html += `
+                <div class="staff-slide absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-1000" style="opacity: ${i === 0 ? 1 : 0};">
+                    <img src="${member.img}" class="w-60 h-60 md:w-72 md:h-72 object-cover rounded-3xl mb-6 shadow-2xl" 
+                         onerror="this.src='https://via.placeholder.com/400x400/1f2937/34C759?text=${encodeURIComponent(member.name)}'">
+                    <h3 class="heading-font text-3xl font-bold text-white">${member.name}</h3>
+                    <p class="text-[#34C759] text-lg mt-1">${member.role}</p>
+                </div>`;
+            });
+            container.innerHTML = html;
+
+            let index = 0;
+            const slides = container.querySelectorAll('.staff-slide');
+            if (slides.length > 1) {
+                setInterval(() => {
+                    slides.forEach(s => s.style.opacity = 0);
+                    index = (index + 1) % slides.length;
+                    slides[index].style.opacity = 1;
+                }, 5000);
+            }
+        }
+
+        function renderServicesModal() {
+            const container = document.getElementById('services-staff-container');
+            container.innerHTML = '';
+            serviceStaff.forEach(person => {
+                container.innerHTML += `
+                <div class="bg-zinc-800 p-6 rounded-3xl flex gap-5">
+                    <img src="${person.photo}" class="w-20 h-20 rounded-2xl object-cover" onerror="this.src='https://via.placeholder.com/300x300/34C759/white?text=${encodeURIComponent(person.name)}'">
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-semibold text-[#34C759]">${person.service}</h3>
+                        <p class="font-medium text-white">${person.name}</p>
+                        <p class="text-white/70 text-sm mt-2">${person.message}</p>
+                        <a href="tel:${person.phone.replace(/\s/g,'')}" class="mt-4 inline-flex items-center gap-2 text-[#34C759]">
+                            <i class="fa-solid fa-phone"></i> ${person.phone}
+                        </a>
+                    </div>
+                </div>`;
+            });
+        }
+
+        function openBasketModal() {
+            const container = document.getElementById('basket-items');
+            container.innerHTML = '';
+            if (basket.length === 0) {
+                container.innerHTML = `<p class="text-center text-gray-500 py-12 text-lg">Your basket is empty</p>`;
+                document.getElementById('basket-total').textContent = 'K0';
+            } else {
+                let total = 0;
+                basket.forEach((item, index) => {
+                    total += item.price;
+                    const div = document.createElement('div');
+                    div.className = "flex gap-4 mb-6 pb-6 border-b last:border-0 last:mb-0";
+                    div.innerHTML = `
+                        <img src="${item.img}" class="w-20 h-20 object-cover rounded-2xl flex-shrink-0" onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(item.name)}'">
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-lg">${item.name}</h4>
+                            <p class="text-[#34C759] font-bold mt-1">K${item.price.toLocaleString()}</p>
+                        </div>
+                        <button onclick="removeFromBasket(${index}); event.stopImmediatePropagation()" class="text-red-500 hover:text-red-700 self-start">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    `;
+                    container.appendChild(div);
+                });
+                document.getElementById('basket-total').textContent = `K${total.toLocaleString()}`;
+            }
+            document.getElementById('basket-modal').style.display = 'flex';
+        }
+
+        function removeFromBasket(index) {
+            basket.splice(index, 1);
+            updateBasketCount();
+            openBasketModal();
+        }
+
+        function closeBasketModal() {
+            document.getElementById('basket-modal').style.display = 'none';
+        }
+
+        function orderBasketViaWhatsApp() {
+            if (basket.length === 0) return;
+            let message = "Hello Brito Mobile,%0AI want to order:%0A%0A";
+            let total = 0;
+            basket.forEach(item => {
+                message += `• ${item.name} - K${item.price.toLocaleString()}%0A`;
+                total += item.price;
+            });
+            message += `%0ATotal: K${total.toLocaleString()}`;
+            window.open(`https://wa.me/260979077079?text=${message}`, '_blank');
+            closeBasketModal();
+            basket = [];
+            updateBasketCount();
+        }
+
+        function openQuickOrderModal() {
+            document.getElementById('quick-order-modal').style.display = 'flex';
+        }
+
+        function closeQuickOrderModal() {
+            document.getElementById('quick-order-modal').style.display = 'none';
+        }
+
+        function showServices() {
+            document.getElementById('services-modal').style.display = 'flex';
+        }
+
+        function closeServices() {
+            document.getElementById('services-modal').style.display = 'none';
+        }
+
+        function openCompareModal() {
+            document.getElementById('compare-modal').style.display = 'flex';
+        }
+
+        function closeCompareModal() {
+            document.getElementById('compare-modal').style.display = 'none';
         }
 
         function toggleMainMenu() {
@@ -251,10 +764,12 @@
             popup.style.display = popup.style.display === 'flex' ? 'none' : 'flex';
         }
 
-        // Close dropdown when tapping outside
-        document.addEventListener('click', function(e) {
+        // Close search dropdown when clicking outside
+        document.addEventListener('click', (e) => {
             const dropdown = document.getElementById('search-dropdown');
-            if (!e.target.closest('.search-glow')) dropdown.style.display = 'none';
+            if (!e.target.closest('.search-glow')) {
+                dropdown.style.display = 'none';
+            }
         });
 
         window.onload = loadData;
