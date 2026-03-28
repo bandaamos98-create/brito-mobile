@@ -54,23 +54,111 @@
       "fullDescription": "Oraimo Bluetooth speaker delivers loud, clear sound with long battery life.",
       "img": "https://bandaamos98-create.github.io/brito-mobile/images/btspeakeroraimo.jpg"
     },
+        {
+      "id": 5,
+      "name": "LAPTOP MOUSE",
+      "category": "accessory",
+      "price": 250,
+      "description": "High quality portable Bluetooth speaker.",
+      "fullDescription": "Oraimo Bluetooth speaker delivers loud, clear sound with long battery life.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/mouse.jpg"
+    },
+        {
+      "id": 5,
+      "name": "Gaming Controller",
+      "category": "accessory",
+      "price": 250,
+      "description": "High quality portable Bluetooth speaker.",
+      "fullDescription": "Oraimo Bluetooth speaker delivers loud, clear sound with long battery life.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/game.jpg"
+    },
+       
+    {
+      "id": 5,
+      "name": "Electric kettles",
+      "category": "accessory",
+      "price": 250,
+      "description": "High quality portable Bluetooth speaker.",
+      "fullDescription": "Oraimo Bluetooth speaker delivers loud, clear sound with long battery life.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/catle.jpg"
+    },
+       
+    {
+      "id": 5,
+      "name": "Laptop Chargers",
+      "category": "accessory",
+      "price": 250,
+      "description": "High quality portable Bluetooth speaker.",
+      "fullDescription": "Oraimo Bluetooth speaker delivers loud, clear sound with long battery life.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/charger.jpg"
+    },
+       
+    {
+      "id": 5,
+      "name": "Extension Cables",
+      "category": "accessory",
+      "price": 250,
+      "description": "High quality portable Bluetooth speaker.",
+      "fullDescription": "Oraimo Bluetooth speaker delivers loud, clear sound with long battery life.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/adapto.jpg"
+    },
+       
+    {
+      "id": 5,
+      "name": "Bluetooth Speakers",
+      "category": "accessory",
+      "price": 250,
+      "description": "High quality portable Bluetooth speaker.",
+      "fullDescription": "Oraimo Bluetooth speaker delivers loud, clear sound with long battery life.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/bts.jpg"
+    },
+      
+     {
+      "id": 5,
+      "name": "Affordable Bluetooth Speakers",
+      "category": "accessory",
+      "price": 250,
+      "description": "High quality portable Bluetooth speaker.",
+      "fullDescription": "Oraimo Bluetooth speaker delivers loud, clear sound with long battery life.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/btspeaker.jpg"
+    }
+    
     {
       "id": 6,
-      "name": "Lenovo IdeaPad Laptop",
+      "name": "All in one Laptop",
+      "category": "laptop",
+      "price": 5600,
+      "description": "Budget laptop suitable for students and basic work.",
+      "fullDescription": "Offering everything a student and a pro editor may need.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/bestlap.jpg"
+    },
+       
+    {
+      "id": 6,
+      "name": "PLENT TO PICK FROM!!",
       "category": "laptop",
       "price": 5600,
       "description": "Budget laptop suitable for students and basic work.",
       "fullDescription": "Lenovo IdeaPad offers good performance for everyday tasks.",
-      "img": "https://bandaamos98-create.github.io/brito-mobile/images/laptop.jpg"
-    },
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/laps.jpg"
+    },   
     {
-      "id": 7,
-      "name": "Dell Inspiron 14",
+      "id": 6,
+      "name": "HP LAPTOP DESIGNED FOR YOU",
       "category": "laptop",
-      "price": 8500,
-      "description": "Powerful everyday laptop with good battery life.",
-      "fullDescription": "Dell Inspiron 14 is a versatile laptop with excellent build quality and strong performance.",
-      "img": "https://bandaamos98-create.github.io/brito-mobile/images/laptop1.jpg"
+      "price": 5600,
+      "description": "Budget laptop suitable for students and basic work.",
+      "fullDescription": "Lenovo IdeaPad offers good performance for everyday tasks.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/lap.jpg"
+    },   
+    {
+      "id": 6,
+      "name": "HP LAPTOPS BEST FOR YOU",
+      "category": "laptop",
+      "price": 5600,
+      "description": "Budget laptop suitable for students and basic work.",
+      "fullDescription": "Lenovo IdeaPad offers good performance for everyday tasks.",
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/laps1.jpg"
     },
     {
       "id": 8,
@@ -81,6 +169,7 @@
       "fullDescription": "Complete accessory bundle including fast charger, wired earphones, protective case and tempered glass screen protector.",
       "img": "https://bandaamos98-create.github.io/brito-mobile/images/connecting.jpg"
     }
+
   ],
   "staff": [
     {
@@ -93,55 +182,55 @@
       "name": "John Banda",
       "role": "Tech Specialist",
       "quote": "We help our customers find the perfect phone or laptop that matches their needs and budget.",
-      "img": "https://bandaamos98-create.github.io/brito-mobile/images/john.jpg"
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/profile-pic.png"
     },
     {
       "name": "Trisha Mwanza",
       "role": "Customer Support",
       "quote": "Our goal is to make every customer happy with their purchase and provide excellent after-sales support.",
-      "img": "https://bandaamos98-create.github.io/brito-mobile/images/mary.jpg"
+      "img": "https://bandaamos98-create.github.io/brito-mobile/images/profile-pic.png"
     }
   ],
   "serviceStaff": [
     {
       "service": "Airtel Money",
       "name": "Grace Mwanza",
-      "photo": "https://bandaamos98-create.github.io/brito-mobile/images/grace.jpg",
+      "photo": "https://bandaamos98-create.github.io/brito-mobile/images/profile-pic.png",
       "phone": "+260977123456",
       "message": "Hi! I'm Grace. Ready to help with all your Airtel Money needs – send, receive, withdraw anytime!"
     },
     {
       "service": "MTN Money",
       "name": "James Phiri",
-      "photo": "https://bandaamos98-create.github.io/brito-mobile/images/james.jpg",
+      "photo": "https://bandaamos98-create.github.io/brito-mobile/images/profile-pic.png",
       "phone": "+260966789012",
       "message": "Hello, I'm James. Fast MTN Money transfers and cash-outs with excellent service."
     },
     {
       "service": "Zanaco Bank",
       "name": "Mary Banda",
-      "photo": "https://bandaamos98-create.github.io/brito-mobile/images/mary.jpg",
+      "photo": "https://bandaamos98-create.github.io/brito-mobile/images/profile-pic.png",
       "phone": "+260955555555",
       "message": "Hi, I'm Mary. I handle all Zanaco deposits, withdrawals and transfers professionally."
     },
     {
       "service": "FNB Bank",
       "name": "Peter Zulu",
-      "photo": "https://bandaamos98-create.github.io/brito-mobile/images/peter.jpg",
+      "photo": "https://bandaamos98-create.github.io/brito-mobile/images/profile-pic.png",
       "phone": "+260977111222",
       "message": "Hello! Peter here – your trusted FNB bank expert at Brito Mobiles."
     },
     {
       "service": "Float / Airtime",
       "name": "Agnes Tembo",
-      "photo": "https://bandaamos98-create.github.io/brito-mobile/images/agnes.jpg",
+      "photo": "https://bandaamos98-create.github.io/brito-mobile/images/profile-pic.png",
       "phone": "+260966333444",
       "message": "Need airtime or float? I'm Agnes and I'm here to help you instantly with all networks!"
     },
     {
       "service": "Cash Exchange",
       "name": "John Banda",
-      "photo": "https://bandaamos98-create.github.io/brito-mobile/images/john.jpg",
+      "photo": "https://bandaamos98-create.github.io/brito-mobile/images/profile-pic.png",
       "phone": "+260979077079",
       "message": "Cash to mobile money or vice versa – fast, safe and reliable service with me!"
     }
