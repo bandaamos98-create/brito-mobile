@@ -20,7 +20,8 @@
             transform: translateY(-8px); 
         }
 
-        .live-scroll, .similar-scroll {
+        /* Live horizontal scrolling categories */
+        .live-scroll {
             display: flex;
             gap: 1.25rem;
             overflow-x: auto;
@@ -28,30 +29,24 @@
             scrollbar-width: none;
             scroll-behavior: smooth;
         }
-        .live-scroll::-webkit-scrollbar, .similar-scroll::-webkit-scrollbar { 
-            display: none; 
-        }
+        .live-scroll::-webkit-scrollbar { display: none; }
 
-        /* Beautiful glowing search bar */
-        .search-glow {
-            position: relative;
+        /* Similar products - Vertical scroll only */
+        .similar-scroll {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-height: 420px;
+            overflow-y: auto;
+            padding-right: 8px;
+            scrollbar-width: thin;
         }
-        .search-glow::before {
-            content: '';
-            position: absolute;
-            inset: -4px;
-            background: linear-gradient(90deg, #000000, #34C759, #ffffff, #34C759, #000000);
-            background-size: 300% 300%;
-            border-radius: 9999px;
-            z-index: -1;
-            animation: glowMove 4s linear infinite;
-            opacity: 0.85;
-            filter: blur(12px);
+        .similar-scroll::-webkit-scrollbar {
+            width: 6px;
         }
-        @keyframes glowMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .similar-scroll::-webkit-scrollbar-thumb {
+            background: #34C759;
+            border-radius: 20px;
         }
 
         .floating-btn {
@@ -94,13 +89,40 @@
             overflow: hidden;
             box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
         }
-        #comparison-result {
-            max-height: 58vh;
-            overflow-y: auto;
-            padding-right: 12px;
+
+        /* Glowing Search Bar */
+        .search-glow {
+            position: relative;
         }
-        #comparison-result::-webkit-scrollbar { width: 6px; }
-        #comparison-result::-webkit-scrollbar-thumb { background: #34C759; border-radius: 20px; }
+        .search-glow::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            background: linear-gradient(90deg, #000000, #34C759, #ffffff, #34C759, #000000);
+            background-size: 300% 300%;
+            border-radius: 9999px;
+            z-index: -1;
+            animation: glowMove 4s linear infinite;
+            opacity: 0.85;
+            filter: blur(12px);
+        }
+        @keyframes glowMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Live Blink */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        .blink-live {
+            animation: blink 1.2s infinite;
+            color: #ff0000;
+            font-weight: 700;
+            text-shadow: 0 0 10px #ff0000;
+        }
     </style>
 </head>
 <body class="bg-zinc-950 text-white">
@@ -166,7 +188,7 @@
         <span class="text-white">All purchases & transactions MUST be done at the branch in Kabwe • No online sales or delivery</span>
     </div>
 
-    <!-- HERO with Rotating Taglines -->
+    <!-- HERO with Rotating Messages -->
     <section id="home" class="hero-bg min-h-screen flex items-center">
         <div class="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
             <div class="space-y-8">
@@ -189,7 +211,7 @@
         </div>
     </section>
 
-    <!-- SHOP SECTION - Live Auto Swiping -->
+    <!-- SHOP SECTION - Auto Swiping -->
     <section id="shop" class="py-20 bg-white text-black">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="heading-font text-5xl font-bold tracking-tight mb-12 text-center">Our Products</h2>
@@ -337,7 +359,7 @@
         </div>
     </div>
 
-    <!-- COMPARE MODAL with Search -->
+    <!-- COMPARE MODAL -->
     <div id="compare-modal" class="modal">
         <div class="modal-content" style="max-width: 1100px; max-height: 95vh;">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
@@ -349,7 +371,7 @@
             </div>
             <div class="p-8 bg-white text-black" style="max-height: calc(95vh - 85px); overflow-y: auto;">
                 <div class="mb-6">
-                    <input id="compare-search" type="text" placeholder="Search devices to compare..." 
+                    <input id="compare-search" type="text" placeholder="Search devices..." 
                            class="w-full p-4 border border-gray-300 rounded-2xl text-lg focus:outline-none focus:border-[#34C759]">
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
@@ -472,7 +494,7 @@
             }, 4000);
         }
 
-        // Live Auto Swiping
+        // Live Auto Swiping Categories - Fixed for desktop
         function renderLiveCategories() {
             const phones = products.filter(p => p.category === "phone");
             const laptops = products.filter(p => p.category === "laptop");
@@ -525,16 +547,17 @@
 
             let scrollPos = 0;
             scrollTimers[containerId] = setInterval(() => {
-                scrollPos += 280;
-                if (scrollPos > container.scrollWidth - container.clientWidth - 100) scrollPos = 0;
+                scrollPos += 290; // Slightly increased step for better visibility
+                if (scrollPos > container.scrollWidth - container.clientWidth - 50) scrollPos = 0;
                 container.scrollTo({ left: scrollPos, behavior: 'smooth' });
             }, interval);
 
+            // Pause on hover
             container.addEventListener('mouseenter', () => clearInterval(scrollTimers[containerId]));
             container.addEventListener('mouseleave', () => {
                 scrollTimers[containerId] = setInterval(() => {
-                    scrollPos += 280;
-                    if (scrollPos > container.scrollWidth - container.clientWidth - 100) scrollPos = 0;
+                    scrollPos += 290;
+                    if (scrollPos > container.scrollWidth - container.clientWidth - 50) scrollPos = 0;
                     container.scrollTo({ left: scrollPos, behavior: 'smooth' });
                 }, interval);
             });
@@ -648,10 +671,10 @@
         function renderSimilarProducts(current) {
             const container = document.getElementById('similar-products-scroll');
             container.innerHTML = '';
-            const similar = products.filter(p => p.category === current.category && p.id !== current.id).slice(0, 10);
+            const similar = products.filter(p => p.category === current.category && p.id !== current.id).slice(0, 8);
             similar.forEach(p => {
                 const div = document.createElement('div');
-                div.className = "flex-shrink-0 w-64 bg-white rounded-3xl overflow-hidden border border-zinc-200 cursor-pointer";
+                div.className = "flex-shrink-0 w-full bg-white rounded-3xl overflow-hidden border border-zinc-200 cursor-pointer";
                 div.innerHTML = `
                     <img src="${p.img}" class="w-full h-40 object-cover" onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(p.name)}'">
                     <div class="p-4">
@@ -708,21 +731,6 @@
                 s2.innerHTML += `<option value="${p.id}">${p.name}</option>`;
             });
         }
-
-        // Compare search functionality
-        document.getElementById('compare-search').addEventListener('input', function() {
-            const term = this.value.toLowerCase().trim();
-            const phones = products.filter(p => p.category === "phone");
-            const filtered = term ? phones.filter(p => p.name.toLowerCase().includes(term)) : phones;
-            
-            const s1 = document.getElementById('compare1');
-            const s2 = document.getElementById('compare2');
-            s1.innerHTML = s2.innerHTML = '<option value="">Select Device</option>';
-            filtered.forEach(p => {
-                s1.innerHTML += `<option value="${p.id}">${p.name}</option>`;
-                s2.innerHTML += `<option value="${p.id}">${p.name}</option>`;
-            });
-        });
 
         function performComparison() {
             const id1 = document.getElementById('compare1').value;
