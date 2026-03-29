@@ -75,6 +75,20 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.3; }
         }
+
+        /* Modern Call Now Button */
+        .call-now-btn {
+            background: linear-gradient(90deg, #34C759, #2E9E4B);
+            color: #000;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            box-shadow: 0 10px 15px -3px rgb(52 199 89);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .call-now-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 20px 25px -5px rgb(52 199 89);
+        }
     </style>
 </head>
 <body class="bg-zinc-950 text-white">
@@ -84,21 +98,26 @@
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3" id="logo-container"></div>
                 
-                <!-- Desktop Search Bar - Exact CPAESS Style -->
+                <!-- Desktop Search Bar - EXACT CPAESS Style -->
                 <div class="flex-1 max-w-md mx-8 hidden md:flex">
                     <div class="relative w-full">
                         <input type="text" id="search-input" placeholder="Search products..."
                                onkeyup="handleSearch(event)"
-                               class="w-full bg-zinc-800 border border-zinc-700 focus:border-orange-500 rounded-3xl py-3 px-5 pl-12 text-sm focus:outline-none">
+                               class="w-full bg-zinc-800 border border-zinc-700 focus:border-orange-500 rounded-3xl py-3 px-5 pl-12 text-sm focus:outline-none text-white">
                         <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500"></i>
                     </div>
                 </div>
 
                 <div class="hidden md:flex items-center gap-6 text-sm font-medium">
                     <a href="#" onclick="openCompareModal()" class="hover:text-[#34C759]">Compare Devices</a>
-                    <a href="tel:+260961971085" class="call-btn flex items-center gap-2 px-6 py-3 rounded-3xl font-semibold hover:scale-105 transition-all">
-                        <i class="fa-solid fa-phone"></i> Call Now
+                    
+                    <!-- Modern Call Now Button -->
+                    <a href="tel:+260961971085" 
+                       class="call-now-btn flex items-center gap-2 px-8 py-3.5 rounded-3xl text-base">
+                        <i class="fa-solid fa-phone text-lg"></i>
+                        <span>Call Now</span>
                     </a>
+                    
                     <button onclick="openBasketModal()" class="flex items-center gap-2 hover:text-[#34C759]">
                         <i class="fa-solid fa-shopping-basket text-xl"></i>
                         <span class="font-medium">My Basket</span>
@@ -107,7 +126,9 @@
                 </div>
 
                 <div class="md:hidden flex items-center gap-3">
-                    <a href="tel:+260961971085" class="call-btn w-11 h-11 flex items-center justify-center rounded-2xl text-xl">
+                    <!-- Mobile Call Icon (kept simple) -->
+                    <a href="tel:+260961971085" 
+                       class="call-now-btn w-11 h-11 flex items-center justify-center rounded-3xl text-xl shadow-lg">
                         <i class="fa-solid fa-phone"></i>
                     </a>
                     <button onclick="toggleMobileMenu()" class="text-2xl">
@@ -116,12 +137,12 @@
                 </div>
             </div>
 
-            <!-- Mobile Search Bar - Exact CPAESS Style -->
+            <!-- Mobile Search Bar - EXACT CPAESS Style + Fixed stretching -->
             <div class="md:hidden mt-4">
-                <div class="relative">
+                <div class="relative w-full">
                     <input type="text" id="search-input-mobile" placeholder="Search products..."
                            onkeyup="handleSearch(event)"
-                           class="w-full bg-zinc-800 border border-zinc-700 focus:border-orange-500 rounded-3xl py-3 px-5 pl-12 text-sm focus:outline-none">
+                           class="w-full bg-zinc-800 border border-zinc-700 focus:border-orange-500 rounded-3xl py-3 px-5 pl-12 text-sm focus:outline-none text-white">
                     <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500"></i>
                 </div>
             </div>
@@ -130,7 +151,8 @@
             <div id="mobile-menu" class="hidden md:hidden mt-4 py-4 border-t border-white/10">
                 <div class="flex flex-col gap-4 text-sm font-medium">
                     <a href="#" onclick="openCompareModal(); toggleMobileMenu()" class="hover:text-[#34C759]">Compare Devices</a>
-                    <a href="tel:+260961971085" onclick="toggleMobileMenu()" class="call-btn flex items-center gap-3 px-6 py-4 rounded-3xl font-semibold justify-center">
+                    <a href="tel:+260961971085" onclick="toggleMobileMenu()" 
+                       class="call-now-btn flex items-center gap-3 px-6 py-4 rounded-3xl font-semibold justify-center text-base">
                         <i class="fa-solid fa-phone"></i> Call Now
                     </a>
                     <button onclick="openBasketModal(); toggleMobileMenu()" class="flex items-center gap-2 hover:text-[#34C759]">
@@ -264,7 +286,8 @@
                             <a id="modal-buy-btn" href="#" target="_blank" class="bg-[#34C759] hover:bg-[#2E9E4B] text-black text-center py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-2">
                                 <i class="fa-brands fa-whatsapp"></i> Buy via WhatsApp
                             </a>
-                            <button id="modal-add-btn" onclick="addToBasketFromModal()" class="add-to-basket-btn bg-zinc-900 hover:bg-black text-white text-center py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-2">
+                            <button id="modal-add-btn" onclick="addToBasketFromModal()" 
+                                    class="add-to-basket-btn bg-zinc-900 hover:bg-black text-white text-center py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-2">
                                 <i class="fa-solid fa-cart-plus"></i> Add to Basket
                             </button>
                         </div>
@@ -441,13 +464,17 @@
             renderLiveScroll("services-scroll", serviceStaff, 5200);
         }
 
+        // FIXED: Add to basket now uses clean event listeners (no more broken JSON onclick)
         function renderLiveScroll(containerId, items, interval) {
             const container = document.getElementById(containerId);
             container.innerHTML = '';
+            
             items.forEach(item => {
                 const card = document.createElement('div');
                 card.className = `product-card flex-shrink-0 w-72 md:w-80 bg-white rounded-3xl overflow-hidden border border-zinc-200 cursor-pointer`;
+                
                 if (item.service) {
+                    // Service card (no basket)
                     card.innerHTML = `
                         <img src="${item.photo}" class="w-full h-56 object-cover"
                              onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(item.service)}'">
@@ -458,6 +485,7 @@
                         </div>
                     `;
                 } else {
+                    // Product card
                     card.innerHTML = `
                         <img src="${item.img}" class="w-full h-56 object-cover"
                              onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(item.name)}'">
@@ -465,19 +493,29 @@
                             <h3 class="font-semibold text-xl text-zinc-900">${item.name}</h3>
                             <p class="text-zinc-600 text-sm mt-3 line-clamp-4">${item.fullDescription || item.description}</p>
                             <div class="mt-6 text-3xl font-bold text-[#34C759]">K${item.price.toLocaleString()}</div>
-                            <button onclick="handleAddToBasket(event, ${JSON.stringify(item).replace(/"/g, '&quot;')}); event.stopImmediatePropagation()"
-                                    class="add-to-basket-btn mt-4 w-full bg-zinc-900 hover:bg-black text-white py-3.5 rounded-2xl font-medium flex items-center justify-center gap-2">
+                            <button class="add-to-basket-btn mt-4 w-full bg-zinc-900 hover:bg-black text-white py-3.5 rounded-2xl font-medium flex items-center justify-center gap-2">
                                 <i class="fa-solid fa-cart-plus"></i> ADD TO BASKET
                             </button>
                         </div>
                     `;
-                    card.onclick = (e) => {
-                        if (!e.target.closest('button')) showProductDetail(item);
-                    };
+                    
+                    // FIXED Add to basket - clean event listener
+                    const addBtn = card.querySelector('.add-to-basket-btn');
+                    addBtn.addEventListener('click', (e) => {
+                        e.stopImmediatePropagation();
+                        handleAddToBasket(item);
+                    });
+                    
+                    card.addEventListener('click', (e) => {
+                        if (!e.target.closest('button')) {
+                            showProductDetail(item);
+                        }
+                    });
                 }
                 container.appendChild(card);
             });
 
+            // Auto-scroll logic
             let scrollPos = 0;
             if (scrollTimers[containerId]) clearInterval(scrollTimers[containerId]);
             scrollTimers[containerId] = setInterval(() => {
@@ -496,32 +534,23 @@
             });
         }
 
-        function handleAddToBasket(e, productStr) {
-            e.stopImmediatePropagation();
-            const product = JSON.parse(productStr);
+        function handleAddToBasket(product) {
             basket.push(product);
             updateBasketCount();
-            showAddedFeedback(e.currentTarget);
+            showAddedFeedback(); // global toast-style feedback
         }
 
-        function showAddedFeedback(button) {
-            const originalHTML = button.innerHTML;
-            button.innerHTML = `<i class="fa-solid fa-check"></i> Added!`;
-            button.classList.add('!bg-green-600', '!text-white');
-            setTimeout(() => {
-                button.innerHTML = originalHTML;
-                button.classList.remove('!bg-green-600', '!text-white');
-            }, 1400);
+        function showAddedFeedback() {
+            // Simple green toast feedback
+            const toast = document.createElement('div');
+            toast.style.cssText = 'position:fixed; bottom:20px; right:20px; background:#34C759; color:black; padding:16px 24px; border-radius:9999px; font-weight:700; box-shadow:0 10px 15px -3px rgb(52 199 89); z-index:99999;';
+            toast.innerHTML = `<i class="fa-solid fa-check mr-2"></i> Added to basket!`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 1800);
         }
 
         function addToBasketFromModal() {
-            if (currentProduct) addToBasket(currentProduct);
-        }
-
-        function addToBasket(product, buttonElement = null) {
-            basket.push(product);
-            updateBasketCount();
-            if (buttonElement) showAddedFeedback(buttonElement);
+            if (currentProduct) handleAddToBasket(currentProduct);
         }
 
         function updateBasketCount() {
