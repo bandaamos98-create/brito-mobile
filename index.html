@@ -18,7 +18,7 @@
         }
         .product-card:hover { transform: translateY(-8px); }
 
-        /* Live Marquee - Improved Touch Support */
+        /* Live Marquee - Touch Optimized */
         .live-marquee {
             overflow-x: auto;
             white-space: nowrap;
@@ -489,7 +489,7 @@
             }
         }
 
-        // Improved Touch Marquee with pause on hold
+        // Touch-friendly marquee with pause on hold
         function renderLiveMarquee(containerId, contentId, items, isService = false) {
             const container = document.getElementById(containerId);
             const content = document.getElementById(contentId);
@@ -524,7 +524,7 @@
                 content.appendChild(card);
             });
 
-            // Touch handling: pause on touch, resume after 4 seconds
+            // Touch handling: pause on touchstart, resume after 4 seconds on touchend
             let resumeTimeout;
             container.addEventListener('touchstart', () => {
                 content.style.animationPlayState = 'paused';
