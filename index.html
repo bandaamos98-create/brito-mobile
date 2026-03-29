@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Brito Mobile | Genuine Phones, Laptops & Accessories</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -18,13 +18,13 @@
         }
         .product-card:hover { transform: translateY(-8px); }
 
-        /* Live Marquee - Touch Friendly */
+        /* Live Marquee - Improved Touch Support */
         .live-marquee {
             overflow-x: auto;
             white-space: nowrap;
             scrollbar-width: none;
             -webkit-overflow-scrolling: touch;
-            touch-action: pan-y;
+            touch-action: pan-x;
         }
         .live-marquee-content {
             display: inline-flex;
@@ -353,7 +353,7 @@
         </div>
     </div>
 
-    <!-- QUICK ORDER, COMPARE, SERVICES MODALS (kept short for brevity) -->
+    <!-- Other modals (Quick Order, Compare, Services) -->
     <div id="quick-order-modal" class="modal">
         <div class="modal-content" style="max-width: 920px;">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
@@ -411,7 +411,6 @@
         let basket = [];
         let currentProduct = null;
         let currentHeroIndex = 0;
-        let marqueeIntervals = {}; // To control per-category pause/resume
 
         const heroMessages = [
             "Your Trusted Mobile Partner in Kabwe",
@@ -490,7 +489,7 @@
             }
         }
 
-        // Touch-friendly marquee with pause on hold
+        // Improved Touch Marquee with pause on hold
         function renderLiveMarquee(containerId, contentId, items, isService = false) {
             const container = document.getElementById(containerId);
             const content = document.getElementById(contentId);
@@ -511,11 +510,7 @@
                         ${!isService ? `
                         <button class="add-to-basket-btn mt-5 w-full bg-black text-white py-3.5 rounded-2xl font-medium flex items-center justify-center gap-2">
                             <i class="fa-solid fa-cart-plus"></i> Add to Basket
-                        </button>` : `
-                        <div class="mt-4 text-sm text-zinc-600">
-                            <strong>${item.name}</strong><br>
-                            ${item.service || ''} • ${item.phone || ''}
-                        </div>`}
+                        </button>` : ''}
                     </div>
                 `;
 
@@ -529,18 +524,18 @@
                 content.appendChild(card);
             });
 
-            // Touch handling for pause/resume per category
-            let timeout;
+            // Touch handling: pause on touch, resume after 4 seconds
+            let resumeTimeout;
             container.addEventListener('touchstart', () => {
                 content.style.animationPlayState = 'paused';
-                clearTimeout(timeout);
-            });
+                clearTimeout(resumeTimeout);
+            }, { passive: true });
 
             container.addEventListener('touchend', () => {
-                timeout = setTimeout(() => {
+                resumeTimeout = setTimeout(() => {
                     content.style.animationPlayState = 'running';
-                }, 4000); // Resume after 4 seconds
-            });
+                }, 4000);
+            }, { passive: true });
         }
 
         function renderLiveCategories() {
@@ -570,7 +565,9 @@
         }
 
         function addToBasketFromModal() {
-            if (currentProduct) addToBasket(currentProduct);
+            if (currentProduct) {
+                addToBasket(currentProduct);
+            }
         }
 
         function showProductDetail(product) {
