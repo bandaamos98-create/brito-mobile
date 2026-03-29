@@ -89,23 +89,6 @@
             max-height: 460px;
             overflow-y: auto;
         }
-
-        /* Search Popup */
-        #search-results, #search-results-mobile {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background: #18181b;
-            border: 1px solid #3f3f46;
-            border-radius: 16px;
-            margin-top: 8px;
-            max-height: 320px;
-            overflow-y: auto;
-            z-index: 100;
-            display: none;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
-        }
     </style>
 </head>
 <body class="bg-zinc-950 text-white">
@@ -116,7 +99,6 @@
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3" id="logo-container"></div>
 
-                <!-- Desktop Search -->
                 <div class="flex-1 max-w-md mx-8 hidden md:flex relative">
                     <div class="relative w-full">
                         <input type="text" id="search-input" placeholder="Search products..."
@@ -170,7 +152,7 @@
                 </div>
             </div>
 
-            <!-- Staff Slideshow with MEET OUR TEAM -->
+            <!-- Staff Slideshow -->
             <div>
                 <div class="text-center mb-6">
                     <h2 class="heading-font text-4xl font-bold tracking-tight text-white">MEET OUR TEAM</h2>
@@ -208,37 +190,70 @@
         </div>
     </section>
 
-    <!-- WHY CHOOSE US -->
+    <!-- WHY CHOOSE US - Enhanced -->
     <section class="py-20 bg-zinc-950">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="heading-font text-5xl font-bold tracking-tight mb-12 text-center text-white">Why Choose Brito Mobile?</h2>
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Your 6 cards here (kept from your code) -->
                 <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:border hover:border-[#34C759] transition-all">
                     <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6"><i class="fa-solid fa-shield-halved text-5xl text-[#34C759]"></i></div>
                     <h3 class="text-2xl font-semibold text-white mb-3">100% Genuine Products</h3>
-                    <p class="text-white/70">Every item comes with official manufacturer warranty. No fakes, ever.</p>
+                    <p class="text-white/70">Every phone, laptop and accessory comes with official manufacturer warranty. We never sell refurbished or fake items.</p>
                 </div>
-                <!-- ... repeat the other 5 cards as in your original code ... -->
-            </div>
-
-            <!-- Social Media -->
-            <div class="mt-16 flex justify-center gap-10 text-4xl">
-                <a href="https://wa.me/260979077079" target="_blank" class="text-green-500 hover:text-green-400"><i class="fa-brands fa-whatsapp"></i></a>
-                <a href="https://web.facebook.com/profile.php?id=100051715276179" target="_blank" class="text-blue-600 hover:text-blue-500"><i class="fa-brands fa-facebook"></i></a>
-                <a href="https://www.tiktok.com/@britomobile" target="_blank" class="text-white hover:text-zinc-300"><i class="fa-brands fa-tiktok"></i></a>
+                <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:border hover:border-[#34C759] transition-all">
+                    <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6"><i class="fa-solid fa-tags text-5xl text-[#34C759]"></i></div>
+                    <h3 class="text-2xl font-semibold text-white mb-3">Best Prices in Kabwe</h3>
+                    <p class="text-white/70">We guarantee the most competitive prices in Kabwe. Price match available on identical products from authorized dealers.</p>
+                </div>
+                <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:border hover:border-[#34C759] transition-all">
+                    <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6"><i class="fa-solid fa-headset text-5xl text-[#34C759]"></i></div>
+                    <h3 class="text-2xl font-semibold text-white mb-3">Expert Support</h3>
+                    <p class="text-white/70">Our knowledgeable team helps you choose the right device based on your needs and budget. No pressure selling.</p>
+                </div>
+                <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:border hover:border-[#34C759] transition-all">
+                    <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6"><i class="fa-solid fa-wrench text-5xl text-[#34C759]"></i></div>
+                    <h3 class="text-2xl font-semibold text-white mb-3">After-Sales Service</h3>
+                    <p class="text-white/70">Free device setup, software updates, troubleshooting, and reliable warranty claims support.</p>
+                </div>
+                <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:border hover:border-[#34C759] transition-all">
+                    <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6"><i class="fa-solid fa-money-bill-wave text-5xl text-[#34C759]"></i></div>
+                    <h3 class="text-2xl font-semibold text-white mb-3">Mini Bank Services</h3>
+                    <p class="text-white/70">Airtel Money, MTN MoMo, Zanaco, FNB, Float, Cash Exchange and Bill Payments – all under one roof.</p>
+                </div>
+                <div class="bg-zinc-900 p-8 rounded-3xl text-center hover:border hover:border-[#34C759] transition-all">
+                    <div class="w-20 h-20 mx-auto bg-[#34C759]/10 rounded-2xl flex items-center justify-center mb-6"><i class="fa-solid fa-clock text-5xl text-[#34C759]"></i></div>
+                    <h3 class="text-2xl font-semibold text-white mb-3">Convenient Location & Hours</h3>
+                    <p class="text-white/70">Open 6 days a week (Monday to Saturday). Easy access opposite Ukupopoka Grocery on Buntungwa Street.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- ABOUT -->
+    <!-- ABOUT US - Enhanced -->
     <section id="about" class="py-20 bg-white text-black">
-        <div class="max-w-7xl mx-auto px-6 text-center">
-            <h2 class="heading-font text-5xl font-bold tracking-tight mb-6">About Brito Mobile</h2>
-            <p class="max-w-3xl mx-auto text-zinc-700 text-lg leading-relaxed">
-                Shop No. 75, Buntungwa Street, Opposite Ukupopoka Grocery, Kabwe, Zambia.<br>
-                We are committed to providing only genuine products with manufacturer warranty and excellent customer service.
-            </p>
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="heading-font text-5xl font-bold tracking-tight">About Brito Mobile</h2>
+            </div>
+            <div class="max-w-4xl mx-auto text-lg text-zinc-700 leading-relaxed space-y-6">
+                <p>
+                    Located at Shop No. 75, Buntungwa Street, Opposite Ukupopoka Grocery in Kabwe, Zambia, 
+                    Brito Mobile has been your trusted partner for genuine mobile phones, laptops, and accessories since our establishment.
+                </p>
+                <p>
+                    We pride ourselves on selling only <strong>100% authentic products</strong> with full manufacturer warranties. 
+                    No refurbished, no grey market — only original devices from authorized channels.
+                </p>
+                <p>
+                    Our team of experienced technicians and customer support staff are always ready to help you make the right choice 
+                    according to your needs and budget. We also offer comprehensive after-sales service including setup, software updates, 
+                    and reliable warranty support.
+                </p>
+                <p>
+                    In addition to our core business, we provide convenient <strong>Mini Bank Services</strong> including Airtel Money, 
+                    MTN MoMo, Zanaco, FNB, float, and cash exchange — making us your true one-stop shop.
+                </p>
+            </div>
         </div>
     </section>
 
@@ -325,7 +340,7 @@
         </div>
     </div>
 
-    <!-- QUICK ORDER, COMPARE, SERVICES MODALS -->
+    <!-- QUICK ORDER MODAL -->
     <div id="quick-order-modal" class="modal">
         <div class="modal-content" style="max-width: 920px;">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
@@ -338,23 +353,24 @@
         </div>
     </div>
 
+    <!-- COMPARE MODAL (Only Phones) -->
     <div id="compare-modal" class="modal">
         <div class="modal-content" style="max-width: 1100px; max-height: 95vh;">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
                 <div>
                     <h2 class="heading-font text-3xl font-bold">Compare Devices</h2>
-                    <p class="text-[#34C759] mt-1">Compare now to make the right choice</p>
+                    <p class="text-[#34C759] mt-1">Compare Cell Phones side by side</p>
                 </div>
                 <button onclick="closeCompareModal()" class="text-4xl hover:text-gray-300">×</button>
             </div>
             <div class="p-8 bg-white text-black overflow-y-auto" style="max-height: calc(95vh - 85px);">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                     <div>
-                        <label class="block text-sm font-medium mb-2">Device 1</label>
+                        <label class="block text-sm font-medium mb-2">Phone 1</label>
                         <select id="compare1" class="w-full p-4 border border-gray-300 rounded-2xl text-lg"></select>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium mb-2">Device 2</label>
+                        <label class="block text-sm font-medium mb-2">Phone 2</label>
                         <select id="compare2" class="w-full p-4 border border-gray-300 rounded-2xl text-lg"></select>
                     </div>
                 </div>
@@ -364,6 +380,7 @@
         </div>
     </div>
 
+    <!-- SERVICES MODAL -->
     <div id="services-modal" class="modal">
         <div class="modal-content max-w-5xl">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
@@ -670,10 +687,11 @@
         }
 
         function populateComparisonSelects() {
+            const phones = products.filter(p => p.category === "phone");
             const s1 = document.getElementById('compare1');
             const s2 = document.getElementById('compare2');
-            s1.innerHTML = s2.innerHTML = '<option value="">Select Device</option>';
-            products.forEach(p => {
+            s1.innerHTML = s2.innerHTML = '<option value="">Select Phone</option>';
+            phones.forEach(p => {
                 const opt = `<option value="${p.id}">${p.name}</option>`;
                 s1.innerHTML += opt;
                 s2.innerHTML += opt;
@@ -683,8 +701,8 @@
         function performComparison() {
             const id1 = document.getElementById('compare1').value;
             const id2 = document.getElementById('compare2').value;
-            if (!id1 || !id2) return alert("Please select two devices.");
-            if (id1 === id2) return alert("Please select different devices.");
+            if (!id1 || !id2) return alert("Please select two phones.");
+            if (id1 === id2) return alert("Please select different phones.");
             const p1 = products.find(p => p.id == id1);
             const p2 = products.find(p => p.id == id2);
             const resultDiv = document.getElementById('comparison-result');
