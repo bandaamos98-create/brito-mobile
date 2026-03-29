@@ -103,6 +103,37 @@
             box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
         }
 
+        /* Fixed Search Results */
+        #search-results, #search-results-mobile {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: #18181b;
+            border: 1px solid #3f3f46;
+            border-radius: 16px;
+            margin-top: 8px;
+            max-height: 320px;
+            overflow-y: auto;
+            z-index: 100000;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.5);
+            display: none;
+        }
+
+        /* Scrollable Basket */
+        .basket-items-container {
+            max-height: 460px;
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+        .basket-items-container::-webkit-scrollbar {
+            width: 6px;
+        }
+        .basket-items-container::-webkit-scrollbar-thumb {
+            background: #34C759;
+            border-radius: 20px;
+        }
+
         .similar-scroll {
             max-height: 420px;
             overflow-y: auto;
@@ -185,7 +216,7 @@
                        onkeyup="handleSearch(event)"
                        class="w-full bg-zinc-800 border border-zinc-700 focus:border-orange-500 rounded-3xl py-3 px-5 pl-12 text-sm focus:outline-none">
                 <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500"></i>
-                <div id="search-results-mobile" class="text-white mt-2"></div>
+                <div id="search-results-mobile" class="text-white"></div>
             </div>
         </div>
     </nav>
@@ -360,7 +391,7 @@
         </div>
     </div>
 
-    <!-- BASKET MODAL -->
+    <!-- BASKET MODAL - Now Scrollable -->
     <div id="basket-modal" class="modal">
         <div class="modal-content" style="max-width: 720px;">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
@@ -380,7 +411,7 @@
         </div>
     </div>
 
-    <!-- QUICK ORDER MODAL -->
+    <!-- Quick Order Modal -->
     <div id="quick-order-modal" class="modal">
         <div class="modal-content" style="max-width: 920px;">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
@@ -393,7 +424,7 @@
         </div>
     </div>
 
-    <!-- COMPARE MODAL -->
+    <!-- Compare Modal -->
     <div id="compare-modal" class="modal">
         <div class="modal-content" style="max-width: 1100px; max-height: 95vh;">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
@@ -411,7 +442,7 @@
                             <input type="text" id="compare-search1" placeholder="Search phone..." 
                                    onkeyup="handleCompareSearch(1, event)"
                                    class="w-full p-4 border border-gray-300 rounded-2xl text-lg">
-                            <div id="compare-results1" class="absolute z-50 w-full bg-white border border-gray-300 rounded-2xl mt-2 max-h-64 overflow-auto hidden shadow-lg"></div>
+                            <div id="compare-results1" class="absolute z-50 w-full bg-white border border-gray-300 rounded-2xl mt-2 max-h-64 overflow-auto hidden"></div>
                         </div>
                     </div>
                     <div>
@@ -420,7 +451,7 @@
                             <input type="text" id="compare-search2" placeholder="Search phone..." 
                                    onkeyup="handleCompareSearch(2, event)"
                                    class="w-full p-4 border border-gray-300 rounded-2xl text-lg">
-                            <div id="compare-results2" class="absolute z-50 w-full bg-white border border-gray-300 rounded-2xl mt-2 max-h-64 overflow-auto hidden shadow-lg"></div>
+                            <div id="compare-results2" class="absolute z-50 w-full bg-white border border-gray-300 rounded-2xl mt-2 max-h-64 overflow-auto hidden"></div>
                         </div>
                     </div>
                 </div>
@@ -430,7 +461,7 @@
         </div>
     </div>
 
-    <!-- SERVICES MODAL -->
+    <!-- Services Modal -->
     <div id="services-modal" class="modal">
         <div class="modal-content max-w-5xl">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
@@ -443,7 +474,7 @@
         </div>
     </div>
 
-    <!-- EMPLOYEE DETAIL MODAL (White) -->
+    <!-- Employee Detail Modal -->
     <div id="employee-modal">
         <div class="modal-content">
             <div class="bg-zinc-900 p-6 flex items-center justify-between border-b border-white/10">
@@ -610,7 +641,6 @@
             });
         }
 
-        // ====================== EMPLOYEE MODAL ======================
         function showEmployeeDetail(person) {
             const content = document.getElementById('employee-detail-content');
             content.innerHTML = `
@@ -645,17 +675,14 @@
             setTimeout(() => modal.style.display = 'none', 400);
         }
 
-        // ====================== PRODUCT MODAL ======================
         function showProductDetail(product) {
             currentProduct = product;
             document.getElementById('modal-product-name').textContent = product.name;
             document.getElementById('modal-product-img').src = product.img;
             document.getElementById('modal-product-price').textContent = `K${product.price}`;
             document.getElementById('modal-product-desc').textContent = product.fullDescription || product.description || "";
-            
             const waLink = `https://wa.me/260979077079?text=Hello Brito Mobile, I want to buy ${encodeURIComponent(product.name)} at K${product.price}`;
             document.getElementById('modal-buy-btn').href = waLink;
-            
             renderSimilarProducts(product);
             document.getElementById('product-modal').style.display = 'flex';
         }
@@ -713,7 +740,6 @@
             setTimeout(() => toast.style.display = 'none', 2400);
         }
 
-        // ====================== MAIN SEARCH ======================
         function handleSearch(e) {
             const term = e.target.value.toLowerCase().trim();
             const isMobile = e.target.id === 'search-input-mobile';
@@ -752,7 +778,6 @@
             }
         }
 
-        // ====================== COMPARE SEARCH ======================
         function handleCompareSearch(slot, e) {
             const term = e.target.value.toLowerCase().trim();
             const resultsContainer = document.getElementById(`compare-results${slot}`);
@@ -789,9 +814,7 @@
         }
 
         function performComparison() {
-            if (!currentCompare1 || !currentCompare2) {
-                return alert("Please select both phones.");
-            }
+            if (!currentCompare1 || !currentCompare2) return alert("Please select both phones.");
             const resultDiv = document.getElementById('comparison-result');
             resultDiv.innerHTML = `
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -810,7 +833,6 @@
             resultDiv.classList.remove('hidden');
         }
 
-        // ====================== OTHER MODALS ======================
         function openBasketModal() {
             const container = document.getElementById('basket-items');
             container.innerHTML = '';
@@ -903,7 +925,6 @@
             }
         }
 
-        // Close modals on outside click
         document.getElementById('employee-modal').addEventListener('click', function(e) {
             if (e.target === this) closeEmployeeModal();
         });
