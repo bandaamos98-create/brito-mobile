@@ -8,39 +8,62 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
-      
+     
         .logo-font { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: -0.04em; }
         .heading-font { font-family: 'Inter', system-ui, sans-serif; font-weight: 700; letter-spacing: -0.025em; }
         .hero-bg { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); }
-       
+      
         .product-card {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .product-card:hover {
             transform: translateY(-8px);
         }
-       
+
+        /* Infinite Auto-Scrolling Marquee */
+        .live-marquee {
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+        .live-marquee-content {
+            display: inline-flex;
+            gap: 1.25rem;
+            animation: marquee-scroll linear infinite;
+            padding-right: 2rem;
+        }
+        @keyframes marquee-scroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* Different scrolling speeds for each category */
+        #phones-scroll .live-marquee-content { animation-duration: 35s; }
+        #laptops-scroll .live-marquee-content { animation-duration: 45s; }
+        #accessories-scroll .live-marquee-content { animation-duration: 28s; }
+        #services-scroll .live-marquee-content { animation-duration: 52s; }
+
+        /* Strong blinking LIVE banner */
+        .blink-live {
+            animation: blink 1.1s step-start infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
         .live-scroll {
             display: flex;
             gap: 1.25rem;
             overflow-x: auto;
             padding-bottom: 1rem;
             scrollbar-width: none;
-            scroll-behavior: smooth;
         }
         .live-scroll::-webkit-scrollbar { display: none; }
 
         .similar-scroll {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
             max-height: 420px;
             overflow-y: auto;
-            padding-right: 8px;
             scrollbar-width: thin;
-        }
-        .similar-scroll::-webkit-scrollbar {
-            width: 6px;
         }
         .similar-scroll::-webkit-scrollbar-thumb {
             background: #34C759;
@@ -67,7 +90,6 @@
             box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
         }
 
-        /* Side Drawer */
         #mobile-menu {
             position: fixed;
             top: 0;
@@ -80,9 +102,7 @@
             box-shadow: -15px 0 40px rgba(0, 0, 0, 0.6);
             overflow-y: auto;
         }
-        #mobile-menu.open {
-            right: 0;
-        }
+        #mobile-menu.open { right: 0; }
 
         .floating-whatsapp {
             position: fixed;
@@ -91,8 +111,14 @@
             z-index: 1000;
         }
 
-        .add-to-basket-btn {
-            transition: all 0.2s ease;
+        .basket-items-container {
+            max-height: 460px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+        }
+        .basket-items-container::-webkit-scrollbar-thumb {
+            background: #34C759;
+            border-radius: 20px;
         }
     </style>
 </head>
@@ -102,7 +128,7 @@
     <nav class="bg-black/90 backdrop-blur-md sticky top-0 z-50 border-b border-white/10">
         <div class="max-w-7xl mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
-                <!-- LOGO + NAME -->
+                <!-- LOGO -->
                 <div class="flex items-center gap-3" id="logo-container"></div>
 
                 <!-- Desktop Search -->
@@ -117,15 +143,13 @@
 
                 <div class="flex items-center gap-5">
                     <a href="tel:+260961971085" class="hidden md:flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 text-black font-semibold px-6 py-3 rounded-3xl text-sm">
-                        <i class="fa-solid fa-phone"></i> 
+                        <i class="fa-solid fa-phone"></i>
                         <span>Call Now</span>
                     </a>
-
                     <button onclick="openBasketModal()" class="flex items-center gap-1 hover:text-[#34C759]">
                         <i class="fa-solid fa-shopping-basket text-2xl"></i>
                         <span id="nav-basket-count" class="bg-[#34C759] text-black text-xs font-bold px-2 py-0.5 rounded-full">0</span>
                     </button>
-
                     <button onclick="toggleMobileMenu()" class="text-2xl">
                         <i class="fa-solid fa-bars" id="menu-icon"></i>
                     </button>
@@ -144,13 +168,13 @@
         </div>
     </nav>
 
-    <!-- LIVE BANNER -->
+    <!-- LIVE BLINKING BANNER -->
     <div class="bg-black border-b border-red-500 py-3 px-6 text-center text-sm font-medium flex items-center justify-center gap-3">
-        <span class="blink-live text-xl">🔴 LIVE</span>
+        <span class="blink-live text-xl font-bold text-red-500">🔴 LIVE</span>
         <span class="text-white">All purchases & transactions MUST be done at the branch in Kabwe • No online sales or delivery</span>
     </div>
 
-    <!-- HERO with Rotating Messages -->
+    <!-- HERO -->
     <section id="home" class="hero-bg min-h-screen flex items-center">
         <div class="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
             <div class="space-y-8">
@@ -167,27 +191,43 @@
         </div>
     </section>
 
-    <!-- SHOP SECTION -->
+    <!-- SHOP SECTION - Live Auto-Scrolling Tiles -->
     <section id="shop" class="py-20 bg-white text-black">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="heading-font text-5xl font-bold tracking-tight mb-12 text-center">Our Products</h2>
-            
+           
             <div class="mb-16">
                 <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-[#34C759]">📱</span> Cell Phones</h3>
-                <div id="phones-scroll" class="live-scroll"></div>
+                <div id="phones-scroll" class="live-marquee">
+                    <div id="phones-content" class="live-marquee-content"></div>
+                </div>
             </div>
+
             <div class="mb-16">
                 <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-[#34C759]">💻</span> Laptops</h3>
-                <div id="laptops-scroll" class="live-scroll"></div>
+                <div id="laptops-scroll" class="live-marquee">
+                    <div id="laptops-content" class="live-marquee-content"></div>
+                </div>
             </div>
-            <div>
+
+            <div class="mb-16">
                 <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-[#34C759]">🔌</span> Accessories</h3>
-                <div id="accessories-scroll" class="live-scroll"></div>
+                <div id="accessories-scroll" class="live-marquee">
+                    <div id="accessories-content" class="live-marquee-content"></div>
+                </div>
+            </div>
+
+            <!-- Other Services - Scrollable but NOT clickable -->
+            <div>
+                <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-[#34C759]">🛠️</span> Other Services</h3>
+                <div id="services-scroll" class="live-marquee">
+                    <div id="services-content" class="live-marquee-content"></div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- WHY CHOOSE US -->
+    <!-- WHY CHOOSE US + SOCIAL MEDIA -->
     <section class="py-20 bg-zinc-950">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="heading-font text-5xl font-bold tracking-tight mb-12 text-center text-white">Why Choose Brito Mobile?</h2>
@@ -223,6 +263,12 @@
                     <p class="text-white/70">Monday to Saturday — convenient hours.</p>
                 </div>
             </div>
+
+            <!-- Social Media Platforms -->
+            <div class="mt-16 flex justify-center gap-10 text-4xl">
+                <a href="https://wa.me/260979077079" target="_blank" class="text-green-500 hover:text-green-400 transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://web.facebook.com/profile.php?id=100051715276179" target="_blank" class="text-blue-600 hover:text-blue-500 transition-colors"><i class="fa-brands fa-facebook"></i></a>
+            </div>
         </div>
     </section>
 
@@ -238,7 +284,7 @@
     </section>
 
     <!-- Floating WhatsApp -->
-    <a href="https://wa.me/260979077079" target="_blank" 
+    <a href="https://wa.me/260979077079" target="_blank"
        class="floating-whatsapp bg-green-600 hover:bg-green-700 text-white px-5 py-3.5 rounded-3xl flex items-center gap-3 shadow-2xl font-medium text-sm">
         <i class="fa-brands fa-whatsapp text-2xl"></i>
         <span>Inquire Now</span>
@@ -258,19 +304,6 @@
                 <a href="#" onclick="showServices(); toggleMobileMenu()" class="hover:text-[#34C759]">🛠️ Other Services</a>
                 <a href="#about" onclick="toggleMobileMenu()" class="hover:text-[#34C759]">ℹ️ About Us</a>
                 <a href="#" onclick="toggleMobileMenu()" class="hover:text-[#34C759]">⭐ Why Choose Us</a>
-                <a href="tel:+260961971085" onclick="toggleMobileMenu()" class="hover:text-[#34C759]">📞 Contact Us</a>
-
-                <div class="pt-8 mt-auto border-t border-white/10 flex flex-col gap-4">
-                    <a href="https://wa.me/260979077079" target="_blank" class="flex items-center gap-3 text-green-400 hover:text-green-300">
-                        <i class="fa-brands fa-whatsapp text-3xl"></i><span>WhatsApp Us</span>
-                    </a>
-                    <a href="mailto:info@britomobile.co.zm" class="flex items-center gap-3 text-[#34C759] hover:text-white">
-                        <i class="fa-solid fa-envelope text-3xl"></i><span>Email Us</span>
-                    </a>
-                    <a href="https://web.facebook.com/profile.php?id=100051715276179" target="_blank" class="flex items-center gap-3 text-[#34C759] hover:text-white">
-                        <i class="fa-brands fa-facebook text-3xl"></i><span>Facebook</span>
-                    </a>
-                </div>
             </div>
         </div>
     </div>
@@ -294,7 +327,7 @@
                             <a id="modal-buy-btn" href="#" target="_blank" class="bg-[#34C759] hover:bg-[#2E9E4B] text-black text-center py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-2">
                                 <i class="fa-brands fa-whatsapp"></i> Buy via WhatsApp
                             </a>
-                            <button onclick="addToBasketFromModal()" id="modal-add-btn"
+                            <button onclick="addToBasketFromModal()" 
                                     class="add-to-basket-btn bg-zinc-900 hover:bg-black text-white text-center py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-2">
                                 <i class="fa-solid fa-cart-plus"></i> Add to Basket
                             </button>
@@ -309,7 +342,7 @@
         </div>
     </div>
 
-    <!-- BASKET MODAL -->
+    <!-- BASKET MODAL - Scrollable -->
     <div id="basket-modal" class="modal">
         <div class="modal-content" style="max-width: 720px;">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
@@ -318,7 +351,7 @@
                 </h2>
                 <button onclick="closeBasketModal()" class="text-4xl hover:text-gray-300">×</button>
             </div>
-            <div id="basket-items" class="p-6 bg-white text-black overflow-y-auto"></div>
+            <div id="basket-items" class="basket-items-container p-6 bg-white text-black"></div>
             <div class="p-6 border-t bg-zinc-50">
                 <div class="flex justify-between items-center text-xl font-bold mb-6">
                     <span>Total Amount:</span>
@@ -421,6 +454,7 @@
                 products = data.products || [];
                 staff = data.staff || [];
                 serviceStaff = data.serviceStaff || [];
+
                 renderCompanyLogo();
                 renderLiveCategories();
                 renderStaffSlideshow();
@@ -433,16 +467,14 @@
         }
 
         function renderCompanyLogo() {
-            const container = document.getElementById('logo-container');
-            container.innerHTML = `
+            const html = `
                 <div class="flex items-center gap-3">
                     <img src="https://via.placeholder.com/44x44/34C759/000?text=BM" alt="Brito Mobile" class="w-11 h-11 rounded-3xl object-cover">
                     <h1 class="logo-font text-3xl text-white">Brito Mobile</h1>
                 </div>
             `;
-            // Also in menu
-            const menuLogo = document.getElementById('menu-logo');
-            if (menuLogo) menuLogo.innerHTML = container.innerHTML;
+            document.getElementById('logo-container').innerHTML = html;
+            document.getElementById('menu-logo').innerHTML = html;
         }
 
         function startHeroSlideshow() {
@@ -454,7 +486,7 @@
                     tagline.textContent = heroMessages[currentHeroIndex];
                     tagline.style.opacity = '1';
                 }, 500);
-            }, 4800); // Hero every ~4.8 seconds
+            }, 4800);
         }
 
         function renderStaffSlideshow() {
@@ -478,47 +510,59 @@
                     slides.forEach(s => s.style.opacity = 0);
                     index = (index + 1) % slides.length;
                     slides[index].style.opacity = 1;
-                }, 6500); // Staff every 6.5 seconds (different timing)
+                }, 6500);
             }
+        }
+
+        function renderLiveMarquee(containerId, contentId, items, isService = false) {
+            const content = document.getElementById(contentId);
+            content.innerHTML = '';
+
+            const duplicated = [...items, ...items];
+
+            duplicated.forEach(item => {
+                const card = document.createElement('div');
+                card.className = `product-card flex-shrink-0 w-72 bg-white rounded-3xl overflow-hidden border border-zinc-200 ${isService ? 'cursor-default' : 'cursor-pointer'}`;
+
+                card.innerHTML = `
+                    <img src="${item.img || 'https://via.placeholder.com/400x300/34C759/white?text=Service'}" 
+                         class="w-full h-56 object-cover" 
+                         onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(item.name || item.service)}'">
+                    <div class="p-6">
+                        <h3 class="font-semibold text-xl text-zinc-900">${item.name || item.service}</h3>
+                        ${item.price ? `<p class="text-[#34C759] text-3xl font-bold mt-3">K${item.price}</p>` : ''}
+                        ${!isService ? `
+                        <button class="add-to-basket-btn mt-5 w-full bg-black text-white py-3.5 rounded-2xl font-medium flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-cart-plus"></i> Add to Basket
+                        </button>` : ''}
+                    </div>
+                `;
+
+                if (!isService) {
+                    const btn = card.querySelector('.add-to-basket-btn');
+                    if (btn) {
+                        btn.addEventListener('click', (e) => {
+                            e.stopImmediatePropagation();
+                            addToBasket(item, btn);
+                        });
+                    }
+                    card.addEventListener('click', (e) => {
+                        if (!e.target.closest('button')) showProductDetail(item);
+                    });
+                }
+                content.appendChild(card);
+            });
         }
 
         function renderLiveCategories() {
             const phones = products.filter(p => p.category === "phone");
             const laptops = products.filter(p => p.category === "laptop");
             const accessories = products.filter(p => p.category === "accessory");
-            renderLiveScroll("phones-scroll", phones);
-            renderLiveScroll("laptops-scroll", laptops);
-            renderLiveScroll("accessories-scroll", accessories);
-        }
 
-        function renderLiveScroll(containerId, items) {
-            const container = document.getElementById(containerId);
-            container.innerHTML = '';
-            items.forEach(item => {
-                const card = document.createElement('div');
-                card.className = `product-card flex-shrink-0 w-72 bg-white rounded-3xl overflow-hidden border border-zinc-200 cursor-pointer`;
-                card.innerHTML = `
-                    <img src="${item.img}" class="w-full h-56 object-cover" onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(item.name)}'">
-                    <div class="p-6">
-                        <h3 class="font-semibold text-xl text-zinc-900">${item.name}</h3>
-                        <p class="text-[#34C759] text-3xl font-bold mt-3">K${item.price}</p>
-                        <button class="add-to-basket-btn mt-5 w-full bg-black text-white py-3.5 rounded-2xl font-medium flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-cart-plus"></i> Add to Basket
-                        </button>
-                    </div>
-                `;
-
-                const btn = card.querySelector('.add-to-basket-btn');
-                btn.addEventListener('click', (e) => {
-                    e.stopImmediatePropagation();
-                    addToBasket(item, btn);
-                });
-
-                card.addEventListener('click', (e) => {
-                    if (!e.target.closest('button')) showProductDetail(item);
-                });
-                container.appendChild(card);
-            });
+            renderLiveMarquee("phones-scroll", "phones-content", phones);
+            renderLiveMarquee("laptops-scroll", "laptops-content", laptops);
+            renderLiveMarquee("accessories-scroll", "accessories-content", accessories);
+            renderLiveMarquee("services-scroll", "services-content", serviceStaff, true);
         }
 
         function addToBasket(product, buttonElement = null) {
@@ -564,7 +608,7 @@
             const similar = products.filter(p => p.category === current.category && p.id !== current.id).slice(0, 6);
             similar.forEach(p => {
                 const div = document.createElement('div');
-                div.className = "flex-shrink-0 w-full bg-white rounded-3xl overflow-hidden border border-zinc-200 cursor-pointer";
+                div.className = "flex-shrink-0 w-full bg-white rounded-3xl overflow-hidden border border-zinc-200 cursor-pointer mb-4";
                 div.innerHTML = `
                     <img src="${p.img}" class="w-full h-40 object-cover" onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(p.name)}'">
                     <div class="p-4">
@@ -572,9 +616,7 @@
                         <p class="text-[#34C759] font-bold">K${p.price}</p>
                     </div>
                 `;
-                div.onclick = () => {
-                    showProductDetail(p); // Do not close modal
-                };
+                div.onclick = () => showProductDetail(p);
                 container.appendChild(div);
             });
         }
@@ -633,7 +675,6 @@
 
         function openQuickOrderModal() {
             document.getElementById('quick-order-modal').style.display = 'flex';
-            toggleMobileMenu();
         }
 
         function closeQuickOrderModal() {
@@ -643,7 +684,6 @@
         function openCompareModal() {
             populateComparisonSelects();
             document.getElementById('compare-modal').style.display = 'flex';
-            toggleMobileMenu();
         }
 
         function closeCompareModal() {
@@ -666,10 +706,8 @@
             const id2 = document.getElementById('compare2').value;
             if (!id1 || !id2) return alert("Please select two devices to compare.");
             if (id1 === id2) return alert("Please select two different devices.");
-
             const p1 = products.find(p => p.id == id1);
             const p2 = products.find(p => p.id == id2);
-
             const resultDiv = document.getElementById('comparison-result');
             resultDiv.innerHTML = `
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -718,9 +756,21 @@
             });
         }
 
-        function focusSearch() {
-            const input = window.innerWidth < 768 ? document.getElementById('search-input-mobile') : document.getElementById('search-input');
-            input.focus();
+        function handleSearch(e) {
+            const term = e.target.value.toLowerCase().trim();
+            if (!term) {
+                renderLiveCategories();
+                return;
+            }
+
+            const filtered = products.filter(p => p.name.toLowerCase().includes(term));
+            const phones = filtered.filter(p => p.category === "phone");
+            const laptops = filtered.filter(p => p.category === "laptop");
+            const accessories = filtered.filter(p => p.category === "accessory");
+
+            renderLiveMarquee("phones-scroll", "phones-content", phones);
+            renderLiveMarquee("laptops-scroll", "laptops-content", laptops);
+            renderLiveMarquee("accessories-scroll", "accessories-content", accessories);
         }
 
         function toggleMobileMenu() {
@@ -732,22 +782,6 @@
                 menu.classList.remove('hidden');
                 setTimeout(() => menu.classList.add('open'), 10);
             }
-        }
-
-        function handleSearch(e) {
-            const term = e.target.value.toLowerCase().trim();
-            if (!term) {
-                renderLiveCategories();
-                return;
-            }
-            const filtered = products.filter(p => p.name.toLowerCase().includes(term));
-            const phones = filtered.filter(p => p.category === "phone");
-            const laptops = filtered.filter(p => p.category === "laptop");
-            const accessories = filtered.filter(p => p.category === "accessory");
-
-            renderLiveScroll("phones-scroll", phones);
-            renderLiveScroll("laptops-scroll", laptops);
-            renderLiveScroll("accessories-scroll", accessories);
         }
 
         // Initialize
