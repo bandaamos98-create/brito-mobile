@@ -56,7 +56,7 @@
             max-height: 95vh; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
         }
 
-        /* Search Results - Same style for main and compare */
+        /* Search Results */
         #search-results, #search-results-mobile, #compare-results1, #compare-results2 {
             position: absolute; top: 100%; left: 0; width: 100%;
             background: #18181b; border: 1px solid #3f3f46; border-radius: 16px;
@@ -160,6 +160,7 @@
     <section id="shop" class="py-20 bg-white text-black">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="heading-font text-5xl font-bold tracking-tight mb-12 text-center">Our Products</h2>
+           
             <div class="mb-16">
                 <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-[#34C759]">📱</span> Cell Phones</h3>
                 <div id="phones-scroll" class="live-marquee"><div id="phones-content" class="live-marquee-content"></div></div>
@@ -180,7 +181,7 @@
     </section>
 
     <!-- WHY CHOOSE US -->
-    <section class="py-20 bg-zinc-950">
+    <section id="why-choose-us" class="py-20 bg-zinc-950">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="heading-font text-5xl font-bold tracking-tight mb-12 text-center text-white">Why Choose Brito Mobile?</h2>
             <div class="grid md:grid-cols-3 gap-8">
@@ -234,7 +235,7 @@
         <i class="fa-brands fa-whatsapp text-2xl"></i><span>Inquire Now</span>
     </a>
 
-    <!-- MOBILE MENU - Added "Why Choose Us" -->
+    <!-- MOBILE MENU -->
     <div id="mobile-menu">
         <div class="flex flex-col h-full">
             <div class="p-6 border-b border-white/10 bg-zinc-900 flex justify-between items-center">
@@ -247,7 +248,8 @@
                 <a href="#" onclick="openQuickOrderModal(); toggleMobileMenu()" class="hover:text-[#34C759]">⚡ Quick Order</a>
                 <a href="#" onclick="showServices(); toggleMobileMenu()" class="hover:text-[#34C759]">🛠️ Other Services</a>
                 <a href="#about" onclick="toggleMobileMenu()" class="hover:text-[#34C759]">ℹ️ About Us</a>
-                <a href="#" onclick="document.getElementById('mobile-menu').classList.remove('open'); setTimeout(() => document.getElementById('mobile-menu').classList.add('hidden'), 400);" class="hover:text-[#34C759]">⭐ Why Choose Us</a>
+                <!-- Why Choose Us scrolls to the section -->
+                <a href="#why-choose-us" onclick="toggleMobileMenu()" class="hover:text-[#34C759]">⭐ Why Choose Us</a>
                 <div class="pt-8 flex justify-center gap-10 text-4xl border-t border-white/10">
                     <a href="https://wa.me/260979077079" target="_blank" class="text-green-400 hover:scale-110 transition-transform"><i class="fa-brands fa-whatsapp"></i></a>
                     <a href="https://web.facebook.com/profile.php?id=100051715276179" target="_blank" class="text-blue-600 hover:scale-110 transition-transform"><i class="fa-brands fa-facebook"></i></a>
@@ -330,13 +332,13 @@
         </div>
     </div>
 
-    <!-- Compare Modal - Search now matches main search style -->
+    <!-- Compare Modal -->
     <div id="compare-modal" class="modal">
         <div class="modal-content" style="max-width: 1100px; max-height: 95vh;">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
                 <div>
                     <h2 class="heading-font text-3xl font-bold">Compare Devices</h2>
-                    <p class="text-[#34C759] mt-1">Compare Cell Phones side by side</p>
+                    <p class="text-[#34C759] mt-1">Compare different phones side by side</p>
                 </div>
                 <button onclick="closeCompareModal()" class="text-4xl hover:text-gray-300">×</button>
             </div>
@@ -646,7 +648,6 @@
             setTimeout(() => toast.style.display = 'none', 2400);
         }
 
-        // Main Search
         function handleSearch(e) {
             const term = e.target.value.toLowerCase().trim();
             const isMobile = e.target.id === 'search-input-mobile';
@@ -683,7 +684,6 @@
             }
         }
 
-        // Compare Search - Now behaves exactly like main search
         function handleCompareSearch(slot, e) {
             const term = e.target.value.toLowerCase().trim();
             const resultsContainer = document.getElementById(`compare-results${slot}`);
@@ -719,7 +719,12 @@
         }
 
         function performComparison() {
-            if (!currentCompare1 || !currentCompare2) return alert("Please select both phones.");
+            if (!currentCompare1 || !currentCompare2) {
+                return alert("Please select two phones.");
+            }
+            if (currentCompare1.id === currentCompare2.id) {
+                return alert("Please select two different phones to compare.");
+            }
             const resultDiv = document.getElementById('comparison-result');
             resultDiv.innerHTML = `
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
