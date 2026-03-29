@@ -18,7 +18,6 @@
         }
         .product-card:hover { transform: translateY(-8px); }
 
-        /* Marquee - Supports both horizontal and vertical swipe */
         .live-marquee {
             overflow-x: auto;
             white-space: nowrap;
@@ -52,17 +51,18 @@
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.85);
             z-index: 60000;
             align-items: center;
             justify-content: center;
             padding: 20px;
+            backdrop-filter: blur(8px);
         }
         .modal-content {
             background: white;
             border-radius: 24px;
             width: 100%;
-            max-width: 1100px;
+            max-width: 520px;
             max-height: 95vh;
             overflow: hidden;
             box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
@@ -93,7 +93,6 @@
             overflow-y: auto;
         }
 
-        /* Toast */
         #toast {
             position: fixed;
             bottom: 90px;
@@ -115,8 +114,8 @@
 
         /* Profile Icon */
         .profile-icon {
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid #34C759;
@@ -125,18 +124,20 @@
         }
         .profile-icon:hover {
             border-color: white;
-            transform: scale(1.05);
+            transform: scale(1.08);
         }
     </style>
 </head>
 <body class="bg-zinc-950 text-white">
 
-    <!-- NAVBAR -->
+    <!-- NAVBAR - Matches your screenshot -->
     <nav class="bg-black/90 backdrop-blur-md sticky top-0 z-50 border-b border-white/10">
         <div class="max-w-7xl mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
+                <!-- Logo -->
                 <div class="flex items-center gap-3" id="logo-container"></div>
-                
+
+                <!-- Search Bar -->
                 <div class="flex-1 max-w-md mx-8 hidden md:flex relative">
                     <div class="relative w-full">
                         <input type="text" id="search-input" placeholder="Search products..."
@@ -147,22 +148,26 @@
                     <div id="search-results" class="text-white"></div>
                 </div>
 
-                <div class="flex items-center gap-5">
+                <!-- Right side: Call Now → Profile → Basket → Menu -->
+                <div class="flex items-center gap-4">
                     <a href="tel:+260961971085" class="hidden md:flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 text-black font-semibold px-6 py-3 rounded-3xl text-sm">
                         <i class="fa-solid fa-phone"></i> Call Now
                     </a>
                     
-                    <!-- Profile Icon - Fixed with better path and debugging -->
+                    <!-- Profile Icon -->
                     <img src="./images/icon.jpg" 
                          alt="Profile" 
                          class="profile-icon"
                          onclick="alert('Profile feature coming soon!')"
-                         onerror="this.onerror=null; this.src='https://via.placeholder.com/36x36/34C759/000?text=👤'; console.log('❌ Profile icon failed to load from ./images/icon.jpg');">
-                    
+                         onerror="this.onerror=null; this.src='https://via.placeholder.com/38x38/34C759/000?text=👤'; console.log('Profile icon failed to load from ./images/icon.jpg');">
+
+                    <!-- Basket -->
                     <button onclick="openBasketModal()" class="flex items-center gap-1 hover:text-[#34C759]">
                         <i class="fa-solid fa-shopping-basket text-2xl"></i>
                         <span id="nav-basket-count" class="bg-[#34C759] text-black text-xs font-bold px-2 py-0.5 rounded-full">0</span>
                     </button>
+
+                    <!-- Menu -->
                     <button onclick="toggleMobileMenu()" class="text-2xl"><i class="fa-solid fa-bars"></i></button>
                 </div>
             </div>
@@ -316,6 +321,28 @@
         <span id="toast-message">Added to basket</span>
     </div>
 
+    <!-- SERVICE DETAIL MODAL -->
+    <div id="service-detail-modal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
+                <h2 id="service-modal-title" class="heading-font text-2xl font-bold"></h2>
+                <button onclick="closeServiceModal()" class="text-4xl hover:text-gray-300">×</button>
+            </div>
+            <div class="p-8 bg-white text-black">
+                <img id="service-modal-img" class="w-full rounded-3xl shadow-xl mb-6" alt="">
+                <h3 id="service-modal-name" class="text-2xl font-semibold text-[#34C759]"></h3>
+                <p id="service-modal-service" class="text-xl font-medium text-zinc-800 mt-1"></p>
+                <p id="service-modal-message" class="mt-6 text-gray-700 leading-relaxed"></p>
+                
+                <div class="mt-8">
+                    <a id="service-modal-phone-btn" href="#" class="flex items-center justify-center gap-3 bg-[#34C759] hover:bg-[#2E9E4B] text-black py-4 rounded-2xl font-semibold text-lg">
+                        <i class="fa-solid fa-phone"></i> Call This Agent
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- PRODUCT MODAL -->
     <div id="product-modal" class="modal">
         <div class="modal-content">
@@ -370,7 +397,7 @@
         </div>
     </div>
 
-    <!-- Other modals (Quick Order, Compare, Services) -->
+    <!-- Quick Order, Compare, Services modals (kept short) -->
     <div id="quick-order-modal" class="modal">
         <div class="modal-content" style="max-width: 920px;">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
@@ -427,7 +454,6 @@
         let serviceStaff = [];
         let basket = [];
         let currentProduct = null;
-        let currentHeroIndex = 0;
 
         const heroMessages = [
             "Your Trusted Mobile Partner in Kabwe",
@@ -479,31 +505,6 @@
             }, 4800);
         }
 
-        function renderStaffSlideshow() {
-            const container = document.getElementById('staff-slideshow');
-            if (!staff.length) return;
-            let html = '';
-            staff.forEach((member, i) => {
-                html += `
-                <div class="staff-slide absolute inset-0 flex flex-col items-center justify-center transition-opacity duration-1000" style="opacity: ${i === 0 ? 1 : 0};">
-                    <img src="${member.img}" class="w-60 h-60 md:w-72 md:h-72 object-cover rounded-3xl mb-6 shadow-2xl" onerror="this.src='https://via.placeholder.com/400x400/1f2937/34C759?text=${encodeURIComponent(member.name)}'">
-                    <h3 class="heading-font text-3xl font-bold text-white">${member.name}</h3>
-                    <p class="text-[#34C759] text-lg mt-1">${member.role}</p>
-                    ${member.quote ? `<p class="text-white/80 text-center max-w-xs mt-4 italic">"${member.quote}"</p>` : ''}
-                </div>`;
-            });
-            container.innerHTML = html;
-            let index = 0;
-            const slides = container.querySelectorAll('.staff-slide');
-            if (slides.length > 1) {
-                setInterval(() => {
-                    slides.forEach(s => s.style.opacity = 0);
-                    index = (index + 1) % slides.length;
-                    slides[index].style.opacity = 1;
-                }, 6500);
-            }
-        }
-
         function renderLiveMarquee(containerId, contentId, items, isService = false) {
             const container = document.getElementById(containerId);
             const content = document.getElementById(contentId);
@@ -512,7 +513,7 @@
             const duplicated = [...items, ...items];
             duplicated.forEach(item => {
                 const card = document.createElement('div');
-                card.className = `product-card flex-shrink-0 w-72 bg-white rounded-3xl overflow-hidden border border-zinc-200 ${isService ? 'cursor-default' : 'cursor-pointer'}`;
+                card.className = `product-card flex-shrink-0 w-72 bg-white rounded-3xl overflow-hidden border border-zinc-200 cursor-pointer`;
                 
                 const imgSrc = isService ? (item.photo || item.img) : item.img;
 
@@ -522,10 +523,9 @@
                         <div class="p-6">
                             <h3 class="font-semibold text-2xl text-zinc-900">${item.service}</h3>
                             <p class="text-[#34C759] text-xl font-medium mt-2">${item.name}</p>
-                            ${item.message ? `<p class="text-zinc-700 text-sm mt-3 line-clamp-2">${item.message}</p>` : ''}
-                            ${item.phone ? `<a href="tel:${item.phone.replace(/\s/g,'')}" class="mt-4 inline-flex items-center gap-2 text-[#34C759] text-sm font-medium"><i class="fa-solid fa-phone"></i> ${item.phone}</a>` : ''}
                         </div>
                     `;
+                    card.addEventListener('click', () => showServiceDetail(item));
                 } else {
                     card.innerHTML = `
                         <img src="${imgSrc}" class="w-full h-56 object-cover" onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(item.name)}'">
@@ -546,9 +546,7 @@
                 content.appendChild(card);
             });
 
-            let resumeTimeout;
-            let startX = 0;
-
+            let resumeTimeout, startX = 0;
             container.addEventListener('touchstart', (e) => {
                 startX = e.touches[0].clientX;
                 content.style.animationPlayState = 'paused';
@@ -573,6 +571,29 @@
             renderLiveMarquee("services-scroll", "services-content", serviceStaff, true);
         }
 
+        // Show Service Detail Modal
+        function showServiceDetail(service) {
+            document.getElementById('service-modal-title').textContent = service.service;
+            document.getElementById('service-modal-img').src = service.photo || service.img || 'https://via.placeholder.com/400x300/34C759/white?text=Service';
+            document.getElementById('service-modal-name').textContent = service.name;
+            document.getElementById('service-modal-service').textContent = service.service;
+            document.getElementById('service-modal-message').textContent = service.message || "Contact us for more details about this service.";
+
+            const phoneBtn = document.getElementById('service-modal-phone-btn');
+            if (service.phone) {
+                phoneBtn.href = `tel:${service.phone.replace(/\s/g,'')}`;
+                phoneBtn.style.display = 'flex';
+            } else {
+                phoneBtn.style.display = 'none';
+            }
+
+            document.getElementById('service-detail-modal').style.display = 'flex';
+        }
+
+        function closeServiceModal() {
+            document.getElementById('service-detail-modal').style.display = 'none';
+        }
+
         function addToBasket(product, buttonElement = null) {
             basket.push(product);
             document.getElementById('nav-basket-count').textContent = basket.length;
@@ -586,22 +607,18 @@
                     buttonElement.style.backgroundColor = '';
                 }, 1400);
             }
-
             showToast(`${product.name} added to basket`);
         }
 
         function showToast(message) {
             const toast = document.getElementById('toast');
-            const toastMsg = document.getElementById('toast-message');
-            toastMsg.innerHTML = message;
+            document.getElementById('toast-message').innerHTML = message;
             toast.style.display = 'flex';
-            setTimeout(() => { toast.style.display = 'none'; }, 2400);
+            setTimeout(() => toast.style.display = 'none', 2400);
         }
 
         function addToBasketFromModal() {
-            if (currentProduct) {
-                addToBasket(currentProduct, document.getElementById('modal-add-btn'));
-            }
+            if (currentProduct) addToBasket(currentProduct, document.getElementById('modal-add-btn'));
         }
 
         function showProductDetail(product) {
@@ -793,19 +810,21 @@
             container.innerHTML = '';
             serviceStaff.forEach(person => {
                 const cardHTML = `
-                <div class="bg-zinc-800 p-6 rounded-3xl flex gap-5">
+                <div class="bg-zinc-800 p-6 rounded-3xl flex gap-5 cursor-pointer" onclick="showServiceDetailFromModal(${JSON.stringify(person).replace(/"/g, '&quot;')})">
                     <img src="${person.photo}" class="w-20 h-20 rounded-2xl object-cover flex-shrink-0" onerror="this.src='https://via.placeholder.com/300x300/34C759/white?text=${encodeURIComponent(person.name)}'">
                     <div class="flex-1">
                         <h3 class="text-2xl font-semibold text-[#34C759]">${person.service}</h3>
                         <p class="font-medium text-white">${person.name}</p>
                         <p class="text-white/70 text-sm mt-2 leading-snug">${person.message}</p>
-                        <a href="tel:${person.phone.replace(/\s/g,'')}" class="mt-4 inline-flex items-center gap-2 text-[#34C759] hover:text-white">
-                            <i class="fa-solid fa-phone"></i> ${person.phone}
-                        </a>
                     </div>
                 </div>`;
                 container.innerHTML += cardHTML;
             });
+        }
+
+        function showServiceDetailFromModal(service) {
+            closeServices();
+            showServiceDetail(service);
         }
 
         function toggleMobileMenu() {
