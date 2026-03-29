@@ -18,13 +18,13 @@
         }
         .product-card:hover { transform: translateY(-8px); }
 
-        /* FIXED: Both horizontal marquee swipe AND vertical page scroll work from anywhere */
+        /* Marquee - Supports both horizontal and vertical swipe */
         .live-marquee {
             overflow-x: auto;
             white-space: nowrap;
             scrollbar-width: none;
             -webkit-overflow-scrolling: touch;
-            touch-action: pan-x pan-y;   /* Allows left/right on products + up/down on whole page */
+            touch-action: pan-x pan-y;
             scroll-behavior: smooth;
         }
         .live-marquee-content {
@@ -113,31 +113,19 @@
             font-size: 15px;
         }
 
-        /* Search Popup */
-        #search-results, #search-results-mobile {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background: #18181b;
-            border: 1px solid #3f3f46;
-            border-radius: 16px;
-            margin-top: 8px;
-            max-height: 320px;
-            overflow-y: auto;
-            z-index: 100;
-            display: none;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
+        /* Profile Icon */
+        .profile-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #34C759;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
-
-        .similar-scroll {
-            max-height: 420px;
-            overflow-y: auto;
-            scrollbar-width: thin;
-        }
-        .similar-scroll::-webkit-scrollbar-thumb {
-            background: #34C759;
-            border-radius: 20px;
+        .profile-icon:hover {
+            border-color: white;
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -148,6 +136,7 @@
         <div class="max-w-7xl mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3" id="logo-container"></div>
+                
                 <div class="flex-1 max-w-md mx-8 hidden md:flex relative">
                     <div class="relative w-full">
                         <input type="text" id="search-input" placeholder="Search products..."
@@ -157,10 +146,19 @@
                     </div>
                     <div id="search-results" class="text-white"></div>
                 </div>
+
                 <div class="flex items-center gap-5">
                     <a href="tel:+260961971085" class="hidden md:flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 text-black font-semibold px-6 py-3 rounded-3xl text-sm">
                         <i class="fa-solid fa-phone"></i> Call Now
                     </a>
+                    
+                    <!-- Profile Icon - Fixed with better path and debugging -->
+                    <img src="./images/icon.jpg" 
+                         alt="Profile" 
+                         class="profile-icon"
+                         onclick="alert('Profile feature coming soon!')"
+                         onerror="this.onerror=null; this.src='https://via.placeholder.com/36x36/34C759/000?text=👤'; console.log('❌ Profile icon failed to load from ./images/icon.jpg');">
+                    
                     <button onclick="openBasketModal()" class="flex items-center gap-1 hover:text-[#34C759]">
                         <i class="fa-solid fa-shopping-basket text-2xl"></i>
                         <span id="nav-basket-count" class="bg-[#34C759] text-black text-xs font-bold px-2 py-0.5 rounded-full">0</span>
@@ -168,6 +166,7 @@
                     <button onclick="toggleMobileMenu()" class="text-2xl"><i class="fa-solid fa-bars"></i></button>
                 </div>
             </div>
+
             <!-- Mobile Search -->
             <div class="md:hidden mt-4 relative">
                 <input type="text" id="search-input-mobile" placeholder="Search products..."
@@ -287,7 +286,7 @@
         <i class="fa-brands fa-whatsapp text-2xl"></i><span>Inquire Now</span>
     </a>
 
-    <!-- MOBILE MENU - Social icons visible immediately -->
+    <!-- MOBILE MENU -->
     <div id="mobile-menu">
         <div class="flex flex-col h-full">
             <div class="p-6 border-b border-white/10 bg-zinc-900 flex justify-between items-center">
@@ -371,7 +370,7 @@
         </div>
     </div>
 
-    <!-- Quick Order Modal -->
+    <!-- Other modals (Quick Order, Compare, Services) -->
     <div id="quick-order-modal" class="modal">
         <div class="modal-content" style="max-width: 920px;">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
@@ -384,7 +383,6 @@
         </div>
     </div>
 
-    <!-- Compare Modal -->
     <div id="compare-modal" class="modal">
         <div class="modal-content" style="max-width: 1100px; max-height: 95vh;">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
@@ -411,7 +409,6 @@
         </div>
     </div>
 
-    <!-- Services Modal -->
     <div id="services-modal" class="modal">
         <div class="modal-content max-w-5xl">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
@@ -549,7 +546,6 @@
                 content.appendChild(card);
             });
 
-            // Smart touch handling - pause animation only on horizontal intent
             let resumeTimeout;
             let startX = 0;
 
@@ -560,8 +556,7 @@
             }, { passive: true });
 
             container.addEventListener('touchend', (e) => {
-                const endX = e.changedTouches[0].clientX;
-                const diff = Math.abs(endX - startX);
+                const diff = Math.abs(e.changedTouches[0].clientX - startX);
                 resumeTimeout = setTimeout(() => {
                     content.style.animationPlayState = 'running';
                 }, diff > 40 ? 2800 : 900);
@@ -584,12 +579,11 @@
 
             if (buttonElement) {
                 const originalHTML = buttonElement.innerHTML;
-                const originalColor = buttonElement.style.backgroundColor;
                 buttonElement.innerHTML = `<i class="fa-solid fa-check"></i> Added!`;
                 buttonElement.style.backgroundColor = '#34C759';
                 setTimeout(() => {
                     buttonElement.innerHTML = originalHTML;
-                    buttonElement.style.backgroundColor = originalColor || '';
+                    buttonElement.style.backgroundColor = '';
                 }, 1400);
             }
 
