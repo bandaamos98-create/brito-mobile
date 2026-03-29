@@ -115,7 +115,6 @@
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3" id="logo-container"></div>
 
-                <!-- Desktop Search -->
                 <div class="flex-1 max-w-md mx-8 hidden md:flex relative">
                     <div class="relative w-full">
                         <input type="text" id="search-input" placeholder="Search products..."
@@ -155,7 +154,7 @@
         <span class="text-white">All purchases & transactions MUST be done at the branch in Kabwe • No online sales or delivery</span>
     </div>
 
-    <!-- HERO -->
+    <!-- HERO with MEET OUR TEAM above Staff Slideshow -->
     <section id="home" class="hero-bg min-h-screen flex items-center">
         <div class="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center">
             <div class="space-y-8">
@@ -168,7 +167,15 @@
                     <button onclick="showServices()" class="border-2 border-[#34C759] hover:bg-[#34C759] hover:text-black text-[#34C759] font-semibold px-10 py-4 rounded-3xl text-lg">Other Services</button>
                 </div>
             </div>
-            <div id="staff-slideshow" class="relative h-[520px] bg-zinc-900 rounded-3xl overflow-hidden shadow-2xl"></div>
+
+            <!-- Staff Slideshow with MEET OUR TEAM above it -->
+            <div>
+                <div class="text-center mb-6">
+                    <h2 class="heading-font text-4xl font-bold text-white">MEET OUR TEAM</h2>
+                    <p class="text-white/70 mt-2">Dedicated professionals ready to serve you with excellence</p>
+                </div>
+                <div id="staff-slideshow" class="relative h-[520px] bg-zinc-900 rounded-3xl overflow-hidden shadow-2xl"></div>
+            </div>
         </div>
     </section>
 
@@ -196,17 +203,6 @@
                 <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-[#34C759]">🛠️</span> Other Services</h3>
                 <div id="services-scroll" class="live-marquee"><div id="services-content" class="live-marquee-content"></div></div>
             </div>
-        </div>
-    </section>
-
-    <!-- MEET OUR TEAM -->
-    <section class="py-20 bg-zinc-950">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="heading-font text-5xl font-bold tracking-tight text-white">MEET OUR TEAM</h2>
-                <p class="text-white/70 mt-3 text-lg">Dedicated professionals committed to providing excellent service and genuine products</p>
-            </div>
-            <div id="team-container" class="grid md:grid-cols-3 gap-8"></div>
         </div>
     </section>
 
@@ -293,7 +289,7 @@
         </div>
     </div>
 
-    <!-- PRODUCT DETAIL MODAL -->
+    <!-- PRODUCT MODAL -->
     <div id="product-modal" class="modal">
         <div class="modal-content">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
@@ -312,8 +308,7 @@
                             <a id="modal-buy-btn" href="#" target="_blank" class="bg-[#34C759] hover:bg-[#2E9E4B] text-black text-center py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-2">
                                 <i class="fa-brands fa-whatsapp"></i> Buy via WhatsApp
                             </a>
-                            <button onclick="addToBasketFromModal()" 
-                                    class="bg-zinc-900 hover:bg-black text-white text-center py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-2">
+                            <button onclick="addToBasketFromModal()" class="bg-zinc-900 hover:bg-black text-white py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-2">
                                 <i class="fa-solid fa-cart-plus"></i> Add to Basket
                             </button>
                         </div>
@@ -354,8 +349,8 @@
                 <h2 class="heading-font text-3xl font-bold">Make Your Orders and Request Right Here</h2>
                 <button onclick="closeQuickOrderModal()" class="text-4xl hover:text-gray-300">×</button>
             </div>
-            <div class="p-4 bg-white overflow-hidden">
-                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeP_msNh6xDGOx8yxVk-FiHWD2e4RZuhONQW_zE3zFD91Xddg/viewform?embedded=true" width="100%" height="720" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+            <div class="p-4 bg-white">
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeP_msNh6xDGOx8yxVk-FiHWD2e4RZuhONQW_zE3zFD91Xddg/viewform?embedded=true" width="100%" height="720" frameborder="0">Loading...</iframe>
             </div>
         </div>
     </div>
@@ -366,7 +361,7 @@
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
                 <div>
                     <h2 class="heading-font text-3xl font-bold">Compare Devices</h2>
-                    <p class="text-[#34C759] mt-1">Compare now to make the right choice with your budget</p>
+                    <p class="text-[#34C759] mt-1">Compare now to make the right choice</p>
                 </div>
                 <button onclick="closeCompareModal()" class="text-4xl hover:text-gray-300">×</button>
             </div>
@@ -429,7 +424,7 @@
 
         async function loadData() {
             try {
-                const res = await fetch('data.json'); // Make sure data.json is in the same folder
+                const res = await fetch('data.json'); // ← Ensure data.json is in the same folder as this file
                 const data = await res.json();
 
                 products = data.products || [];
@@ -440,12 +435,11 @@
                 document.getElementById('footer-name').textContent = data.company.name;
                 document.getElementById('footer-location').textContent = data.company.location;
                 document.getElementById('footer-phone').textContent = data.company.phone;
-                document.getElementById('about-text').innerHTML = `${data.company.location}<br>We are committed to providing only genuine products with manufacturer warranty and excellent customer service.`;
+                document.getElementById('about-text').innerHTML = `${data.company.location}<br>We provide only genuine products with manufacturer warranty and excellent customer service.`;
 
                 renderCompanyLogo(data.company.icon);
                 renderLiveCategories();
                 renderStaffSlideshow();
-                renderTeamSection();
                 renderServicesModal();
                 startHeroSlideshow();
                 populateComparisonSelects();
@@ -503,22 +497,6 @@
             }
         }
 
-        function renderTeamSection() {
-            const container = document.getElementById('team-container');
-            container.innerHTML = '';
-            staff.forEach(member => {
-                const card = document.createElement('div');
-                card.className = "bg-zinc-900 p-8 rounded-3xl text-center hover:border hover:border-[#34C759] transition-all";
-                card.innerHTML = `
-                    <img src="${member.img}" class="w-32 h-32 mx-auto rounded-2xl object-cover mb-6 shadow-xl" onerror="this.src='https://via.placeholder.com/300x300/1f2937/34C759?text=${encodeURIComponent(member.name)}'">
-                    <h3 class="text-2xl font-semibold text-white">${member.name}</h3>
-                    <p class="text-[#34C759] mt-1">${member.role}</p>
-                    ${member.quote ? `<p class="text-white/70 mt-6 italic">"${member.quote}"</p>` : ''}
-                `;
-                container.appendChild(card);
-            });
-        }
-
         function renderLiveMarquee(containerId, contentId, items, isService = false) {
             const content = document.getElementById(contentId);
             content.innerHTML = '';
@@ -528,7 +506,7 @@
                 const card = document.createElement('div');
                 card.className = `product-card flex-shrink-0 w-72 bg-white rounded-3xl overflow-hidden border border-zinc-200 ${isService ? 'cursor-default' : 'cursor-pointer'}`;
                 
-                const imgSrc = isService ? (item.photo || '') : (item.img || '');
+                const imgSrc = isService ? item.photo : item.img;
                 
                 card.innerHTML = `
                     <img src="${imgSrc}" class="w-full h-56 object-cover" onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(item.name || item.service)}'">
@@ -544,12 +522,7 @@
 
                 if (!isService) {
                     const btn = card.querySelector('.add-to-basket-btn');
-                    if (btn) {
-                        btn.addEventListener('click', (e) => {
-                            e.stopImmediatePropagation();
-                            addToBasket(item, btn);
-                        });
-                    }
+                    if (btn) btn.addEventListener('click', (e) => { e.stopImmediatePropagation(); addToBasket(item, btn); });
                     card.addEventListener('click', (e) => {
                         if (!e.target.closest('button')) showProductDetail(item);
                     });
@@ -585,9 +558,7 @@
         }
 
         function addToBasketFromModal() {
-            if (currentProduct) {
-                addToBasket(currentProduct);
-            }
+            if (currentProduct) addToBasket(currentProduct);
         }
 
         function showProductDetail(product) {
