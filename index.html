@@ -12,171 +12,81 @@
         .logo-font { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: -0.04em; }
         .heading-font { font-family: 'Inter', system-ui, sans-serif; font-weight: 700; letter-spacing: -0.025em; }
         .hero-bg { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); }
-        .product-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+
+        .product-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .product-card:hover { transform: translateY(-8px); }
+
         .live-marquee {
-            overflow-x: auto;
-            white-space: nowrap;
-            scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
-            touch-action: pan-x pan-y;
-            scroll-behavior: smooth;
+            overflow-x: auto; white-space: nowrap; scrollbar-width: none;
+            -webkit-overflow-scrolling: touch; touch-action: pan-x pan-y; scroll-behavior: smooth;
         }
         .live-marquee-content {
-            display: inline-flex;
-            gap: 1.25rem;
-            animation: marquee-scroll linear infinite;
-            padding-right: 2rem;
-            will-change: transform;
+            display: inline-flex; gap: 1.25rem;
+            animation: marquee-scroll linear infinite; padding-right: 2rem;
         }
-        @keyframes marquee-scroll {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); }
-        }
-        #phones-scroll .live-marquee-content { animation-duration: 35s; }
-        #laptops-scroll .live-marquee-content { animation-duration: 45s; }
-        #accessories-scroll .live-marquee-content { animation-duration: 28s; }
-        #services-scroll .live-marquee-content { animation-duration: 52s; }
-        .live-marquee::-webkit-scrollbar { display: none; }
+        @keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
         .blink-live { animation: blink 1.1s step-start infinite; }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* Employee Modal - White Theme */
+        /* Employee Modal - White */
         #employee-modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(16px);
-            z-index: 70000;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            opacity: 0;
-            transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(16px);
+            z-index: 70000; align-items: center; justify-content: center;
+            padding: 20px; opacity: 0; transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         #employee-modal.show { opacity: 1; }
         #employee-modal .modal-content {
-            background: white;
-            color: #111827;
-            border-radius: 28px;
-            width: 100%;
-            max-width: 480px;
-            overflow: hidden;
-            box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.7);
-            transform: scale(0.85);
-            opacity: 0;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            background: white; color: #111827; border-radius: 28px;
+            width: 100%; max-width: 480px; overflow: hidden;
+            box-shadow: 0 30px 70px -15px rgba(0,0,0,0.7);
+            transform: scale(0.85); opacity: 0;
+            transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
         }
-        #employee-modal.show .modal-content {
-            transform: scale(1);
-            opacity: 1;
-        }
-        .employee-photo {
-            width: 100%;
-            height: 320px;
-            object-fit: cover;
-        }
+        #employee-modal.show .modal-content { transform: scale(1); opacity: 1; }
+        .employee-photo { width: 100%; height: 320px; object-fit: cover; }
 
         .modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.9);
-            z-index: 60000;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9);
+            z-index: 60000; align-items: center; justify-content: center; padding: 20px;
         }
         .modal-content {
-            background: white;
-            border-radius: 24px;
-            width: 100%;
-            max-width: 1100px;
-            max-height: 95vh;
-            overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            background: white; border-radius: 24px; width: 100%; max-width: 1100px;
+            max-height: 95vh; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
         }
 
-        /* Fixed Search Results */
-        #search-results, #search-results-mobile {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background: #18181b;
-            border: 1px solid #3f3f46;
-            border-radius: 16px;
-            margin-top: 8px;
-            max-height: 320px;
-            overflow-y: auto;
-            z-index: 100000;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.5);
+        /* Search Results - Same style for main and compare */
+        #search-results, #search-results-mobile, #compare-results1, #compare-results2 {
+            position: absolute; top: 100%; left: 0; width: 100%;
+            background: #18181b; border: 1px solid #3f3f46; border-radius: 16px;
+            margin-top: 8px; max-height: 320px; overflow-y: auto;
+            z-index: 100000; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.5);
             display: none;
         }
 
-        /* Scrollable Basket */
         .basket-items-container {
-            max-height: 460px;
-            overflow-y: auto;
-            padding-right: 8px;
+            max-height: 460px; overflow-y: auto; padding-right: 8px;
         }
-        .basket-items-container::-webkit-scrollbar {
-            width: 6px;
-        }
-        .basket-items-container::-webkit-scrollbar-thumb {
-            background: #34C759;
-            border-radius: 20px;
-        }
+        .basket-items-container::-webkit-scrollbar { width: 6px; }
+        .basket-items-container::-webkit-scrollbar-thumb { background: #34C759; border-radius: 20px; }
 
-        .similar-scroll {
-            max-height: 420px;
-            overflow-y: auto;
-            scrollbar-width: thin;
-        }
-        .similar-scroll::-webkit-scrollbar-thumb {
-            background: #34C759;
-            border-radius: 20px;
-        }
+        .similar-scroll { max-height: 420px; overflow-y: auto; }
+        .similar-scroll::-webkit-scrollbar-thumb { background: #34C759; border-radius: 20px; }
 
         #mobile-menu {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 320px;
-            height: 100vh;
-            background: #09090b;
-            z-index: 9999;
-            transition: right 0.4s cubic-bezier(0.32, 0.72, 0, 1);
-            overflow-y: auto;
+            position: fixed; top: 0; right: -100%; width: 320px; height: 100vh;
+            background: #09090b; z-index: 9999;
+            transition: right 0.4s cubic-bezier(0.32, 0.72, 0, 1); overflow-y: auto;
         }
         #mobile-menu.open { right: 0; }
 
-        .floating-whatsapp {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
+        .floating-whatsapp { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
         #toast {
-            position: fixed;
-            bottom: 90px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #34C759;
-            color: black;
-            padding: 14px 24px;
-            border-radius: 9999px;
-            font-weight: 600;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
-            display: none;
-            align-items: center;
-            gap: 10px;
-            z-index: 70000;
-            white-space: nowrap;
-            font-size: 15px;
+            position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%);
+            background: #34C759; color: black; padding: 14px 24px; border-radius: 9999px;
+            font-weight: 600; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
+            display: none; align-items: center; gap: 10px; z-index: 70000;
         }
     </style>
 </head>
@@ -207,7 +117,6 @@
                     <button onclick="toggleMobileMenu()" class="text-2xl"><i class="fa-solid fa-bars"></i></button>
                 </div>
             </div>
-            <!-- Mobile Search -->
             <div class="md:hidden mt-4 relative">
                 <input type="text" id="search-input-mobile" placeholder="Search products..."
                        onkeyup="handleSearch(event)"
@@ -251,7 +160,6 @@
     <section id="shop" class="py-20 bg-white text-black">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="heading-font text-5xl font-bold tracking-tight mb-12 text-center">Our Products</h2>
-           
             <div class="mb-16">
                 <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-[#34C759]">📱</span> Cell Phones</h3>
                 <div id="phones-scroll" class="live-marquee"><div id="phones-content" class="live-marquee-content"></div></div>
@@ -326,7 +234,7 @@
         <i class="fa-brands fa-whatsapp text-2xl"></i><span>Inquire Now</span>
     </a>
 
-    <!-- MOBILE MENU -->
+    <!-- MOBILE MENU - Added "Why Choose Us" -->
     <div id="mobile-menu">
         <div class="flex flex-col h-full">
             <div class="p-6 border-b border-white/10 bg-zinc-900 flex justify-between items-center">
@@ -339,6 +247,7 @@
                 <a href="#" onclick="openQuickOrderModal(); toggleMobileMenu()" class="hover:text-[#34C759]">⚡ Quick Order</a>
                 <a href="#" onclick="showServices(); toggleMobileMenu()" class="hover:text-[#34C759]">🛠️ Other Services</a>
                 <a href="#about" onclick="toggleMobileMenu()" class="hover:text-[#34C759]">ℹ️ About Us</a>
+                <a href="#" onclick="document.getElementById('mobile-menu').classList.remove('open'); setTimeout(() => document.getElementById('mobile-menu').classList.add('hidden'), 400);" class="hover:text-[#34C759]">⭐ Why Choose Us</a>
                 <div class="pt-8 flex justify-center gap-10 text-4xl border-t border-white/10">
                     <a href="https://wa.me/260979077079" target="_blank" class="text-green-400 hover:scale-110 transition-transform"><i class="fa-brands fa-whatsapp"></i></a>
                     <a href="https://web.facebook.com/profile.php?id=100051715276179" target="_blank" class="text-blue-600 hover:scale-110 transition-transform"><i class="fa-brands fa-facebook"></i></a>
@@ -421,7 +330,7 @@
         </div>
     </div>
 
-    <!-- Compare Modal -->
+    <!-- Compare Modal - Search now matches main search style -->
     <div id="compare-modal" class="modal">
         <div class="modal-content" style="max-width: 1100px; max-height: 95vh;">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
@@ -439,7 +348,7 @@
                             <input type="text" id="compare-search1" placeholder="Search phone..."
                                    onkeyup="handleCompareSearch(1, event)"
                                    class="w-full p-4 border border-gray-300 rounded-2xl text-lg">
-                            <div id="compare-results1" class="absolute z-50 w-full bg-white border border-gray-300 rounded-2xl mt-2 max-h-64 overflow-auto hidden"></div>
+                            <div id="compare-results1" class="text-white"></div>
                         </div>
                     </div>
                     <div>
@@ -448,7 +357,7 @@
                             <input type="text" id="compare-search2" placeholder="Search phone..."
                                    onkeyup="handleCompareSearch(2, event)"
                                    class="w-full p-4 border border-gray-300 rounded-2xl text-lg">
-                            <div id="compare-results2" class="absolute z-50 w-full bg-white border border-gray-300 rounded-2xl mt-2 max-h-64 overflow-auto hidden"></div>
+                            <div id="compare-results2" class="text-white"></div>
                         </div>
                     </div>
                 </div>
@@ -506,12 +415,10 @@
             try {
                 const res = await fetch('products.json');
                 const data = await res.json();
-                
                 company = data.company || {};
                 products = data.products || [];
                 staff = data.staff || [];
                 serviceStaff = data.serviceStaff || [];
-
                 renderCompanyLogo();
                 renderLiveCategories();
                 renderStaffSlideshow();
@@ -522,18 +429,14 @@
             }
         }
 
-        // ==================== FIXED LOGO ====================
         function renderCompanyLogo() {
             const iconUrl = company.icon || "https://via.placeholder.com/44x44/34C759/000?text=BM";
-            
             const html = `
                 <div class="flex items-center gap-3">
-                    <img src="${iconUrl}" alt="${company.name || 'Brito Mobile'}" 
-                         class="w-11 h-11 rounded-3xl object-cover border border-white/20">
+                    <img src="${iconUrl}" alt="${company.name || 'Brito Mobile'}" class="w-11 h-11 rounded-3xl object-cover border border-white/20">
                     <h1 class="logo-font text-3xl text-white">${company.name || "Brito Mobile"}</h1>
                 </div>
             `;
-            
             document.getElementById('logo-container').innerHTML = html;
             document.getElementById('menu-logo').innerHTML = html;
             document.getElementById('modal-logo').innerHTML = html;
@@ -580,11 +483,9 @@
             const content = document.getElementById(contentId);
             content.innerHTML = '';
             const duplicated = [...items, ...items];
-
             duplicated.forEach(item => {
                 const card = document.createElement('div');
                 card.className = `product-card flex-shrink-0 w-72 bg-white rounded-3xl overflow-hidden border border-zinc-200 cursor-pointer`;
-
                 if (isService) {
                     card.innerHTML = `
                         <img src="${item.photo || item.img}" class="w-full h-56 object-cover" onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(item.service)}'">
@@ -632,9 +533,9 @@
             container.innerHTML = '';
             serviceStaff.forEach(person => {
                 const cardHTML = `
-                <div onclick="showEmployeeDetail(serviceStaff.find(p => p.name === '${person.name}'))"
+                <div onclick="showEmployeeDetail(serviceStaff.find(p => p.name === '${person.name}'))" 
                      class="bg-zinc-800 p-6 rounded-3xl flex gap-5 cursor-pointer hover:bg-zinc-700 transition-colors">
-                    <img src="${person.photo}" class="w-20 h-20 rounded-2xl object-cover flex-shrink-0"
+                    <img src="${person.photo}" class="w-20 h-20 rounded-2xl object-cover flex-shrink-0" 
                          onerror="this.src='https://via.placeholder.com/300x300/34C759/white?text=${encodeURIComponent(person.name)}'">
                     <div class="flex-1">
                         <h3 class="text-2xl font-semibold text-[#34C759]">${person.service}</h3>
@@ -650,7 +551,7 @@
         function showEmployeeDetail(person) {
             const content = document.getElementById('employee-detail-content');
             content.innerHTML = `
-                <img src="${person.photo || person.img}" class="employee-photo"
+                <img src="${person.photo || person.img}" class="employee-photo" 
                      onerror="this.src='https://via.placeholder.com/600x400/1f2937/34C759?text=${encodeURIComponent(person.name)}'">
                 <div class="p-8 space-y-6">
                     <div>
@@ -662,7 +563,7 @@
                         <p class="text-zinc-700 leading-relaxed">"${person.message}"</p>
                     </div>` : ''}
                     ${person.phone ? `
-                    <a href="tel:${person.phone.replace(/\s/g,'')}"
+                    <a href="tel:${person.phone.replace(/\s/g,'')}" 
                        class="flex items-center justify-center gap-3 bg-[#34C759] hover:bg-[#2E9E4B] text-black font-semibold py-4 rounded-2xl transition-all">
                         <i class="fa-solid fa-phone text-xl"></i>
                         Call ${person.phone}
@@ -679,9 +580,6 @@
             modal.classList.remove('show');
             setTimeout(() => modal.style.display = 'none', 400);
         }
-
-        // Keep all your other functions exactly as they were (showProductDetail, addToBasket, handleSearch, etc.)
-        // They are unchanged in this version.
 
         function showProductDetail(product) {
             currentProduct = product;
@@ -748,11 +646,11 @@
             setTimeout(() => toast.style.display = 'none', 2400);
         }
 
+        // Main Search
         function handleSearch(e) {
             const term = e.target.value.toLowerCase().trim();
             const isMobile = e.target.id === 'search-input-mobile';
             const resultsContainer = document.getElementById(isMobile ? 'search-results-mobile' : 'search-results');
-           
             if (!term) {
                 resultsContainer.style.display = 'none';
                 return;
@@ -785,8 +683,60 @@
             }
         }
 
-        // Keep the rest of your functions (handleCompareSearch, openBasketModal, etc.) unchanged
-        // They are already correct in your pasted code.
+        // Compare Search - Now behaves exactly like main search
+        function handleCompareSearch(slot, e) {
+            const term = e.target.value.toLowerCase().trim();
+            const resultsContainer = document.getElementById(`compare-results${slot}`);
+            if (!term) {
+                resultsContainer.style.display = 'none';
+                return;
+            }
+            const filtered = products.filter(p => p.category === "phone" && p.name.toLowerCase().includes(term)).slice(0, 8);
+            let html = '';
+            filtered.forEach(p => {
+                html += `
+                    <div onclick="selectComparePhone(${slot}, ${p.id});" class="flex gap-3 p-4 hover:bg-zinc-800 cursor-pointer border-b border-zinc-700 last:border-0">
+                        <img src="${p.img}" class="w-12 h-12 object-cover rounded-xl flex-shrink-0" onerror="this.src='https://via.placeholder.com/100x100/34C759/white?text=${encodeURIComponent(p.name)}'">
+                        <div>
+                            <p class="font-medium text-white">${p.name}</p>
+                            <p class="text-[#34C759] text-sm">K${p.price}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            resultsContainer.innerHTML = html || `<div class="p-4 text-zinc-400">No phones found</div>`;
+            resultsContainer.style.display = 'block';
+        }
+
+        function selectComparePhone(slot, id) {
+            const phone = products.find(p => p.id == id);
+            if (phone) {
+                if (slot === 1) currentCompare1 = phone;
+                else currentCompare2 = phone;
+                document.getElementById(`compare-search${slot}`).value = phone.name;
+                document.getElementById(`compare-results${slot}`).style.display = 'none';
+            }
+        }
+
+        function performComparison() {
+            if (!currentCompare1 || !currentCompare2) return alert("Please select both phones.");
+            const resultDiv = document.getElementById('comparison-result');
+            resultDiv.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="border border-gray-300 p-6 rounded-3xl">
+                        <img src="${currentCompare1.img}" class="w-full h-48 object-cover rounded-2xl mb-4" alt="${currentCompare1.name}">
+                        <h3 class="font-bold text-2xl mb-2">${currentCompare1.name}</h3>
+                        <p class="text-4xl font-bold text-[#34C759]">K${currentCompare1.price}</p>
+                    </div>
+                    <div class="border border-gray-300 p-6 rounded-3xl">
+                        <img src="${currentCompare2.img}" class="w-full h-48 object-cover rounded-2xl mb-4" alt="${currentCompare2.name}">
+                        <h3 class="font-bold text-2xl mb-2">${currentCompare2.name}</h3>
+                        <p class="text-4xl font-bold text-[#34C759]">K${currentCompare2.price}</p>
+                    </div>
+                </div>
+            `;
+            resultDiv.classList.remove('hidden');
+        }
 
         function openBasketModal() {
             const container = document.getElementById('basket-items');
@@ -853,6 +803,8 @@
             currentCompare2 = null;
             document.getElementById('compare-search1').value = '';
             document.getElementById('compare-search2').value = '';
+            document.getElementById('compare-results1').style.display = 'none';
+            document.getElementById('compare-results2').style.display = 'none';
             document.getElementById('comparison-result').classList.add('hidden');
             document.getElementById('compare-modal').style.display = 'flex';
         }
@@ -885,9 +837,12 @@
         });
 
         document.addEventListener('click', (e) => {
-            if (!e.target.closest('#search-input') && !e.target.closest('#search-input-mobile')) {
+            if (!e.target.closest('#search-input') && !e.target.closest('#search-input-mobile') &&
+                !e.target.closest('#compare-search1') && !e.target.closest('#compare-search2')) {
                 document.getElementById('search-results').style.display = 'none';
                 document.getElementById('search-results-mobile').style.display = 'none';
+                document.getElementById('compare-results1').style.display = 'none';
+                document.getElementById('compare-results2').style.display = 'none';
             }
         });
 
