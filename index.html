@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
-     
+    
         .logo-font { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: -0.04em; }
         .heading-font { font-family: 'Inter', system-ui, sans-serif; font-weight: 700; letter-spacing: -0.025em; }
         .hero-bg { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%); }
@@ -18,7 +18,7 @@
         }
         .product-card:hover { transform: translateY(-8px); }
 
-        /* Live Marquee - Touch Optimized */
+        /* Live Marquee - Improved touch handling */
         .live-marquee {
             overflow-x: auto;
             white-space: nowrap;
@@ -43,7 +43,6 @@
         #services-scroll .live-marquee-content { animation-duration: 52s; }
 
         .live-marquee::-webkit-scrollbar { display: none; }
-
         .blink-live { animation: blink 1.1s step-start infinite; }
         @keyframes blink { 50% { opacity: 0; } }
 
@@ -92,6 +91,26 @@
             overflow-y: auto;
         }
 
+        /* Toast Notification */
+        #toast {
+            position: fixed;
+            bottom: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #34C759;
+            color: black;
+            padding: 14px 24px;
+            border-radius: 9999px;
+            font-weight: 600;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            display: none;
+            align-items: center;
+            gap: 10px;
+            z-index: 70000;
+            white-space: nowrap;
+            font-size: 15px;
+        }
+
         /* Search Popup */
         #search-results, #search-results-mobile {
             position: absolute;
@@ -109,7 +128,6 @@
             box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
         }
 
-        /* Similar Products - Vertical Scroll Only */
         .similar-scroll {
             max-height: 420px;
             overflow-y: auto;
@@ -128,7 +146,6 @@
         <div class="max-w-7xl mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3" id="logo-container"></div>
-
                 <div class="flex-1 max-w-md mx-8 hidden md:flex relative">
                     <div class="relative w-full">
                         <input type="text" id="search-input" placeholder="Search products..."
@@ -138,7 +155,6 @@
                     </div>
                     <div id="search-results" class="text-white"></div>
                 </div>
-
                 <div class="flex items-center gap-5">
                     <a href="tel:+260961971085" class="hidden md:flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 text-black font-semibold px-6 py-3 rounded-3xl text-sm">
                         <i class="fa-solid fa-phone"></i> Call Now
@@ -150,7 +166,6 @@
                     <button onclick="toggleMobileMenu()" class="text-2xl"><i class="fa-solid fa-bars"></i></button>
                 </div>
             </div>
-
             <!-- Mobile Search -->
             <div class="md:hidden mt-4 relative">
                 <input type="text" id="search-input-mobile" placeholder="Search products..."
@@ -181,7 +196,6 @@
                     <button onclick="showServices()" class="border-2 border-[#34C759] hover:bg-[#34C759] hover:text-black text-[#34C759] font-semibold px-10 py-4 rounded-3xl text-lg">Other Services</button>
                 </div>
             </div>
-
             <div>
                 <div class="text-center mb-6">
                     <h2 class="heading-font text-4xl font-bold tracking-tight text-white">MEET OUR TEAM</h2>
@@ -196,22 +210,19 @@
     <section id="shop" class="py-20 bg-white text-black">
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="heading-font text-5xl font-bold tracking-tight mb-12 text-center">Our Products</h2>
-           
+          
             <div class="mb-16">
                 <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-[#34C759]">📱</span> Cell Phones</h3>
                 <div id="phones-scroll" class="live-marquee"><div id="phones-content" class="live-marquee-content"></div></div>
             </div>
-
             <div class="mb-16">
                 <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-[#34C759]">💻</span> Laptops</h3>
                 <div id="laptops-scroll" class="live-marquee"><div id="laptops-content" class="live-marquee-content"></div></div>
             </div>
-
             <div class="mb-16">
                 <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-[#34C759]">🔌</span> Accessories</h3>
                 <div id="accessories-scroll" class="live-marquee"><div id="accessories-content" class="live-marquee-content"></div></div>
             </div>
-
             <div>
                 <h3 class="heading-font text-3xl font-bold mb-6 flex items-center gap-3"><span class="text-[#34C759]">🛠️</span> Other Services</h3>
                 <div id="services-scroll" class="live-marquee"><div id="services-content" class="live-marquee-content"></div></div>
@@ -274,13 +285,14 @@
         <i class="fa-brands fa-whatsapp text-2xl"></i><span>Inquire Now</span>
     </a>
 
-    <!-- MOBILE MENU -->
+    <!-- MOBILE MENU - Fixed: Social icons always visible -->
     <div id="mobile-menu">
         <div class="flex flex-col h-full">
             <div class="p-6 border-b border-white/10 bg-zinc-900 flex justify-between items-center">
                 <div class="flex items-center gap-3" id="menu-logo"></div>
                 <button onclick="toggleMobileMenu()" class="text-3xl text-zinc-400 hover:text-white">×</button>
             </div>
+            
             <div class="flex-1 p-6 flex flex-col gap-6 text-lg font-medium overflow-y-auto">
                 <a href="#shop" onclick="toggleMobileMenu()" class="hover:text-[#34C759]">🛒 Shop</a>
                 <a href="#" onclick="openCompareModal(); toggleMobileMenu()" class="hover:text-[#34C759]">⚖️ Compare Devices</a>
@@ -289,13 +301,20 @@
                 <a href="#about" onclick="toggleMobileMenu()" class="hover:text-[#34C759]">ℹ️ About Us</a>
                 <a href="#" onclick="toggleMobileMenu()" class="hover:text-[#34C759]">⭐ Why Choose Us</a>
 
-                <div class="pt-8 mt-auto flex justify-center gap-8 text-3xl">
-                    <a href="https://wa.me/260979077079" target="_blank" class="text-green-400"><i class="fa-brands fa-whatsapp"></i></a>
-                    <a href="https://web.facebook.com/profile.php?id=100051715276179" target="_blank" class="text-blue-600"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="https://www.tiktok.com/@britomobile" target="_blank" class="text-white"><i class="fa-brands fa-tiktok"></i></a>
+                <!-- Social Media - Always visible at bottom -->
+                <div class="mt-auto pt-12 flex justify-center gap-10 text-4xl">
+                    <a href="https://wa.me/260979077079" target="_blank" class="text-green-400 hover:scale-110 transition-transform"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="https://web.facebook.com/profile.php?id=100051715276179" target="_blank" class="text-blue-600 hover:scale-110 transition-transform"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.tiktok.com/@britomobile" target="_blank" class="text-white hover:scale-110 transition-transform"><i class="fa-brands fa-tiktok"></i></a>
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast">
+        <i class="fa-solid fa-check-circle"></i>
+        <span id="toast-message">Added to basket</span>
     </div>
 
     <!-- PRODUCT MODAL -->
@@ -317,8 +336,7 @@
                             <a id="modal-buy-btn" href="#" target="_blank" class="bg-[#34C759] hover:bg-[#2E9E4B] text-black text-center py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-2">
                                 <i class="fa-brands fa-whatsapp"></i> Buy via WhatsApp
                             </a>
-                            <button onclick="addToBasketFromModal()" 
-                                    id="modal-add-btn"
+                            <button onclick="addToBasketFromModal()" id="modal-add-btn"
                                     class="bg-zinc-900 hover:bg-black text-white text-center py-4 rounded-2xl font-semibold text-lg flex items-center justify-center gap-2">
                                 <i class="fa-solid fa-cart-plus"></i> Add to Basket
                             </button>
@@ -353,7 +371,7 @@
         </div>
     </div>
 
-    <!-- Other modals (Quick Order, Compare, Services) -->
+    <!-- Quick Order Modal -->
     <div id="quick-order-modal" class="modal">
         <div class="modal-content" style="max-width: 920px;">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
@@ -366,6 +384,7 @@
         </div>
     </div>
 
+    <!-- Compare Modal -->
     <div id="compare-modal" class="modal">
         <div class="modal-content" style="max-width: 1100px; max-height: 95vh;">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
@@ -392,6 +411,7 @@
         </div>
     </div>
 
+    <!-- Services Modal -->
     <div id="services-modal" class="modal">
         <div class="modal-content max-w-5xl">
             <div class="flex justify-between items-center p-6 border-b bg-zinc-900 text-white">
@@ -428,7 +448,7 @@
                 products = data.products || [];
                 staff = data.staff || [];
                 serviceStaff = data.serviceStaff || [];
-
+                
                 renderCompanyLogo();
                 renderLiveCategories();
                 renderStaffSlideshow();
@@ -477,7 +497,6 @@
                 </div>`;
             });
             container.innerHTML = html;
-
             let index = 0;
             const slides = container.querySelectorAll('.staff-slide');
             if (slides.length > 1) {
@@ -489,19 +508,17 @@
             }
         }
 
-        // Touch-friendly marquee with pause on hold
         function renderLiveMarquee(containerId, contentId, items, isService = false) {
             const container = document.getElementById(containerId);
             const content = document.getElementById(contentId);
             content.innerHTML = '';
-            const duplicated = [...items, ...items];
 
+            const duplicated = [...items, ...items];
             duplicated.forEach(item => {
                 const card = document.createElement('div');
                 card.className = `product-card flex-shrink-0 w-72 bg-white rounded-3xl overflow-hidden border border-zinc-200 ${isService ? 'cursor-default' : 'cursor-pointer'}`;
                 
                 const imgSrc = isService ? (item.photo || item.img) : item.img;
-
                 card.innerHTML = `
                     <img src="${imgSrc}" class="w-full h-56 object-cover" onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(item.name || item.service)}'">
                     <div class="p-6">
@@ -516,7 +533,10 @@
 
                 if (!isService) {
                     const btn = card.querySelector('.add-to-basket-btn');
-                    if (btn) btn.addEventListener('click', (e) => { e.stopImmediatePropagation(); addToBasket(item, btn); });
+                    if (btn) btn.addEventListener('click', (e) => {
+                        e.stopImmediatePropagation();
+                        addToBasket(item, btn);
+                    });
                     card.addEventListener('click', (e) => {
                         if (!e.target.closest('button')) showProductDetail(item);
                     });
@@ -524,7 +544,7 @@
                 content.appendChild(card);
             });
 
-            // Touch handling: pause on touchstart, resume after 4 seconds on touchend
+            // Improved swipe handling
             let resumeTimeout;
             container.addEventListener('touchstart', () => {
                 content.style.animationPlayState = 'paused';
@@ -534,7 +554,7 @@
             container.addEventListener('touchend', () => {
                 resumeTimeout = setTimeout(() => {
                     content.style.animationPlayState = 'running';
-                }, 4000);
+                }, 3500);
             }, { passive: true });
         }
 
@@ -542,13 +562,13 @@
             const phones = products.filter(p => p.category === "phone");
             const laptops = products.filter(p => p.category === "laptop");
             const accessories = products.filter(p => p.category === "accessory");
-
             renderLiveMarquee("phones-scroll", "phones-content", phones);
             renderLiveMarquee("laptops-scroll", "laptops-content", laptops);
             renderLiveMarquee("accessories-scroll", "accessories-content", accessories);
             renderLiveMarquee("services-scroll", "services-content", serviceStaff, true);
         }
 
+        // Enhanced addToBasket with toast confirmation
         function addToBasket(product, buttonElement = null) {
             basket.push(product);
             document.getElementById('nav-basket-count').textContent = basket.length;
@@ -562,12 +582,24 @@
                     buttonElement.style.backgroundColor = '';
                 }, 1400);
             }
+
+            // Show confirmation toast
+            showToast(`${product.name} added to basket`);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.innerHTML = message;
+            toast.style.display = 'flex';
+
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2400);
         }
 
         function addToBasketFromModal() {
-            if (currentProduct) {
-                addToBasket(currentProduct);
-            }
+            if (currentProduct) addToBasket(currentProduct);
         }
 
         function showProductDetail(product) {
@@ -729,8 +761,10 @@
             const id2 = document.getElementById('compare2').value;
             if (!id1 || !id2) return alert("Please select two phones.");
             if (id1 === id2) return alert("Please select different phones.");
+
             const p1 = products.find(p => p.id == id1);
             const p2 = products.find(p => p.id == id2);
+
             const resultDiv = document.getElementById('comparison-result');
             resultDiv.innerHTML = `
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
