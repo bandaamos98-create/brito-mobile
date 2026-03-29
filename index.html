@@ -18,19 +18,21 @@
         }
         .product-card:hover { transform: translateY(-8px); }
 
-        /* Live Marquee - Improved touch handling */
+        /* FIXED MARQUEE - Better swiping + pause */
         .live-marquee {
             overflow-x: auto;
             white-space: nowrap;
             scrollbar-width: none;
             -webkit-overflow-scrolling: touch;
             touch-action: pan-x;
+            scroll-behavior: smooth;
         }
         .live-marquee-content {
             display: inline-flex;
             gap: 1.25rem;
             animation: marquee-scroll linear infinite;
             padding-right: 2rem;
+            will-change: transform;
         }
         @keyframes marquee-scroll {
             from { transform: translateX(0); }
@@ -91,7 +93,7 @@
             overflow-y: auto;
         }
 
-        /* Toast Notification */
+        /* Toast */
         #toast {
             position: fixed;
             bottom: 90px;
@@ -285,7 +287,7 @@
         <i class="fa-brands fa-whatsapp text-2xl"></i><span>Inquire Now</span>
     </a>
 
-    <!-- MOBILE MENU - Fixed: Social icons always visible -->
+    <!-- MOBILE MENU - SOCIAL MEDIA NOW VISIBLE IMMEDIATELY (no scroll needed) -->
     <div id="mobile-menu">
         <div class="flex flex-col h-full">
             <div class="p-6 border-b border-white/10 bg-zinc-900 flex justify-between items-center">
@@ -301,8 +303,8 @@
                 <a href="#about" onclick="toggleMobileMenu()" class="hover:text-[#34C759]">ℹ️ About Us</a>
                 <a href="#" onclick="toggleMobileMenu()" class="hover:text-[#34C759]">⭐ Why Choose Us</a>
 
-                <!-- Social Media - Always visible at bottom -->
-                <div class="mt-auto pt-12 flex justify-center gap-10 text-4xl">
+                <!-- SOCIAL MEDIA - Placed right here so you see it immediately when menu opens -->
+                <div class="pt-8 flex justify-center gap-10 text-4xl border-t border-white/10">
                     <a href="https://wa.me/260979077079" target="_blank" class="text-green-400 hover:scale-110 transition-transform"><i class="fa-brands fa-whatsapp"></i></a>
                     <a href="https://web.facebook.com/profile.php?id=100051715276179" target="_blank" class="text-blue-600 hover:scale-110 transition-transform"><i class="fa-brands fa-facebook"></i></a>
                     <a href="https://www.tiktok.com/@britomobile" target="_blank" class="text-white hover:scale-110 transition-transform"><i class="fa-brands fa-tiktok"></i></a>
@@ -311,7 +313,7 @@
         </div>
     </div>
 
-    <!-- Toast Notification -->
+    <!-- Toast -->
     <div id="toast">
         <i class="fa-solid fa-check-circle"></i>
         <span id="toast-message">Added to basket</span>
@@ -519,19 +521,29 @@
                 card.className = `product-card flex-shrink-0 w-72 bg-white rounded-3xl overflow-hidden border border-zinc-200 ${isService ? 'cursor-default' : 'cursor-pointer'}`;
                 
                 const imgSrc = isService ? (item.photo || item.img) : item.img;
-                card.innerHTML = `
-                    <img src="${imgSrc}" class="w-full h-56 object-cover" onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(item.name || item.service)}'">
-                    <div class="p-6">
-                        <h3 class="font-semibold text-xl text-zinc-900">${item.name || item.service}</h3>
-                        ${item.price ? `<p class="text-[#34C759] text-3xl font-bold mt-3">K${item.price}</p>` : ''}
-                        ${!isService ? `
-                        <button class="add-to-basket-btn mt-5 w-full bg-black text-white py-3.5 rounded-2xl font-medium flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-cart-plus"></i> Add to Basket
-                        </button>` : ''}
-                    </div>
-                `;
 
-                if (!isService) {
+                if (isService) {
+                    // FIXED: Now shows FULL details - Service name + Person name
+                    card.innerHTML = `
+                        <img src="${imgSrc}" class="w-full h-56 object-cover" onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(item.service)}'">
+                        <div class="p-6">
+                            <h3 class="font-semibold text-2xl text-zinc-900">${item.service}</h3>
+                            <p class="text-[#34C759] text-xl font-medium mt-2">${item.name}</p>
+                            ${item.message ? `<p class="text-zinc-700 text-sm mt-3 line-clamp-2">${item.message}</p>` : ''}
+                            ${item.phone ? `<a href="tel:${item.phone.replace(/\s/g,'')}" class="mt-4 inline-flex items-center gap-2 text-[#34C759] text-sm font-medium"><i class="fa-solid fa-phone"></i> ${item.phone}</a>` : ''}
+                        </div>
+                    `;
+                } else {
+                    card.innerHTML = `
+                        <img src="${imgSrc}" class="w-full h-56 object-cover" onerror="this.src='https://via.placeholder.com/400x300/34C759/white?text=${encodeURIComponent(item.name)}'">
+                        <div class="p-6">
+                            <h3 class="font-semibold text-xl text-zinc-900">${item.name}</h3>
+                            ${item.price ? `<p class="text-[#34C759] text-3xl font-bold mt-3">K${item.price}</p>` : ''}
+                            <button class="add-to-basket-btn mt-5 w-full bg-black text-white py-3.5 rounded-2xl font-medium flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-cart-plus"></i> Add to Basket
+                            </button>
+                        </div>
+                    `;
                     const btn = card.querySelector('.add-to-basket-btn');
                     if (btn) btn.addEventListener('click', (e) => {
                         e.stopImmediatePropagation();
@@ -544,7 +556,7 @@
                 content.appendChild(card);
             });
 
-            // Improved swipe handling
+            // FIXED SWIPING: Better pause/resume logic
             let resumeTimeout;
             container.addEventListener('touchstart', () => {
                 content.style.animationPlayState = 'paused';
@@ -554,7 +566,7 @@
             container.addEventListener('touchend', () => {
                 resumeTimeout = setTimeout(() => {
                     content.style.animationPlayState = 'running';
-                }, 3500);
+                }, 2800);
             }, { passive: true });
         }
 
@@ -568,7 +580,6 @@
             renderLiveMarquee("services-scroll", "services-content", serviceStaff, true);
         }
 
-        // Enhanced addToBasket with toast confirmation
         function addToBasket(product, buttonElement = null) {
             basket.push(product);
             document.getElementById('nav-basket-count').textContent = basket.length;
@@ -583,7 +594,6 @@
                 }, 1400);
             }
 
-            // Show confirmation toast
             showToast(`${product.name} added to basket`);
         }
 
@@ -592,10 +602,7 @@
             const toastMsg = document.getElementById('toast-message');
             toastMsg.innerHTML = message;
             toast.style.display = 'flex';
-
-            setTimeout(() => {
-                toast.style.display = 'none';
-            }, 2400);
+            setTimeout(() => { toast.style.display = 'none'; }, 2400);
         }
 
         function addToBasketFromModal() {
